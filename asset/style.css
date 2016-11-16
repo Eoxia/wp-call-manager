@@ -1,0 +1,9 @@
+﻿#wpadminbar #wp-admin-bar-imputation_tel .ab-icon:before{
+	content: "\f525";
+	top: 3px;
+}
+
+#wpadminbar #wp-admin-bar-imputation .ab-icon:before{
+	content: "\f338";
+	top: 3px;
+}
