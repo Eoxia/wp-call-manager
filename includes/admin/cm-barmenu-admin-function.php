@@ -110,8 +110,8 @@ add_action( 'wp_enqueue_scripts', 'custom_wp_toolbar_css_admin' );
  * @method custom_wp_toolbar_css_admin.
  */
 function custom_wp_toolbar_css_admin() {
-	wp_enqueue_style( 'add_custom_wp_toolbar_css', plugin_dir_url( __FILE__ ) . '../../asset/css/style.css' );
+	wp_enqueue_style( 'add_custom_wp_toolbar_css', plugin_dir_url( __FILE__ ) . '../../assets/css/style.css' );
 	wp_enqueue_script( 'jquery-ui-dialog' );
 	wp_enqueue_script( 'jquery-form' );
-	wp_enqueue_script( 'cm_custom_js', plugin_dir_url( __FILE__ ) . '../../asset/js/admin/cm-admin.js' );
+	wp_enqueue_script( 'cm_custom_js', plugin_dir_url( __FILE__ ) . '../../assets/js/admin/cm-admin.js' );
 }
