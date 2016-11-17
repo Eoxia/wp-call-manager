@@ -1,7 +1,7 @@
 <?php
 /**
- * [FR]  Page répertoriant les ajouts et les actions des boutons Call & Blame.
- * [ENG] This Php file contain adds and actions for buttons Call & Blame.
+ * [FR]  Page ajoutant les boutons Call & Blame.
+ * [ENG] This Php file adds buttons Call & Blame.
  *
  * @package WordPress.
  * @subpackage Call & Blame.
@@ -99,4 +99,19 @@ function imputation( $wp_admin_bar ) {
 		'parent' => 'imputation',
 	);
 	$wp_admin_bar->add_group( $group );
+}
+
+add_action( 'admin_enqueue_scripts', 'custom_wp_toolbar_css_admin' );
+add_action( 'wp_enqueue_scripts', 'custom_wp_toolbar_css_admin' );
+/**
+ * [FR]  Ajout du CSS des boutons Call & BLame.
+ * [ENG] Function to add CSS for buttons Call & Blame.
+ *
+ * @method custom_wp_toolbar_css_admin.
+ */
+function custom_wp_toolbar_css_admin() {
+	wp_enqueue_style( 'add_custom_wp_toolbar_css', plugin_dir_url( __FILE__ ) . '../../asset/css/style.css' );
+	wp_enqueue_script( 'jquery-ui-dialog' );
+	wp_enqueue_script( 'jquery-form' );
+	wp_enqueue_script( 'cm_custom_js', plugin_dir_url( __FILE__ ) . '../../asset/js/admin/cm-admin.js' );
 }

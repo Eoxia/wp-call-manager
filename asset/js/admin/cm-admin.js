@@ -1,16 +1,5 @@
-<?php
-/**
- * [FR]  Page répertoriant les ajouts et les actions des boutons Call & Blame.
- * [ENG] This Php file contain adds and actions for buttons Call & Blame.
- *
- * @package WordPress.
- * @subpackage Call & Blame.
- */
 
-function my_action_javascript() {
-	?>
-	<script type = "text/javascript" >
-	jQuery( document ).ready( function( $ ) {
+jQuery( document ).ready( function( $ ) {
 		jQuery( "#wp-admin-bar-imputation .child_blame" ).click( function(e) {
 			e.preventDefault();
 			var a = jQuery( this ).find( 'a' );
@@ -29,7 +18,6 @@ function my_action_javascript() {
 			jQuery.post( ajaxurl, data, function( response ) {
 				jQuery( "#wp-admin-bar-imputation_tel .ab-label" ).text( response )
 			});
-
 		});
 		jQuery( "#dialog" ).dialog( {
 			autoOpen: false,
@@ -47,8 +35,4 @@ function my_action_javascript() {
 				}
 			}
 		});
-
 	});
-	</script>
-	<?php
-}

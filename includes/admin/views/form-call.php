@@ -1,7 +1,7 @@
 <?php
 /**
- * [FR]  Page répertoriant les ajouts et les actions des boutons Call & Blame.
- * [ENG] This Php file contain adds and actions for buttons Call & Blame.
+ * [FR]  Page ajoutant la div contenant le dialog du bouton Call.
+ * [ENG] This Php file contain a div for button Call's pop-up.
  *
  * @package WordPress.
  * @subpackage Call & Blame.
@@ -23,7 +23,7 @@ function dialog_call() {
 					wp_nonce_field( 'form_dialog_check', '_wpnonce_dialog' );
 					$admin_user = get_users( 'orderby=nicename&role=administrator&exclude=' . get_current_user_id() . '' );
 					?>
-					__( Pour qui ? ) <br />
+					<?php esc_html_e( 'Pour qui ?' ) ?> <br />
 					<select name = "to_call">
 						<?php
 						foreach ( $admin_user as $user ) {
@@ -34,16 +34,16 @@ function dialog_call() {
 						?>
 					</select> <br />
 					<input type="hidden" name="action" value="form_call">
-					__( Choisissez votre option ) : <br />
-					<input type="radio" name="button_call" value="treated" checked="checked"> __( Traité ) <br />
-					<input type="radio" name="button_call" value="transfered"> __( Transféré ) <br />
-					<input type="radio" name="button_call" value="recall"> __( A rappeler ) <br />
-					__( Informations contact ) : <br />
-					<input type="text" name="name_contact_call" placeholder="Nom du contact"> <br />
-					<input type="text" name="society_contact_call" placeholder="Société du contact"> <br />
-					<input type="text" name="number_contact_call" placeholder="Numéro du contact"> <br />
-					<input type="email" name="email_contact_call" placeholder="E-mail du contact"> <br />
-					<input type="textarea" name="comment_call" placeholder="Commentaire"> <br />
+					<?php esc_html_e( 'Choisissez votre option :' ) ?> <br />
+					<input type="radio" name="button_call" value="treated" checked="checked"> <?php esc_html_e( 'Traité' ); ?> <br />
+					<input type="radio" name="button_call" value="transfered"> <?php esc_html_e( 'Transféré' ); ?> <br />
+					<input type="radio" name="button_call" value="recall"> <?php esc_html_e( 'A rappeler' ); ?> <br />
+					<?php esc_html_e( 'Informations contact :' ) ?> <br />
+					<input type="text" name="name_contact_call" placeholder="<?php esc_attr_e( 'Nom du contact' ) ?>"> <br />
+					<input type="text" name="society_contact_call" placeholder="<?php esc_attr_e( 'Société du contact' ) ?>"> <br />
+					<input type="text" name="number_contact_call" placeholder="<?php esc_attr_e( 'Numéro du contact' ) ?>"> <br />
+					<input type="email" name="email_contact_call" placeholder="<?php esc_attr_e( 'E-mail du contact' ) ?>"> <br />
+					<input type="textarea" name="comment_call" placeholder="<?php esc_attr_e( 'Commentaire' ) ?>"> <br />
 				</form>
 			</p>
 		</div>

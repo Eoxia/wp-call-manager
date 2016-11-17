@@ -1,7 +1,7 @@
 <?php
 /**
- * [FR]  Page répertoriant les ajouts et les actions des boutons Call & Blame.
- * [ENG] This Php file contain adds and actions for buttons Call & Blame.
+ * [FR]  Page ajoutant l'AJAX' des boutons Call & Blame.
+ * [ENG] This Php file contain AJAX for buttons Call & Blame.
  *
  * @package WordPress.
  * @subpackage Call & Blame.

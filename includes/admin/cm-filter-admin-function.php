@@ -1,7 +1,7 @@
 <?php
 /**
- * [FR]  Page répertoriant les ajouts et les actions des boutons Call & Blame.
- * [ENG] This Php file contain adds and actions for buttons Call & Blame.
+ * [FR]  Page ajoutant les filtres des boutons Call & Blame.
+ * [ENG] This Php file contain filters for buttons Call & Blame.
  *
  * @package WordPress.
  * @subpackage Call & Blame.
@@ -32,8 +32,8 @@ function display_monthly( $content, $user_id, $year, $month ) {
 		}
 	}
 
-	$content .= "<li class='temp'> __( Nombre d'appel ) : <strong> $number_call </strong></li>";
-	$content .= "<li class='temp'> __( Nombre de blame ) : <strong> $number_blame </strong></li>";
+	$content .= "<li class='temp'>" . esc_html( "Nombre d'appel :" ) . "<strong> $number_call </strong></li>";
+	$content .= "<li class='temp'>" . esc_html( 'Nombre de blame :' ) . "<strong> $number_blame </strong></li>";
 	return $content;
 }
 

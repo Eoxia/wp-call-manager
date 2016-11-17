@@ -13,9 +13,7 @@
  * Author: Damien.
 */
 
-include( 'includes/admin/views/task-manager/summary-filter.php' );
 include( 'includes/admin/views/form-call.php' );
 include( 'includes/admin/cm-ajax-admin-function.php' );
 include( 'includes/admin/cm-barmenu-admin-function.php' );
-include( 'includes/admin/cm-filter-adlin-function.php' );
-include( '/assets/js/admin/cm-admin.js' );
+include( 'includes/admin/cm-filter-admin-function.php' );
