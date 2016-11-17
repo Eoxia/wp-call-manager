@@ -101,16 +101,27 @@ function imputation( $wp_admin_bar ) {
 	$wp_admin_bar->add_group( $group );
 }
 
-add_action( 'admin_enqueue_scripts', 'custom_wp_toolbar_css_admin' );
-add_action( 'wp_enqueue_scripts', 'custom_wp_toolbar_css_admin' );
+add_action( 'admin_footer', 'dialog_call' );
+/**
+ * [FR]  Création de la Div pour la pop-up du plugin Call.
+ * [ENG] Here we create a div for the pop-up dialog when you clic on the Call button.
+ *
+ * @method dialog_call.
+ */
+function dialog_call() {
+	include( plugin_dir_path( __FILE__ ) . 'views/form-call.php' );
+}
+
+add_action( 'admin_enqueue_scripts', 'cm_custom_wp_toolbar_css_admin' );
+add_action( 'wp_enqueue_scripts', 'cm_custom_wp_toolbar_css_admin' );
 /**
  * [FR]  Ajout du CSS des boutons Call & BLame.
  * [ENG] Function to add CSS for buttons Call & Blame.
  *
  * @method custom_wp_toolbar_css_admin.
  */
-function custom_wp_toolbar_css_admin() {
-	wp_enqueue_style( 'add_custom_wp_toolbar_css', plugin_dir_url( __FILE__ ) . '../../assets/css/style.css' );
+function cm_custom_wp_toolbar_css_admin() {
+	wp_enqueue_style( 'cm_add_custom_wp_toolbar_css', plugin_dir_url( __FILE__ ) . '../../assets/css/style.css', array( 'wp-jquery-ui-dialog' ) );
 	wp_enqueue_script( 'jquery-ui-dialog' );
 	wp_enqueue_script( 'jquery-form' );
 	wp_enqueue_script( 'cm_custom_js', plugin_dir_url( __FILE__ ) . '../../assets/js/admin/cm-admin.js' );
