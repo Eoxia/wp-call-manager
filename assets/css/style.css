@@ -7,3 +7,8 @@
 	content: "\f338";
 	top: 3px;
 }
+
+#wpadminbar #wp-admin-bar-imputation_recall .ab-icon:before{
+	content: "\f227";
+	top: 3px;
+}

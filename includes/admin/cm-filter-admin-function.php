@@ -10,10 +10,10 @@
 add_filter( 'tm_filter_timeline_summary_month_end', 'display', 102, 4 );
 add_filter( 'tm_filter_timeline_day', 'display', 103, 5 );
 /**
- * [FR]  Ajout du total de Call & Blame du mois dans la chronologie.
- * [ENG] From here it's the compatiblity with Task-manager's Chronology Here Monthly.
+ * [FR]  Ajout du total de Call & Blame du mois et du jour dans la chronologie.
+ * [ENG] From here it's the compatiblity with Task-manager's Chronology.
  *
- * @method display_monthly.
+ * @method display.
  * @param  mixed $content Le contenu.
  * @param  int   $user_id L'id de la personne en cours d'affichage.
  * @param  int   $year    L'année de la chronologie affichée.

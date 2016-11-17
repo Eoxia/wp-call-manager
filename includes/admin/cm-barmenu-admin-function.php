@@ -8,6 +8,9 @@
  */
 
 add_action( 'admin_bar_menu', 'imputation_tel', 100 );
+add_action( 'admin_bar_menu', 'imputation', 101 );
+add_action( 'admin_bar_menu', 'imputation_recall', 102 );
+
 /**
  * [FR]  La fonction suivante créer le bouton Call.
  * [ENG] This function create the button Call.
@@ -44,7 +47,6 @@ function imputation_tel( $wp_admin_bar ) {
 	$wp_admin_bar->add_node( $bouton_tel );
 }
 
-add_action( 'admin_bar_menu', 'imputation', 101 );
 /**
  * [FR]  La fonction suivante créer le bouton Blame qui affiche un sub-menu de tous les administrateurs à blame.
  * [ENG] This function create the Blame button which display a sub-menu of all administrators.
@@ -99,6 +101,30 @@ function imputation( $wp_admin_bar ) {
 		'parent' => 'imputation',
 	);
 	$wp_admin_bar->add_group( $group );
+}
+
+/**
+ * [imputation_recall description]
+ *
+ * @method imputation_recall.
+ * @param [type] $wp_admin_bar [description].
+ */
+function imputation_recall( $wp_admin_bar ) {
+	global $wpdb;
+	$select_comment = array(
+		'meta_key' => '_eocm_receiver_id',
+		'meta_value' => get_current_user_id(),
+		'status' => 'recall',
+		'count' => true,
+	);
+	$selected_comment = get_comments( $select_comment );
+	if ( $selected_comment > 0 ) {
+		$bouton_recall = array(
+			'id' => 'imputation_recall',
+			'title' => '<span class="ab-action-recall"><span class="ab-icon"></span>' . esc_html( 'Vous avez des personnes à rappeler', 'call-manager' ) . '</span>',
+		);
+		$wp_admin_bar->add_node( $bouton_recall );
+	}
 }
 
 add_action( 'admin_footer', 'dialog_call' );

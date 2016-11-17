@@ -8,6 +8,6 @@
  */
 
 ?>
-<li class='temp'> <?php esc_html_e( "Nombre d'appel", 'call-manager.php' ); ?> : <strong> <?php echo esc_html( $number_call ); ?> </strong></li>
-<li class='temp'> <?php esc_html_e( 'Nombre de blame', 'call-manager.php' ); ?> : <strong> <?php echo esc_html( $number_blame ); ?> </strong></li>
+<li class='temp'> <span class="dashicons dashicons-phone"></span> <strong> <?php echo esc_html( $number_call ); ?> </strong></li>
+<li class='temp'> <span class="dashicons dashicons-businessman"></span> <strong> <?php echo esc_html( $number_blame ); ?> </strong></li>
 <?php
