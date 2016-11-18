@@ -19,6 +19,14 @@ jQuery( document ).ready( function( $ ) {
 			jQuery( "#wp-admin-bar-imputation_tel .ab-label" ).text( response )
 		});
 	});
+	jQuery( "#wp-admin-bar-imputation_tel_moins .ab-action-moins" ).click( function(){
+		var data = {
+			'action': 'count_tel_moins',
+		};
+		jQuery.post( ajaxurl, data, function( response ) {
+			jQuery( "#wp-admin-bar-imputation_tel .ab-label" ).text( response )
+		});
+	});
 	jQuery( "#dialog" ).dialog( {
 		autoOpen: false,
 		resizable: false,

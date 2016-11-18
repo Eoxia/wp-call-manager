@@ -8,6 +8,7 @@
  */
 
 add_action( 'wp_ajax_count_tel', 'count_tel_callback' );
+add_action( 'wp_ajax_count_tel_moins', 'count_tel_moins_callback' );
 add_action( 'wp_ajax_count', 'count_callback' );
 add_action( 'wp_ajax_form_call', 'form_call_callback' );
 add_action( 'wp_ajax_dialog_recall', 'dialog_recall_callback' );
@@ -24,6 +25,21 @@ function count_tel_callback() {
 	$day = intval( current_time( 'd' ) );
 	$select = get_user_meta( get_current_user_id(),'imputation_' . $time_db, true );
 	$select[ $day ]['call']++;
+	update_user_meta( get_current_user_id(), 'imputation_' . $time_db, $select );
+	wp_die( esc_html( $select[ $day ]['call'] ) );
+}
+
+/**
+ * [FR] 	Action inverse du bouton Call.
+ * [ENG]  Button wich decrement the Call's total.
+ *
+ * @method count_tel_callback.
+ */
+function count_tel_moins_callback() {
+	$time_db = current_time( 'Ym' );
+	$day = intval( current_time( 'd' ) );
+	$select = get_user_meta( get_current_user_id(),'imputation_' . $time_db, true );
+	$select[ $day ]['call']--;
 	update_user_meta( get_current_user_id(), 'imputation_' . $time_db, $select );
 	wp_die( esc_html( $select[ $day ]['call'] ) );
 }
