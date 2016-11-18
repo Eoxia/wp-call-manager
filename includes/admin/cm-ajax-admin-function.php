@@ -10,6 +10,8 @@
 add_action( 'wp_ajax_count_tel', 'count_tel_callback' );
 add_action( 'wp_ajax_count', 'count_callback' );
 add_action( 'wp_ajax_form_call', 'form_call_callback' );
+add_action( 'wp_ajax_dialog_recall', 'dialog_recall_callback' );
+add_action( 'wp_ajax_treated', 'treated_callback' );
 
 /**
  * [FR] 	Action du bouton Call.
@@ -53,8 +55,8 @@ function count_callback() {
 }
 
 /**
- * [FR]  Traitement du formulaire.
- * [ENG] This function save the data from the dialog form.
+ * [FR]  Traitement du formulaire du bouton Call.
+ * [ENG] This function save the data from the dialog form of Call's button.
  *
  * @method form_call_callback.
  */
@@ -107,5 +109,18 @@ function form_call_callback() {
 		add_comment_meta( $id_comment, '_eocm_caller_name', $name_contact_call );
 		add_comment_meta( $id_comment, '_eocm_receiver_id', $to_call );
 	}
+	wp_die();
+}
+
+/**
+ * [treated_callback description]
+ *
+ * @method treated_callback
+ */
+function treated_callback() {
+	$id = $_GET['comment_id'];
+	$treated['comment_approved'] = 'treated';
+	$treated['comment_ID'] = $id;
+	wp_update_comment( $treated );
 	wp_die();
 }

@@ -35,4 +35,29 @@ jQuery( document ).ready( function( $ ) {
 			}
 		}
 	});
+	jQuery( "#wp-admin-bar-imputation_recall .ab-action-recall" ).click( function(){
+		jQuery( "#dialog-recall" ).dialog("open");
+	});
+	jQuery( "#dialog-recall a" ).click ( function (e) {
+		e.preventDefault();
+		var link = jQuery( this );
+		var href = link.attr( 'href' );
+		console.log(href);
+		var data = null;
+		jQuery.get( href, data, function() {
+			link.closest( "tr" ).remove();
+		});
+	});
+	jQuery( "#dialog-recall" ).dialog( {
+		autoOpen: false,
+		resizable: false,
+		height: "auto",
+		width: "auto",
+		modal: true,
+		buttons: {
+			Fermer: function() {
+				$( this ).dialog( "close" );
+			}
+		}
+	});
 });

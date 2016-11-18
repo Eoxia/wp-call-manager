@@ -121,21 +121,33 @@ function imputation_recall( $wp_admin_bar ) {
 	if ( $selected_comment > 0 ) {
 		$bouton_recall = array(
 			'id' => 'imputation_recall',
-			'title' => '<span class="ab-action-recall"><span class="ab-icon"></span>' . esc_html( 'Vous avez des personnes à rappeler', 'call-manager' ) . '</span>',
+			'title' => '<span class="ab-action-recall"><span class="ab-icon"></span>' . esc_html( 'Vous avez des personnes à rappeler !', 'call-manager' ) . '</span>',
+			'meta' => array( 'title' => __( 'CLiquez ici pour plus de détails' ) ),
 		);
 		$wp_admin_bar->add_node( $bouton_recall );
 	}
 }
 
 add_action( 'admin_footer', 'dialog_call' );
+add_action( 'admin_footer', 'dialog_recall' );
+
 /**
- * [FR]  Création de la Div pour la pop-up du plugin Call.
+ * [FR]  Création de la Div pour la pop-up du bouton Call.
  * [ENG] Here we create a div for the pop-up dialog when you clic on the Call button.
  *
  * @method dialog_call.
  */
 function dialog_call() {
 	include( plugin_dir_path( __FILE__ ) . 'views/form-call.php' );
+}
+/**
+ * [FR]  Création de la Div pour la pop-up du bouton Recall.
+ * [ENG] Here we create a div for the pop-up dialog when you clic on the Recall button.
+ *
+ * @method dialog_call.
+ */
+function dialog_recall() {
+	include( plugin_dir_path( __FILE__ ) . 'views/dialog-recall.php' );
 }
 
 add_action( 'admin_enqueue_scripts', 'cm_custom_wp_toolbar_css_admin' );
@@ -148,7 +160,5 @@ add_action( 'wp_enqueue_scripts', 'cm_custom_wp_toolbar_css_admin' );
  */
 function cm_custom_wp_toolbar_css_admin() {
 	wp_enqueue_style( 'cm_add_custom_wp_toolbar_css', plugin_dir_url( __FILE__ ) . '../../assets/css/style.css', array( 'wp-jquery-ui-dialog' ) );
-	wp_enqueue_script( 'jquery-ui-dialog' );
-	wp_enqueue_script( 'jquery-form' );
-	wp_enqueue_script( 'cm_custom_js', plugin_dir_url( __FILE__ ) . '../../assets/js/admin/cm-admin.js' );
+	wp_enqueue_script( 'cm_custom_js', plugin_dir_url( __FILE__ ) . '../../assets/js/admin/cm-admin.js', array( 'jquery-ui-dialog', 'jquery-form' ) );
 }
