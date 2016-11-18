@@ -9,6 +9,7 @@
 
 add_filter( 'tm_filter_timeline_summary_month_end', 'display', 102, 4 );
 add_filter( 'tm_filter_timeline_day', 'display', 103, 5 );
+
 /**
  * [FR]  Ajout du total de Call & Blame du mois et du jour dans la chronologie.
  * [ENG] From here it's the compatiblity with Task-manager's Chronology.

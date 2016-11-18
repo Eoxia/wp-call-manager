@@ -8,6 +8,6 @@
  */
 
 ?>
-<li class='temp'> <span class="dashicons dashicons-phone"></span> <strong> <?php echo esc_html( $number_call ); ?> </strong></li>
+<li class='temp'> <span class="ab-action-recap"> <span class="dashicons dashicons-phone"></span> <strong> <?php echo esc_html( $number_call ); ?> </strong> </span></li>
 <li class='temp'> <span class="dashicons dashicons-businessman"></span> <strong> <?php echo esc_html( $number_blame ); ?> </strong></li>
 <?php

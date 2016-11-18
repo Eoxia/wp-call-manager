@@ -11,7 +11,7 @@ jQuery( document ).ready( function( $ ) {
 		});
 	});
 	jQuery( "#wp-admin-bar-imputation_tel .ab-action" ).click( function(){
-		jQuery( "#dialog" ).dialog("open");
+		jQuery( "#dialog" ).dialog( "open" );
 		var data = {
 			'action': 'count_tel',
 		};
@@ -44,7 +44,7 @@ jQuery( document ).ready( function( $ ) {
 		}
 	});
 	jQuery( "#wp-admin-bar-imputation_recall .ab-action-recall" ).click( function(){
-		jQuery( "#dialog-recall" ).dialog("open");
+		jQuery( "#dialog-recall" ).dialog( "open" );
 	});
 	jQuery( "#dialog-recall a" ).click ( function (e) {
 		e.preventDefault();
@@ -61,6 +61,21 @@ jQuery( document ).ready( function( $ ) {
 		resizable: false,
 		height: "auto",
 		width: "auto",
+		modal: true,
+		buttons: {
+			Fermer: function() {
+				$( this ).dialog( "close" );
+			}
+		}
+	});
+	jQuery( ".ab-action-recap" ).click( function () {
+		jQuery( "#cm-summary-recap" ).dialog( "open" );
+	});
+	jQuery( "#cm-summary-recap" ).dialog( {
+		autoOpen: false,
+		resizable: true,
+		height: "30px",
+		width: "30px",
 		modal: true,
 		buttons: {
 			Fermer: function() {

@@ -58,7 +58,8 @@ function imputation_tel( $wp_admin_bar ) {
 function imputation_tel_moins( $wp_admin_bar ) {
 	$bouton_tel = array(
 		'id'       => 'imputation_tel_moins',
-		'title'    => '<span class="ab-action-moins"><span class="ab-icon"></span></span>',
+		'title'    => '<span class="ab-action-moins"><span class="ab-icon"></span>' . esc_html__( 'Retirer un appel' ) . '</span>',
+		'parent'   => 'imputation_tel',
 	);
 	$wp_admin_bar->add_node( $bouton_tel );
 }
@@ -99,12 +100,12 @@ function imputation( $wp_admin_bar ) {
 		}
 		$to_blame = array(
 			'id' => 'to_blame_' . $id,
-			'title' => '<span class="ab-child">' . $name . ' vous a interrompu : <span class="ab-retour_' . $id . '">' . $blame_number . '</span> fois.</span>',
+			'title' => '<span class="ab-child">' . $name . ' ' . esc_html__( 'vous a interrompu :', 'call-manager' ) . ' <span class="ab-retour_' . $id . '">' . $blame_number . '</span> fois.</span>',
 			'parent' => 'imputation',
 			'href' => admin_url( 'admin-ajax.php?action=count&user_id=' . $id ),
 			'meta' => array(
 				'class' => 'child_blame',
-				'title' => 'Cliquez pour ajouter une interruption',
+				'title' => esc_html__( 'Cliquez pour ajouter une interruption' ),
 			),
 		);
 		$wp_admin_bar->add_node( $to_blame );
@@ -146,6 +147,7 @@ function imputation_recall( $wp_admin_bar ) {
 
 add_action( 'admin_footer', 'dialog_call' );
 add_action( 'admin_footer', 'dialog_recall' );
+add_action( 'admin_footer', 'cm_summary_recap' );
 
 /**
  * [FR]  Création de la Div pour la pop-up du bouton Call.
@@ -165,6 +167,16 @@ function dialog_call() {
  */
 function dialog_recall() {
 	include( plugin_dir_path( __FILE__ ) . 'views/dialog-recall.php' );
+}
+
+/**
+ * [FR]  Création de la Div pour la pop-up du recap dans la chronologie de task-manager.
+ * [ENG] Here we create a div for the pop-up dialog when you clic on the Call button in Crhonology from task-manager.
+ *
+ * @method cm_summary_recap
+ */
+function cm_summary_recap() {
+	include( plugin_dir_path( __FILE__ ) . 'views/task-manager/summary-recap.php' );
 }
 
 add_action( 'admin_enqueue_scripts', 'cm_custom_wp_toolbar_css_admin' );
