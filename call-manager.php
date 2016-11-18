@@ -7,7 +7,7 @@
  */
 
 /*
- * Plugin Name: Call-manager.
+ * Plugin Name: Call Manager
  * Description: Un plugin pour les devs d'Eoxia.
  * Version: 1.7.0.0.
  * Author: Damien.

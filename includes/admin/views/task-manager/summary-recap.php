@@ -17,12 +17,12 @@
 				<td> <strong><?php esc_html_e( 'Nom de la Société', 'call-manager' ) ?> </strong> | </td>
 				<td> <strong><?php esc_html_e( 'Numéro de Téléphone', 'call-manager' ) ?> </strong> | </td>
 				<td> <strong><?php esc_html_e( 'E-mail', 'call-manager' ) ?> </strong> | </td>
-				<td> <strong><?php esc_html_e( 'Traité ?', 'call-manager' ) ?> </strong> </td>
 			</tr>
 			<?php
 			$comment = array(
 				'meta_key' => '_eocm_receiver_id',
 				'meta_value' => get_current_user_id(),
+				'status' => array( 'treated', 'recall', 'transfered' ),
 				'order' => 'ASC',
 			);
 			$data_comment = get_comments( $comment );
@@ -41,7 +41,6 @@
 					<td> <?php echo esc_html( $society_caller ); ?> </td>
 					<td> <?php echo esc_html( $phone_caller ); ?> </td>
 					<td> <?php echo esc_html( $mail_caller ); ?> </td>
-					<td> <a href="<?php echo esc_attr( $url ); ?>"><?php esc_html_e( 'Traité', 'call-manager' ) ?> </a>	</td>
 				</tr>
 				<?php
 			}

@@ -74,8 +74,8 @@ jQuery( document ).ready( function( $ ) {
 	jQuery( "#cm-summary-recap" ).dialog( {
 		autoOpen: false,
 		resizable: true,
-		height: "30px",
-		width: "30px",
+		height: "40%",
+		width: "20%",
 		modal: true,
 		buttons: {
 			Fermer: function() {
