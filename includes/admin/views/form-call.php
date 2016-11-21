@@ -8,9 +8,9 @@
  */
 
 ?>
-<div id="dialog" title="Renseignement">
+<div id="dialog" title="Renseignements">
 	<p>
-		<form id="form-dialog" method="post" action="<?php echo esc_html( admin_url( 'admin-ajax.php' ) ); ?>">
+		<form id="form-dialog" action="<?php echo esc_html( admin_url( 'admin-ajax.php' ) ); ?>">
 			<?php
 			wp_nonce_field( 'form_dialog_check', '_wpnonce_dialog' );
 			$admin_user = get_users( 'orderby=nicename&role=administrator' );
@@ -31,11 +31,11 @@
 			<input type="radio" name="button_call" value="transfered"> <?php esc_html_e( 'Transféré', 'call-manager' ); ?> <br />
 			<input type="radio" name="button_call" value="recall"> <?php esc_html_e( 'A rappeler', 'call-manager' ); ?> <br />
 			<?php esc_html_e( 'Informations contact :', 'call-manager' ) ?> <br />
-			<input type="text" name="name_contact_call" placeholder="<?php esc_attr_e( 'Nom du contact', 'call-manager' ) ?>"> <br />
-			<input type="text" name="society_contact_call" placeholder="<?php esc_attr_e( 'Société du contact', 'call-manager' ) ?>"> <br />
-			<input type="text" name="number_contact_call" placeholder="<?php esc_attr_e( 'Numéro du contact', 'call-manager' ) ?>"> <br />
-			<input type="email" name="email_contact_call" placeholder="<?php esc_attr_e( 'E-mail du contact', 'call-manager' ) ?>"> <br />
-			<textarea rows="3" cols="15" form="form_dialog" name="comment_call" placeholder="<?php esc_attr_e( 'Commentaire', 'call-manager' ) ?>"></textarea> <br />
+			<input type="text" id="name_contact_call" name="name_contact_call" placeholder="<?php esc_attr_e( 'Nom du contact', 'call-manager' ) ?>"> <br />
+			<input type="text" id="society_contact_call" name="society_contact_call" placeholder="<?php esc_attr_e( 'Société du contact', 'call-manager' ) ?>"> <br />
+			<input type="text" id="number_contact_call" name="number_contact_call" placeholder="<?php esc_attr_e( 'Numéro du contact', 'call-manager' ) ?>"> <br />
+			<input type="email" id="email_contact_call" name="email_contact_call" placeholder="<?php esc_attr_e( 'E-mail du contact', 'call-manager' ) ?>"> <br />
+			<textarea rows="3" cols="15" id="comment_content_call" form="form-dialog" name="comment_content_call" placeholder="<?php esc_attr_e( 'Commentaire', 'call-manager' ) ?>"></textarea> <br />
 		</form>
 	</p>
 </div>

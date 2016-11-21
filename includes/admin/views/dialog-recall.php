@@ -17,7 +17,8 @@
 				<th> <strong><?php esc_html_e( 'Nom de la Société', 'call-manager' ) ?> </strong> | </th>
 				<th> <strong><?php esc_html_e( 'Numéro de Téléphone', 'call-manager' ) ?> </strong> | </th>
 				<th> <strong><?php esc_html_e( 'E-mail', 'call-manager' ) ?> </strong> | </th>
-				<th> <strong><?php esc_html_e( 'Traité ?', 'call-manager' ) ?> </strong> </th>
+				<th> <strong><?php esc_html_e( 'Commentaire', 'call-manager' ) ?> </strong> </th>
+				<th> | <strong><?php esc_html_e( 'Traité ?', 'call-manager' ) ?> </strong> </th>
 			</tr>
 			<?php
 			$comment = array(
@@ -34,6 +35,7 @@
 				$society_caller = get_comment_meta( $id, '_eocm_caller_society', true );
 				$phone_caller = get_comment_meta( $id, '_eocm_caller_phone', true );
 				$mail_caller = get_comment_meta( $id, '_eocm_caller_email', true );
+				$comment_content_receive = get_comment( $id, ARRAY_A );
 				$url = admin_url( 'admin-ajax.php?action=treated&comment_id=' . $id )
 				?>
 				<tr>
@@ -42,6 +44,7 @@
 					<td> <?php echo esc_html( $society_caller ); ?> </td>
 					<td> <?php echo esc_html( $phone_caller ); ?> </td>
 					<td> <?php echo esc_html( $mail_caller ); ?> </td>
+					<td> <?php echo esc_html( $comment_content_receive['comment_content'] ); ?> </td>
 					<td> <a href="<?php echo esc_attr( $url ); ?>"><?php esc_html_e( 'Traité', 'call-manager' ) ?> </a>	</td>
 				</tr>
 				<?php

@@ -34,9 +34,33 @@ jQuery( document ).ready( function( $ ) {
 		width: "auto",
 		modal: true,
 		buttons: {
-			"OK": function() {
-				jQuery( "#form-dialog" ).ajaxSubmit();
-				$( this ).dialog( "close" );
+			Rechercher: function() {
+				jQuery( "#form-dialog" ).click().attr( "method", "GET" ).ajaxSubmit( function( response ) {
+					var name = response.data.name;
+					jQuery( "#form-dialog #name_contact_call" ).attr( "value" , name );
+					var society = response.data.society;
+					jQuery( "#form-dialog #society_contact_call" ).attr( "value" , society );
+					var email = response.data.mail;
+					jQuery( "#form-dialog #email_contact_call" ).attr( "value" , email );
+					var number = response.data.number;
+					jQuery( "#form-dialog #number_contact_call" ).attr( "value" , number );
+					var comment = response.data.commentcontent;
+					jQuery( "#form-dialog #comment_content_call" ).attr( "value" , comment );
+				});
+			},
+			OK: function() {
+				jQuery( "#form-dialog" ).click().attr( "method", "POST" ).ajaxSubmit();
+				var name = "";
+				jQuery( "#form-dialog #name_contact_call" ).attr( "value" , name );
+				var society = "";
+				jQuery( "#form-dialog #society_contact_call" ).attr( "value" , society );
+				var email = "";
+				jQuery( "#form-dialog #email_contact_call" ).attr( "value" , email );
+				var number = "";
+				jQuery( "#form-dialog #number_contact_call" ).attr( "value" , number );
+				var comment = "";
+				jQuery( "#form-dialog #comment_content_call" ).attr( "value" , comment );
+				$( "#dialog" ).dialog( "close" );
 			},
 			Annuler: function() {
 				$( this ).dialog( "close" );
@@ -50,7 +74,6 @@ jQuery( document ).ready( function( $ ) {
 		e.preventDefault();
 		var link = jQuery( this );
 		var href = link.attr( 'href' );
-		console.log(href);
 		var data = null;
 		jQuery.get( href, data, function() {
 			link.closest( "tr" ).remove();
