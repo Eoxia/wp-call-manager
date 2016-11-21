@@ -145,9 +145,9 @@ function imputation_recall( $wp_admin_bar ) {
 	}
 }
 
-add_action( 'admin_footer', 'dialog_call' );
-add_action( 'admin_footer', 'dialog_recall' );
-add_action( 'admin_footer', 'cm_summary_recap' );
+add_action( 'admin_footer', 'dialog_call', 999 );
+add_action( 'admin_footer', 'dialog_recall', 999 );
+// add_action( 'admin_footer', 'cm_summary_recap', 999 );
 
 /**
  * [FR]  Création de la Div pour la pop-up du bouton Call.
@@ -175,9 +175,9 @@ function dialog_recall() {
  *
  * @method cm_summary_recap
  */
-function cm_summary_recap() {
-	include( plugin_dir_path( __FILE__ ) . 'views/task-manager/summary-recap.php' );
-}
+// function cm_summary_recap() {
+// 	include( plugin_dir_path( __FILE__ ) . 'views/task-manager/summary-recap.php' );
+// }
 
 add_action( 'admin_enqueue_scripts', 'cm_custom_wp_toolbar_css_admin' );
 add_action( 'wp_enqueue_scripts', 'cm_custom_wp_toolbar_css_admin' );

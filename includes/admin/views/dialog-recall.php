@@ -12,12 +12,12 @@
 	<p>
 		<table style="text-align: center;">
 			<tr>
-				<td> <strong><?php esc_html_e( "Date de réception de l'appel", 'call-manager' ) ?>  </strong> | </td>
-				<td> <strong><?php esc_html_e( 'Nom du Contact', 'call-manager' ) ?> </strong> | </td>
-				<td> <strong><?php esc_html_e( 'Nom de la Société', 'call-manager' ) ?> </strong> | </td>
-				<td> <strong><?php esc_html_e( 'Numéro de Téléphone', 'call-manager' ) ?> </strong> | </td>
-				<td> <strong><?php esc_html_e( 'E-mail', 'call-manager' ) ?> </strong> | </td>
-				<td> <strong><?php esc_html_e( 'Traité ?', 'call-manager' ) ?> </strong> </td>
+				<th> <strong><?php esc_html_e( "Date de réception de l'appel", 'call-manager' ) ?>  </strong> | </th>
+				<th> <strong><?php esc_html_e( 'Nom du Contact', 'call-manager' ) ?> </strong> | </th>
+				<th> <strong><?php esc_html_e( 'Nom de la Société', 'call-manager' ) ?> </strong> | </th>
+				<th> <strong><?php esc_html_e( 'Numéro de Téléphone', 'call-manager' ) ?> </strong> | </th>
+				<th> <strong><?php esc_html_e( 'E-mail', 'call-manager' ) ?> </strong> | </th>
+				<th> <strong><?php esc_html_e( 'Traité ?', 'call-manager' ) ?> </strong> </th>
 			</tr>
 			<?php
 			$comment = array(

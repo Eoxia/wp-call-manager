@@ -68,19 +68,32 @@ jQuery( document ).ready( function( $ ) {
 			}
 		}
 	});
-	jQuery( ".ab-action-recap" ).click( function () {
-		jQuery( "#cm-summary-recap" ).dialog( "open" );
-	});
-	jQuery( "#cm-summary-recap" ).dialog( {
-		autoOpen: false,
-		resizable: true,
-		height: "40%",
-		width: "20%",
-		modal: true,
-		buttons: {
-			Fermer: function() {
-				$( this ).dialog( "close" );
+	jQuery( ".ab-action-recap-monthly" ).click( function () {
+		jQuery( this ).closest( "ul" ).find( ".pop-up" ).dialog( {
+			autoOpen: true,
+			resizable: true,
+			height: "600",
+			width: "850",
+			modal: true,
+			buttons: {
+				Fermer: function() {
+					$( this ).dialog( "close" );
+				}
 			}
-		}
+		});
+	});
+	jQuery( ".ab-action-recap-daily" ).click( function () {
+		jQuery( this ).closest( "ul" ).find( ".pop-up" ).dialog( {
+			autoOpen: true,
+			resizable: true,
+			height: "600",
+			width: "850",
+			modal: true,
+			buttons: {
+				Fermer: function() {
+					$( this ).dialog( "close" );
+				}
+			}
+		});
 	});
 });

@@ -42,4 +42,5 @@ function display( $content, $user_id, $year, $month, $day = null ) {
 		}
 	}
 	include( 'views/task-manager/summary-filter.php' );
+	include( plugin_dir_path( __FILE__ ) . 'views/task-manager/summary-recap.php' );
 }
