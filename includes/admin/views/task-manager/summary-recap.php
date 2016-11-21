@@ -8,15 +8,22 @@
  */
 
 ?>
-<div id="cm-summary-recap" title="Voici la liste personnes qui vous ont contacté">
+<div id="cm-summary-recap" class="hidden pop-up"
+<?php if ( null !== $day ) {
+	?> title="<?php esc_attr_e( 'Voici la liste des personnes qui vous ont contacté ce jour-là' , 'call-manager' ) ?>" <?php
+} else {
+	?> title="<?php esc_attr_e( 'Voici la liste des personnes qui vous ont contacté ce mois-ci' , 'call-manager' ) ?>" <?php
+}
+?>
+>
 	<p>
 		<table style="text-align: center;">
 			<tr>
-				<td> <strong><?php esc_html_e( "Date de réception de l'appel", 'call-manager' ) ?>  </strong> | </td>
-				<td> <strong><?php esc_html_e( 'Nom du Contact', 'call-manager' ) ?> </strong> | </td>
-				<td> <strong><?php esc_html_e( 'Nom de la Société', 'call-manager' ) ?> </strong> | </td>
-				<td> <strong><?php esc_html_e( 'Numéro de Téléphone', 'call-manager' ) ?> </strong> | </td>
-				<td> <strong><?php esc_html_e( 'E-mail', 'call-manager' ) ?> </strong> | </td>
+				<th> <strong><?php esc_html_e( "Date de réception de l'appel", 'call-manager' ) ?>  </strong> | </th>
+				<th> <strong><?php esc_html_e( 'Nom du Contact', 'call-manager' ) ?> </strong> | </th>
+				<th> <strong><?php esc_html_e( 'Nom de la Société', 'call-manager' ) ?> </strong> | </th>
+				<th> <strong><?php esc_html_e( 'Numéro de Téléphone', 'call-manager' ) ?> </strong> | </th>
+				<th> <strong><?php esc_html_e( 'E-mail', 'call-manager' ) ?> </strong> </th>
 			</tr>
 			<?php
 			$comment = array(
@@ -24,6 +31,7 @@
 				'meta_value' => get_current_user_id(),
 				'status' => array( 'treated', 'recall', 'transfered' ),
 				'order' => 'ASC',
+				'date_query' => array( 'year' => $year, 'month' => $month, 'day' => $day ),
 			);
 			$data_comment = get_comments( $comment );
 			foreach ( $data_comment as $data ) {
@@ -33,7 +41,6 @@
 				$society_caller = get_comment_meta( $id, '_eocm_caller_society', true );
 				$phone_caller = get_comment_meta( $id, '_eocm_caller_phone', true );
 				$mail_caller = get_comment_meta( $id, '_eocm_caller_email', true );
-				$url = admin_url( 'admin-ajax.php?action=treated&comment_id=' . $id )
 				?>
 				<tr>
 					<td> <?php echo esc_html( $date_comment ); ?> </td>
@@ -46,5 +53,6 @@
 			}
 			?>
 		</table>
+
 	</p>
 </div>
