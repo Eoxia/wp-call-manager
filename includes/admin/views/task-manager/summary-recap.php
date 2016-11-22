@@ -17,14 +17,14 @@
 ?>
 >
 	<p>
-		<table style="text-align: center;">
+		<table style="text-align: center; table-layout: fixed;">
 			<tr>
 				<th> <strong><?php esc_html_e( "Date de réception de l'appel", 'call-manager' ) ?>  </strong> | </th>
 				<th> <strong><?php esc_html_e( 'Nom du Contact', 'call-manager' ) ?> </strong> | </th>
 				<th> <strong><?php esc_html_e( 'Nom de la Société', 'call-manager' ) ?> </strong> | </th>
-				<th> <strong><?php esc_html_e( 'Numéro de Téléphone', 'call-manager' ) ?> </strong> </th>
+				<th> <strong><?php esc_html_e( 'Numéro de Téléphone', 'call-manager' ) ?> </strong> | </th>
 				<th> <strong><?php esc_html_e( 'E-mail', 'call-manager' ) ?> </strong> </th>
-				<th> <strong><?php esc_html_e( 'Commentaire', 'call-manager' ) ?> </strong> </th>
+				<th> | <strong><?php esc_html_e( 'Commentaire', 'call-manager' ) ?> </strong> </th>
 			</tr>
 			<?php
 			$comment = array(
@@ -50,7 +50,7 @@
 					<td> <?php echo esc_html( $society_caller ); ?> </td>
 					<td> <?php echo esc_html( $phone_caller ); ?> </td>
 					<td> <?php echo esc_html( $mail_caller ); ?> </td>
-					<td> <?php echo esc_html( $comment_content_receive['comment_content'] ); ?> </td>
+					<td> <div style="width: 200px; word-wrap: break-word;"> <?php echo esc_html( $comment_content_receive['comment_content'] ); ?> </div> </td>
 				</tr>
 				<?php
 			}

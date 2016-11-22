@@ -10,7 +10,7 @@
 ?>
 <div id="dialog-recall" title="Voici les personnes que vous devez rappeler">
 	<p>
-		<table style="text-align: center;">
+		<table style="text-align: center; table-layout: fixed;">
 			<tr>
 				<th> <strong><?php esc_html_e( "Date de réception de l'appel", 'call-manager' ) ?>  </strong> | </th>
 				<th> <strong><?php esc_html_e( 'Nom du Contact', 'call-manager' ) ?> </strong> | </th>
@@ -44,7 +44,7 @@
 					<td> <?php echo esc_html( $society_caller ); ?> </td>
 					<td> <?php echo esc_html( $phone_caller ); ?> </td>
 					<td> <?php echo esc_html( $mail_caller ); ?> </td>
-					<td> <?php echo esc_html( $comment_content_receive['comment_content'] ); ?> </td>
+					<td> <div style="width: 130px; word-wrap: break-word;"> <?php echo esc_html( $comment_content_receive['comment_content'] ); ?> </div> </td>
 					<td> <a href="<?php echo esc_attr( $url ); ?>"><?php esc_html_e( 'Traité', 'call-manager' ) ?> </a>	</td>
 				</tr>
 				<?php

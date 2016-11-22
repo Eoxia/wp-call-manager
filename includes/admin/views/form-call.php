@@ -21,15 +21,15 @@
 				foreach ( $admin_user as $user ) {
 					$id = $user->ID;
 					$name = ucfirst( $user->display_name );
-					?> <option value="<?php echo esc_attr( $id ); ?>"><?php echo esc_attr( $name ); ?></option> <?php
+					?> <option <?php selected( $id, get_current_user_id(), true ) ?> value="<?php echo esc_attr( $id ); ?>"><?php echo esc_attr( $name ); ?></option> <?php
 				}
 				?>
 			</select> <br />
 			<input type="hidden" name="action" value="form_call">
 			<?php esc_html_e( 'Choisissez votre option :', 'call-manager' ) ?> <br />
-			<input type="radio" name="button_call" value="treated" checked="checked"> <?php esc_html_e( 'Traité', 'call-manager' ); ?> <br />
-			<input type="radio" name="button_call" value="transfered"> <?php esc_html_e( 'Transféré', 'call-manager' ); ?> <br />
-			<input type="radio" name="button_call" value="recall"> <?php esc_html_e( 'A rappeler', 'call-manager' ); ?> <br />
+			<input type="radio" id="treated" name="button_call" value="treated" checked="checked"> <label for="treated"><?php esc_html_e( 'Traité', 'call-manager' ); ?> </label> <br />
+			<input type="radio" id="transfered" name="button_call" value="transfered"> <label for="transfered"><?php esc_html_e( 'Transféré', 'call-manager' ); ?> </label> <br />
+			<input type="radio" id="recall" name="button_call" value="recall"> <label for="recall"> <?php esc_html_e( 'A rappeler', 'call-manager' ); ?> </label> <br />
 			<?php esc_html_e( 'Informations contact :', 'call-manager' ) ?> <br />
 			<input type="text" id="name_contact_call" name="name_contact_call" placeholder="<?php esc_attr_e( 'Nom du contact', 'call-manager' ) ?>"> <br />
 			<input type="text" id="society_contact_call" name="society_contact_call" placeholder="<?php esc_attr_e( 'Société du contact', 'call-manager' ) ?>"> <br />
