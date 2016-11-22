@@ -1,14 +1,13 @@
 <?php
 /**
- * [FR]  Page ajoutant les boutons Call & Blame.
- * [ENG] This Php file adds buttons Call & Blame.
+ * [FR]  Page ajoutant les boutons Call & Blame & Recall ainsi que les divs contenant les formulaires et le css des boutons et des dialogs.
+ * [ENG] This Php file adds buttons Call & Blame & Recall and contains divs for forms, dialogs' and buttons' css.
  *
  * @package WordPress.
  * @subpackage Call & Blame.
  */
 
 add_action( 'admin_bar_menu', 'imputation_tel', 100 );
-add_action( 'admin_bar_menu', 'imputation_tel_moins', 100 );
 add_action( 'admin_bar_menu', 'imputation', 101 );
 add_action( 'admin_bar_menu', 'imputation_recall', 102 );
 
@@ -46,22 +45,12 @@ function imputation_tel( $wp_admin_bar ) {
 		'title'    => '<span class="ab-action"><span class="ab-icon"></span><span class="ab-label">' . $total_call . '</span></span>',
 	);
 	$wp_admin_bar->add_node( $bouton_tel );
-}
-
-/**
- * [FR]  La fonction suivante créer le bouton Call -.
- * [ENG] This function create the button Call -.
- *
- * @method imputation_tel_moins
- * @param  mixed $wp_admin_bar WordPress function for addding node.
- */
-function imputation_tel_moins( $wp_admin_bar ) {
-	$bouton_tel = array(
+	$bouton_tel_moins = array(
 		'id'       => 'imputation_tel_moins',
 		'title'    => '<span class="ab-action-moins"><span class="ab-icon"></span>' . esc_html__( 'Retirer un appel' ) . '</span>',
 		'parent'   => 'imputation_tel',
 	);
-	$wp_admin_bar->add_node( $bouton_tel );
+	$wp_admin_bar->add_node( $bouton_tel_moins );
 }
 
 /**
@@ -110,9 +99,6 @@ function imputation( $wp_admin_bar ) {
 		);
 		$wp_admin_bar->add_node( $to_blame );
 	}
-
-	// [FR]  Groupe du blame.
-	// [ENG] Blame's group.
 	$group = array(
 		'id' => 'blame_group',
 		'parent' => 'imputation',
@@ -121,7 +107,7 @@ function imputation( $wp_admin_bar ) {
 }
 
 /**
- * [imputation_recall description]
+ * Bouton Recall qui ne s'affiche que quand vous avez une personne à rappeler.
  *
  * @method imputation_recall.
  * @param [type] $wp_admin_bar [description].
@@ -145,26 +131,16 @@ function imputation_recall( $wp_admin_bar ) {
 	}
 }
 
-add_action( 'admin_footer', 'dialog_call', 999 );
-add_action( 'admin_footer', 'dialog_recall', 999 );
+add_action( 'admin_footer', 'dialog', 999 );
 
 /**
- * [FR]  Création de la Div pour la pop-up du bouton Call.
- * [ENG] Here we create a div for the pop-up dialog when you clic on the Call button.
+ * [FR]  Création de la Div pour la pop-up du bouton Call & Recall.
+ * [ENG] Here we create a div for the pop-up dialog when you clic on the Call & Recall buttons.
  *
  * @method dialog_call.
  */
-function dialog_call() {
+function dialog() {
 	include( plugin_dir_path( __FILE__ ) . 'views/form-call.php' );
-}
-
-/**
- * [FR]  Création de la Div pour la pop-up du bouton Recall.
- * [ENG] Here we create a div for the pop-up dialog when you clic on the Recall button.
- *
- * @method dialog_call.
- */
-function dialog_recall() {
 	include( plugin_dir_path( __FILE__ ) . 'views/dialog-recall.php' );
 }
 

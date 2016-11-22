@@ -119,7 +119,7 @@ jQuery( document ).ready( function( $ ) {
 			autoOpen: true,
 			resizable: true,
 			height: "600",
-			width: "850",
+			width: "auto",
 			modal: true,
 			buttons: {
 				Fermer: function() {
@@ -133,7 +133,7 @@ jQuery( document ).ready( function( $ ) {
 			autoOpen: true,
 			resizable: true,
 			height: "600",
-			width: "850",
+			width: "auto",
 			modal: true,
 			buttons: {
 				Fermer: function() {
