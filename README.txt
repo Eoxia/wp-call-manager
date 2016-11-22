@@ -1,6 +1,6 @@
 [Description]
 
-Imputation is a WordPress' plugin which respect WordPress Coding Standards.
+Call Manager is a WordPress' plugin which respect WordPress Coding Standards.
 
 [Fonctionnality]
 
@@ -14,6 +14,6 @@ Its code is English friendly but his display will be in French, you are free to 
 
 After activated the plugin it will create an array in your WordPress database to stock monthly data for each admin user.
 
-When you click on the first one (with dashicons-phone) his count increment and open a pop-up which contains a form. THis form can be fill by several information about the person who called you.
+When you click on the first one (with dashicons-phone) his count increment and open a pop-up which contains a form. This form can be fill by several information about the person who called you and make a research if this person has already called your agency.
 
 When you hover the second one a list of admin users shown and with a click on their name you can "blame" them. This will increment the total blame which is display at the right of the dashicons-businessman and increment the blame value associate with the admin's ID.
