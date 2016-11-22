@@ -45,6 +45,7 @@ jQuery( document ).ready( function( $ ) {
 					var number = response.data.number;
 					jQuery( "#form-dialog #number_contact_call" ).attr( "value" , number );
 					var comment = response.data.commentcontent;
+					if ( null === comment ) { var comment = "Inconnu / Not found" }
 					jQuery( "#form-dialog #comment_content_call" ).attr( "value" , comment );
 				});
 			},
@@ -63,7 +64,23 @@ jQuery( document ).ready( function( $ ) {
 				$( "#dialog" ).dialog( "close" );
 			},
 			Annuler: function() {
-				$( this ).dialog( "close" );
+				var name = "";
+				jQuery( "#form-dialog #name_contact_call" ).attr( "value" , name );
+				var society = "";
+				jQuery( "#form-dialog #society_contact_call" ).attr( "value" , society );
+				var email = "";
+				jQuery( "#form-dialog #email_contact_call" ).attr( "value" , email );
+				var number = "";
+				jQuery( "#form-dialog #number_contact_call" ).attr( "value" , number );
+				var comment = "";
+				jQuery( "#form-dialog #comment_content_call" ).attr( "value" , comment );
+				var data = {
+					'action': 'count_tel_moins',
+				};
+				jQuery.post( ajaxurl, data, function( response ) {
+					jQuery( "#wp-admin-bar-imputation_tel .ab-label" ).text( response )
+				});
+				$( "#dialog" ).dialog( "close" );
 			}
 		}
 	});

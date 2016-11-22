@@ -73,8 +73,8 @@ add_action( 'wp_ajax_form_call', 'form_call_callback' );
 add_action( 'wp_ajax_treated', 'treated_callback' );
 
 /**
- * [FR]  Traitement du formulaire du bouton Call.
- * [ENG] This function save the data from the dialog form of Call's button.
+ * [FR]  Traitement du formulaire du bouton Call en POST et de la recherche en GET.
+ * [ENG] This function save the data from the dialog form of Call's button via POST and search from GET.
  *
  * @method form_call_callback.
  */
@@ -127,19 +127,37 @@ function form_call_callback() {
 		add_comment_meta( $id_comment, '_eocm_caller_name', $name_contact_call );
 		add_comment_meta( $id_comment, '_eocm_receiver_id', $to_call );
 	} elseif ( ! empty( $_GET['_wpnonce_dialog'] ) && check_admin_referer( 'form_dialog_check', '_wpnonce_dialog' ) ) {
-		if ( '' !== $_GET['number_contact_call'] ) {
-			$number_contact_call = $_GET['number_contact_call'];
+		if ( ( '' !== $_GET['number_contact_call'] ) or ( '' !== $_GET['email_contact_call'] ) or ( '' !== $_GET['name_contact_call'] ) or ( '' !== $_GET['society_contact_call'] ) ) {
 			$comment = array(
-				'meta_key' => '_eocm_caller_phone',
-				'meta_value' => $number_contact_call,
 				'status' => array( 'treated', 'recall', 'transfered' ),
 				'order' => 'ASC',
 			);
+			if ( '' !== $_GET['number_contact_call'] ) {
+				$number_caller = $_GET['number_contact_call'];
+				$comment['meta_key'] = '_eocm_caller_phone';
+				$comment['meta_value'] = $number_caller;
+			}
+			if ( '' !== $_GET['email_contact_call'] ) {
+				$mail_caller = $_GET['email_contact_call'];
+				$comment['meta_key'] = '_eocm_caller_email';
+				$comment['meta_value'] = $mail_caller;
+			}
+			if ( '' !== $_GET['name_contact_call'] ) {
+				$name_caller = $_GET['name_contact_call'];
+				$comment['meta_key'] = '_eocm_caller_name';
+				$comment['meta_value'] = $name_caller;
+			}
+			if ( '' !== $_GET['society_contact_call'] ) {
+				$society_caller = $_GET['society_contact_call'];
+				$comment['meta_key'] = '_eocm_caller_society';
+				$comment['meta_value'] = $society_caller;
+			}
 			$data_comment = get_comments( $comment );
 			foreach ( $data_comment as $data ) {
 				$id = $data->comment_ID;
 				$name_caller = get_comment_meta( $id, '_eocm_caller_name', true );
 				$society_caller = get_comment_meta( $id, '_eocm_caller_society', true );
+				$number_caller = get_comment_meta( $id, '_eocm_caller_phone', true );
 				$mail_caller = get_comment_meta( $id, '_eocm_caller_email', true );
 				$comment_content_receive = get_comment( $id, ARRAY_A );
 				$comment_content = $comment_content_receive['comment_content'];
@@ -148,83 +166,17 @@ function form_call_callback() {
 				'name' => $name_caller,
 				'society' => $society_caller,
 				'mail' => $mail_caller,
-				'number' => $number_contact_call,
-				'commentcontent' => $comment_content,
-			);
-			wp_send_json_success( $data );
-		} elseif ( '' !== $_GET['email_contact_call'] ) {
-			$email_contact_call = $_GET['email_contact_call'];
-			$comment = array(
-				'meta_key' => '_eocm_caller_email',
-				'meta_value' => $email_contact_call,
-				'status' => array( 'treated', 'recall', 'transfered' ),
-				'order' => 'ASC',
-			);
-			$data_comment = get_comments( $comment );
-			foreach ( $data_comment as $data ) {
-				$id = $data->comment_ID;
-				$name_caller = get_comment_meta( $id, '_eocm_caller_name', true );
-				$society_caller = get_comment_meta( $id, '_eocm_caller_society', true );
-				$number_caller = get_comment_meta( $id, '_eocm_caller_phone', true );
-				$comment_content_receive = get_comment( $id, ARRAY_A );
-				$comment_content = $comment_content_receive['comment_content'];
-			}
-			$data = array(
-				'name' => $name_caller,
-				'society' => $society_caller,
-				'mail' => $email_contact_call,
 				'number' => $number_caller,
 				'commentcontent' => $comment_content,
 			);
 			wp_send_json_success( $data );
-		} elseif ( '' !== $_GET['name_contact_call'] ) {
-			$name_contact_call = $_GET['name_contact_call'];
-			$comment = array(
-				'meta_key' => '_eocm_caller_name',
-				'meta_value' => $name_contact_call,
-				'status' => array( 'treated', 'recall', 'transfered' ),
-				'order' => 'ASC',
-			);
-			$data_comment = get_comments( $comment );
-			foreach ( $data_comment as $data ) {
-				$id = $data->comment_ID;
-				$mail_caller = get_comment_meta( $id, '_eocm_caller_email', true );
-				$society_caller = get_comment_meta( $id, '_eocm_caller_society', true );
-				$number_caller = get_comment_meta( $id, '_eocm_caller_phone', true );
-				$comment_content_receive = get_comment( $id, ARRAY_A );
-				$comment_content = $comment_content_receive['comment_content'];
-			}
+		} else {
 			$data = array(
-				'name' => $name_contact_call,
-				'society' => $society_caller,
-				'mail' => $mail_caller,
-				'number' => $number_caller,
-				'commentcontent' => $comment_content,
-			);
-			wp_send_json_success( $data );
-		} elseif ( '' !== $_GET['society_contact_call'] ) {
-			$society_contact_call = $_GET['society_contact_call'];
-			$comment = array(
-				'meta_key' => '_eocm_caller_society',
-				'meta_value' => $society_contact_call,
-				'status' => array( 'treated', 'recall', 'transfered' ),
-				'order' => 'ASC',
-			);
-			$data_comment = get_comments( $comment );
-			foreach ( $data_comment as $data ) {
-				$id = $data->comment_ID;
-				$mail_caller = get_comment_meta( $id, '_eocm_caller_email', true );
-				$name_caller = get_comment_meta( $id, '_eocm_caller_name', true );
-				$number_caller = get_comment_meta( $id, '_eocm_caller_phone', true );
-				$comment_content_receive = get_comment( $id, ARRAY_A );
-				$comment_content = $comment_content_receive['comment_content'];
-			}
-			$data = array(
-				'name' => $name_caller,
-				'society' => $society_contact_call,
-				'mail' => $mail_caller,
-				'number' => $number_caller,
-				'commentcontent' => $comment_content,
+				'name' => '',
+				'society' => '',
+				'mail' => '',
+				'number' => '',
+				'commentcontent' => 'Remplissez un champ pour la recherche !',
 			);
 			wp_send_json_success( $data );
 		}
@@ -234,16 +186,7 @@ function form_call_callback() {
 }
 
 /**
- * [search_callback description]
- *
- * @method search_callback
- */
-function search_callback() {
-
-}
-
-/**
- * [treated_callback description]
+ * Fonction pour modifier les "Recall" en Traité.
  *
  * @method treated_callback
  */
