@@ -80,7 +80,7 @@ function cm_blame( $wp_admin_bar ) {
 					$total_blame = $total_blame + $select[ $day ]['blame'][ $x ];
 				}
 			}
-			if ( ! isset( $select[ $day ]['blame']['0'] ) ) {
+			if ( ( ! isset( $select[ $day ]['blame']['0'] ) ) or ( ! isset( $select[ $day ]['blame']['999999'] ) ) ) {
 				$select[ $day ]['blame']['0'] = 0;
 				$select[ $day ]['blame']['999999'] = 0;
 			}

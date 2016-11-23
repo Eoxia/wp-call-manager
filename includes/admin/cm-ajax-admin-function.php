@@ -60,6 +60,12 @@ function count_callback() {
 		$x = $user->ID;
 		$total_blame = $total_blame + $select[ $day ]['blame'][ $x ];
 	}
+	if ( ( ! isset( $select[ $day ]['blame']['0'] ) ) or ( ! isset( $select[ $day ]['blame']['999999'] ) ) ) {
+		$select[ $day ]['blame']['0'] = 0;
+		$select[ $day ]['blame']['999999'] = 0;
+	}
+	$total_blame = $total_blame + $select[ $day ]['blame']['0'];
+	$total_blame = $total_blame + $select[ $day ]['blame']['999999'];
 	$data = array(
 		'count_current_user' => $select[ $day ]['blame'][ $_GET['user_id'] ],
 		'total' => $total_blame,
