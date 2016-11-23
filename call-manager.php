@@ -13,6 +13,6 @@
  * Author: Damien.
 */
 
-include( 'includes/admin/cm-ajax-admin-function.php' );
-include( 'includes/admin/cm-barmenu-admin-function.php' );
-include( 'includes/admin/cm-filter-admin-function.php' );
+include( 'includes/admin/cm-class-ajax-admin.php' );
+include( 'includes/admin/cm-class-barmenu-admin.php' );
+include( 'includes/admin/cm-class-filter-admin.php' );
