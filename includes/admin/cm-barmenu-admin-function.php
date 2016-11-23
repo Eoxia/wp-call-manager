@@ -7,9 +7,9 @@
  * @subpackage Call & Blame.
  */
 
-	add_action( 'admin_bar_menu', 'imputation_tel', 100 );
-	add_action( 'admin_bar_menu', 'imputation', 101 );
-	add_action( 'admin_bar_menu', 'imputation_recall', 102 );
+add_action( 'admin_bar_menu', 'imputation_tel', 100 );
+add_action( 'admin_bar_menu', 'imputation', 101 );
+add_action( 'admin_bar_menu', 'imputation_recall', 102 );
 
 /**
  * [FR]  La fonction suivante créer le bouton Call.
@@ -79,6 +79,10 @@ function imputation( $wp_admin_bar ) {
 				if ( ! empty( $select[ $day ]['blame'][ $x ] ) ) {
 					$total_blame = $total_blame + $select[ $day ]['blame'][ $x ];
 				}
+			}
+			if ( ! isset( $select[ $day ]['blame']['0'] ) ) {
+				$select[ $day ]['blame']['0'] = 0;
+				$select[ $day ]['blame']['999999'] = 0;
 			}
 			$total_blame = $total_blame + $select[ $day ]['blame']['0'];
 			$total_blame = $total_blame + $select[ $day ]['blame']['999999'];
