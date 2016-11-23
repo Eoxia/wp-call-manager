@@ -11,7 +11,6 @@ add_action( 'wp_ajax_count_tel', 'count_tel_callback' );
 add_action( 'wp_ajax_count_tel_moins', 'count_tel_moins_callback' );
 add_action( 'wp_ajax_count', 'count_callback' );
 
-
 /**
  * [FR] 	Action du bouton Call.
  * [ENG]  Button Call's action.
@@ -73,7 +72,6 @@ function count_callback() {
 	);
 	wp_send_json_success( $data );
 }
-
 
 add_action( 'wp_ajax_form_call', 'form_call_callback' );
 add_action( 'wp_ajax_treated', 'treated_callback' );
