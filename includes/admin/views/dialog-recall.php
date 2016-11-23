@@ -8,7 +8,7 @@
  */
 
 ?>
-<div id="dialog-recall" title="Voici les personnes que vous devez rappeler">
+<div id="dialog-recall" class="hidden" title="Voici les personnes que vous devez rappeler">
 	<p>
 		<table style="text-align: center; table-layout: fixed;">
 			<tr>

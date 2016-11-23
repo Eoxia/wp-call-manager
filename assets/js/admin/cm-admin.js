@@ -15,16 +15,6 @@ jQuery( document ).ready( function( $ ) {
 		});
 	});
 	jQuery( "#wp-admin-bar-imputation_tel .ab-action" ).click( function(){
-		var name = "";
-		jQuery( "#form-dialog #name_contact_call" ).attr( "value" , name );
-		var society = "";
-		jQuery( "#form-dialog #society_contact_call" ).attr( "value" , society );
-		var email = "";
-		jQuery( "#form-dialog #email_contact_call" ).attr( "value" , email );
-		var number = "";
-		jQuery( "#form-dialog #number_contact_call" ).attr( "value" , number );
-		var comment = "";
-		jQuery( "#form-dialog #comment_content_call" ).attr( "value" , comment );
 		jQuery( "#dialog" ).dialog( "open" );
 		var data = {
 			'action': 'count_tel',
@@ -73,6 +63,7 @@ jQuery( document ).ready( function( $ ) {
 				var emailCheck = jQuery( "#form-dialog #email_contact_call" ).val();
 				if ( validateEmail( emailCheck ) ) {
 					jQuery( "#form-dialog" ).click().attr( "method", "POST" ).ajaxSubmit();
+					jQuery( "#form-dialog" )[0].reset();
 					jQuery( "#dialog" ).dialog( "close" );
 				}	else {
 					var comment = "E-mail non valide !";
@@ -86,12 +77,24 @@ jQuery( document ).ready( function( $ ) {
 				jQuery.post( ajaxurl, data, function( response ) {
 					jQuery( "#wp-admin-bar-imputation_tel .ab-label" ).text( response )
 				});
+				jQuery( "#form-dialog" )[0].reset();
 				jQuery( "#dialog" ).dialog( "close" );
 			}
 		}
 	});
 	jQuery( "#wp-admin-bar-imputation_recall .ab-action-recall" ).click( function(){
-		jQuery( "#dialog-recall" ).dialog( "open" );
+		jQuery( "#dialog-recall" ).dialog( {
+			autoOpen: true,
+			resizable: false,
+			height: "auto",
+			width: "auto",
+			modal: true,
+			buttons: {
+				Fermer: function() {
+					$( this ).dialog( "close" );
+				}
+			}
+		});
 	});
 	jQuery( "#dialog-recall a" ).click ( function (e) {
 		e.preventDefault();
@@ -101,18 +104,6 @@ jQuery( document ).ready( function( $ ) {
 		jQuery.get( href, data, function() {
 			link.closest( "tr" ).remove();
 		});
-	});
-	jQuery( "#dialog-recall" ).dialog( {
-		autoOpen: false,
-		resizable: false,
-		height: "auto",
-		width: "auto",
-		modal: true,
-		buttons: {
-			Fermer: function() {
-				$( this ).dialog( "close" );
-			}
-		}
 	});
 	jQuery( ".ab-action-recap-monthly" ).click( function () {
 		jQuery( this ).closest( "ul" ).find( ".pop-up" ).dialog( {
@@ -142,4 +133,23 @@ jQuery( document ).ready( function( $ ) {
 			}
 		});
 	});
+	jQuery(document).on( 'heartbeat-tick', function() {
+		var data = {
+			'action': 'display_button_recall',
+		};
+		jQuery.post( ajaxurl, data, function ( response ) {
+			if ( "oui" === response.data.retour ) {
+				jQuery( "#wp-admin-bar-imputation_recall #spanny" ).removeClass( "hidden" );
+			}
+			if ( "non" === response.data.retour ) {
+				jQuery( "#wp-admin-bar-imputation_recall #spanny" ).addClass( "hidden" );
+			}
+		});
+		var data = {
+			'action': 'display_recall',
+		};
+		jQuery.post( ajaxurl, data, function( response ) {
+			document.querySelector( "#dialog-recall" ).outerHTML=response;
+		});
+  });
 });

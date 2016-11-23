@@ -29,6 +29,7 @@
 			<?php esc_html_e( 'Choisissez votre option :', 'call-manager' ) ?> <br />
 			<input type="radio" id="treated" name="button_call" value="treated" checked="checked"> <label for="treated"><?php esc_html_e( 'Traité', 'call-manager' ); ?> </label> <br />
 			<input type="radio" id="transfered" name="button_call" value="transfered"> <label for="transfered"><?php esc_html_e( 'Transféré', 'call-manager' ); ?> </label> <br />
+			<input type="radio" id="will_recall" name="button_call" value="will_recall"> <label for="will_recall"> <?php esc_html_e( 'Rappellera', 'call-manager' ); ?> </label> <br />
 			<input type="radio" id="recall" name="button_call" value="recall"> <label for="recall"> <?php esc_html_e( 'A rappeler', 'call-manager' ); ?> </label> <br />
 			<?php esc_html_e( 'Informations contact :', 'call-manager' ) ?> <br />
 			<input type="text" id="name_contact_call" name="name_contact_call" placeholder="<?php esc_attr_e( 'Nom du contact', 'call-manager' ) ?>"> <br />
