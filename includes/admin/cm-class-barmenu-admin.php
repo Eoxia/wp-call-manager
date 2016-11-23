@@ -24,6 +24,7 @@ class Cm_Barmenu_Admin {
 		add_action( 'admin_enqueue_scripts', array( $this, 'cm_custom_wp_toolbar_css_admin' ), 104 );
 		add_action( 'wp_enqueue_scripts', array( $this, 'cm_custom_wp_toolbar_css_admin' ), 104 );
 	}
+
 	/**
 	 * [FR]  La fonction suivante créer le bouton Call.
 	 * [ENG] This function create the button Call.
@@ -167,7 +168,7 @@ class Cm_Barmenu_Admin {
 	 * Bouton Recall qui ne s'affiche que quand vous avez une personne à rappeler.
 	 *
 	 * @method imputation_recall.
-	 * @param [type] $wp_admin_bar [description].
+	 * @param  mixed $wp_admin_bar WordPress function for addding node.
 	 */
 	public function cm_recall( $wp_admin_bar ) {
 		$user_data = get_userdata( get_current_user_id() );
@@ -182,7 +183,7 @@ class Cm_Barmenu_Admin {
 			if ( $selected_comment > 0 ) {
 				$bouton_recall = array(
 					'id' => 'imputation_recall',
-					'title' => '<span class="ab-action-recall"><span class="ab-icon"></span>' . esc_html( 'Vous avez des personnes à rappeler !', 'call-manager' ) . '</span>',
+					'title' => '<span id="spanny" style="cursor:pointer;" class="ab-action-recall"><span class="ab-icon"></span>' . esc_html( 'Vous avez des personnes à rappeler !', 'call-manager' ) . '</span>',
 					'meta' => array( 'title' => __( 'CLiquez ici pour plus de détails' ) ),
 				);
 				$wp_admin_bar->add_node( $bouton_recall );
