@@ -7,9 +7,9 @@
  * @subpackage Call & Blame.
  */
 
-add_action( 'admin_bar_menu', 'imputation_tel', 100 );
-add_action( 'admin_bar_menu', 'imputation', 101 );
-add_action( 'admin_bar_menu', 'imputation_recall', 102 );
+add_action( 'admin_bar_menu', 'cm_call', 100 );
+add_action( 'admin_bar_menu', 'cm_blame', 101 );
+add_action( 'admin_bar_menu', 'cm_recall', 102 );
 
 /**
  * [FR]  La fonction suivante créer le bouton Call.
@@ -18,7 +18,7 @@ add_action( 'admin_bar_menu', 'imputation_recall', 102 );
  * @method imputation_tel
  * @param  mixed $wp_admin_bar WordPress function for addding node.
  */
-function imputation_tel( $wp_admin_bar ) {
+function cm_call( $wp_admin_bar ) {
 	$user_data = get_userdata( get_current_user_id() );
 	if ( 'administrator' === implode( ', ', $user_data->roles ) ) {
 		$time_db = current_time( 'Ym' );
@@ -65,7 +65,7 @@ function imputation_tel( $wp_admin_bar ) {
  * @method imputation
  * @param  mixed $wp_admin_bar WordPress function for addding node.
  */
-function imputation( $wp_admin_bar ) {
+function cm_blame( $wp_admin_bar ) {
 	$user_data = get_userdata( get_current_user_id() );
 	if ( 'administrator' === implode( ', ', $user_data->roles ) ) {
 		$time_db = current_time( 'Ym' );
@@ -156,7 +156,7 @@ function imputation( $wp_admin_bar ) {
  * @method imputation_recall.
  * @param [type] $wp_admin_bar [description].
  */
-function imputation_recall( $wp_admin_bar ) {
+function cm_recall( $wp_admin_bar ) {
 	$user_data = get_userdata( get_current_user_id() );
 	if ( 'administrator' === implode( ', ', $user_data->roles ) ) {
 		$select_comment = array(
