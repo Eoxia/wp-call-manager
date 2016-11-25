@@ -17,8 +17,8 @@ class Cm_Filter_Admin {
 	 * @method __construct
 	 */
 	public function __construct() {
-		add_filter( 'tm_filter_timeline_summary_month_end', array( $this, 'display' ), 106 );
-		add_filter( 'tm_filter_timeline_day', array( $this, 'display' ), 106 );
+		add_filter( 'tm_filter_timeline_summary_month_end', array( $this, 'display' ), 106, 4 );
+		add_filter( 'tm_filter_timeline_day', array( $this, 'display' ), 106, 5 );
 	}
 
 	/**
