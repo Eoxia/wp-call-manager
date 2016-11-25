@@ -13,6 +13,11 @@
 	top: 3px;
 }
 
+#wpadminbar #wp-admin-bar-imputation_will_recall .ab-icon:before{
+	content: "\f227";
+	top: 3px;
+}
+
 #wpadminbar #wp-admin-bar-imputation_tel_moins .ab-icon:before{
 	content: "\f460";
 	top: 3px;

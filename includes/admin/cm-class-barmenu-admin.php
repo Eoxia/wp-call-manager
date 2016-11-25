@@ -20,6 +20,7 @@ class Cm_Barmenu_Admin {
 		add_action( 'admin_bar_menu', array( $this, 'cm_call' ), 100 );
 		add_action( 'admin_bar_menu', array( $this, 'cm_blame' ), 101 );
 		add_action( 'admin_bar_menu', array( $this, 'cm_recall' ), 102 );
+		add_action( 'admin_bar_menu', array( $this, 'cm_will_recall' ), 102 );
 		add_action( 'admin_footer', array( $this, 'dialog' ), 103 );
 		add_action( 'admin_enqueue_scripts', array( $this, 'cm_custom_wp_toolbar_css_admin' ), 104 );
 		add_action( 'wp_enqueue_scripts', array( $this, 'cm_custom_wp_toolbar_css_admin' ), 104 );
@@ -192,6 +193,33 @@ class Cm_Barmenu_Admin {
 	}
 
 	/**
+	 * Bouton Will_recall qui ne s'affiche que quand vous une personne va rappeler.
+	 *
+	 * @method cm_will_recall
+	 * @param  mixed $wp_admin_bar WordPress function for addding node.
+	 */
+	public function cm_will_recall( $wp_admin_bar ) {
+		$user_data = get_userdata( get_current_user_id() );
+		if ( 'administrator' === implode( ', ', $user_data->roles ) ) {
+			$select_comment = array(
+				'meta_key' => '_eocm_receiver_id',
+				'meta_value' => get_current_user_id(),
+				'status' => 'will_recall',
+				'count' => true,
+			);
+			$selected_comment = get_comments( $select_comment );
+			if ( $selected_comment > 0 ) {
+				$bouton_will_recall = array(
+					'id' => 'imputation_will_recall',
+					'title' => '<span id="spanny-deux" style="cursor:pointer;" class="ab-action-will-recall"><span class="ab-icon"></span>' . esc_html( 'Des personnes veulent vous rappeler !', 'call-manager' ) . '</span>',
+					'meta' => array( 'title' => __( 'CLiquez ici pour plus de détails' ) ),
+				);
+				$wp_admin_bar->add_node( $bouton_will_recall );
+			}
+		}
+	}
+
+	/**
 	 * [FR]  Création de la Div pour la pop-up du bouton Call & Recall.
 	 * [ENG] Here we create a div for the pop-up dialog when you clic on the Call & Recall buttons.
 	 *
@@ -199,7 +227,33 @@ class Cm_Barmenu_Admin {
 	 */
 	public function dialog() {
 		include( plugin_dir_path( __FILE__ ) . 'views/form-call.php' );
-		include( plugin_dir_path( __FILE__ ) . 'views/dialog-recall.php' );
+		$comment = array(
+			'meta_key' => '_eocm_receiver_id',
+			'meta_value' => get_current_user_id(),
+			'order' => 'ASC',
+		);
+		$comment['status'] = 'will_recall';
+		$data_comment = get_comments( $comment );
+		foreach ( $data_comment as $comments ) {
+			$comments->date_comment = get_comment_date( '', $comments->comment_ID );
+			$comments->name_caller = get_comment_meta( $comments->comment_ID, '_eocm_caller_name', true );
+			$comments->society_caller = get_comment_meta( $comments->comment_ID, '_eocm_caller_society', true );
+			$comments->phone_caller = get_comment_meta( $comments->comment_ID, '_eocm_caller_phone', true );
+			$comments->mail_caller = get_comment_meta( $comments->comment_ID, '_eocm_caller_email', true );
+			$comments->url = admin_url( 'admin-ajax.php?action=treated&comment_id=' . $comments->comment_ID );
+		}
+		include( plugin_dir_path( __FILE__ ) . 'views/dialog-parent.php' );
+		$comment['status'] = 'recall';
+		$data_comment = get_comments( $comment );
+		foreach ( $data_comment as $comments ) {
+			$comments->date_comment = get_comment_date( '', $comments->comment_ID );
+			$comments->name_caller = get_comment_meta( $comments->comment_ID, '_eocm_caller_name', true );
+			$comments->society_caller = get_comment_meta( $comments->comment_ID, '_eocm_caller_society', true );
+			$comments->phone_caller = get_comment_meta( $comments->comment_ID, '_eocm_caller_phone', true );
+			$comments->mail_caller = get_comment_meta( $comments->comment_ID, '_eocm_caller_email', true );
+			$comments->url = admin_url( 'admin-ajax.php?action=treated&comment_id=' . $comments->comment_ID );
+		}
+		include( plugin_dir_path( __FILE__ ) . 'views/dialog-parent.php' );
 	}
 
 	/**

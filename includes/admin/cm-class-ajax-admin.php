@@ -22,8 +22,10 @@ class Cm_Ajax_Admin {
 		add_action( 'wp_ajax_count', array( $this, 'count_callback' ), 105 );
 		add_action( 'wp_ajax_form_call', array( $this, 'form_call_callback' ), 105 );
 		add_action( 'wp_ajax_treated', array( $this, 'treated_callback' ), 105 );
-		add_action( 'wp_ajax_display_recall', array( $this, 'display_recall_callback' ), 105 );
+		add_action( 'wp_ajax_display', array( $this, 'display_callback' ), 105 );
+		add_action( 'wp_ajax_display_deux', array( $this, 'display_deux_callback' ), 105 );
 		add_action( 'wp_ajax_display_button_recall', array( $this, 'display_button_recall_callback' ), 105 );
+		add_action( 'wp_ajax_display_button_will_recall', array( $this, 'display_button_will_recall_callback' ), 105 );
 	}
 
 	/**
@@ -215,20 +217,10 @@ class Cm_Ajax_Admin {
 	}
 
 	/**
-	 * [display_recall_callback description]
-	 *
-	 * @method display_recall_callback
-	 */
-	public function display_recall_callback() {
-		include( plugin_dir_path( __FILE__ ) . 'views/dialog-recall.php' );
-		wp_die();
-	}
-
-	/**
 	 * Bouton Recall qui ne s'affiche que quand vous avez une personne à rappeler.
 	 *
 	 * @method cm_recall.
-	 * @param  mixed $wp_admin_bar WordPress function for addding node..
+	 * @param  mixed $wp_admin_bar WordPress function for addding node.
 	 */
 	public function display_button_recall_callback( $wp_admin_bar ) {
 		$user_data = get_userdata( get_current_user_id() );
@@ -252,6 +244,86 @@ class Cm_Ajax_Admin {
 				wp_send_json_success( $data );
 			}
 		}
+	}
+
+	/**
+	 * Bouton Will-recall qui ne s'affiche que quand des personnes veulent vous rappeler.
+	 *
+	 * @method display_button_will_recall_callback
+	 * @param  mixed $wp_admin_bar WordPress function for addding node.
+	 */
+	public function display_button_will_recall_callback( $wp_admin_bar ) {
+		$user_data = get_userdata( get_current_user_id() );
+		if ( 'administrator' === implode( ', ', $user_data->roles ) ) {
+			$select_comment = array(
+				'meta_key' => '_eocm_receiver_id',
+				'meta_value' => get_current_user_id(),
+				'status' => 'will_recall',
+				'count' => true,
+			);
+			$selected_comment = get_comments( $select_comment );
+			if ( $selected_comment > 0 ) {
+				$data = array(
+					'return' => 'yes',
+				);
+				wp_send_json_success( $data );
+			} elseif ( 0 === $selected_comment ) {
+				$data = array(
+					'return' => 'no',
+				);
+				wp_send_json_success( $data );
+			}
+		}
+	}
+
+	/**
+	 * [display_deux_callback description]
+	 *
+	 * @method display_deux_callback
+	 */
+	public function display_callback() {
+		$comment = array(
+			'meta_key' => '_eocm_receiver_id',
+			'meta_value' => get_current_user_id(),
+			'order' => 'ASC',
+		);
+		$comment['status'] = 'recall';
+		$data_comment = get_comments( $comment );
+		foreach ( $data_comment as $comments ) {
+			$comments->date_comment = get_comment_date( '', $comments->comment_ID );
+			$comments->name_caller = get_comment_meta( $comments->comment_ID, '_eocm_caller_name', true );
+			$comments->society_caller = get_comment_meta( $comments->comment_ID, '_eocm_caller_society', true );
+			$comments->phone_caller = get_comment_meta( $comments->comment_ID, '_eocm_caller_phone', true );
+			$comments->mail_caller = get_comment_meta( $comments->comment_ID, '_eocm_caller_email', true );
+			$comments->url = admin_url( 'admin-ajax.php?action=treated&comment_id=' . $comments->comment_ID );
+		}
+		include( plugin_dir_path( __FILE__ ) . 'views/dialog-child.php' );
+		wp_die();
+	}
+
+	/**
+	 * [display_recall_callback description]
+	 *
+	 * @method display_recall_callback
+	 */
+	public function display_deux_callback() {
+		$comment = array(
+			'meta_key' => '_eocm_receiver_id',
+			'meta_value' => get_current_user_id(),
+			'order' => 'ASC',
+		);
+		$comment['status'] = 'will_recall';
+		$data_comment = get_comments( $comment );
+		foreach ( $data_comment as $comments ) {
+			$comments->date_comment = get_comment_date( '', $comments->comment_ID );
+			$comments->name_caller = get_comment_meta( $comments->comment_ID, '_eocm_caller_name', true );
+			$comments->society_caller = get_comment_meta( $comments->comment_ID, '_eocm_caller_society', true );
+			$comments->phone_caller = get_comment_meta( $comments->comment_ID, '_eocm_caller_phone', true );
+			$comments->mail_caller = get_comment_meta( $comments->comment_ID, '_eocm_caller_email', true );
+			$comments->url = admin_url( 'admin-ajax.php?action=treated&comment_id=' . $comments->comment_ID );
+		}
+		include( plugin_dir_path( __FILE__ ) . 'views/dialog-child.php' );
+		wp_die();
 	}
 }
 

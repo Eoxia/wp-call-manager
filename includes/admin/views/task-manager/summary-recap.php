@@ -19,12 +19,12 @@
 	<p>
 		<table style="text-align: center; table-layout: fixed;">
 			<tr>
-				<th> <strong><?php esc_html_e( "Date de réception de l'appel", 'call-manager' ) ?>  </strong> | </th>
-				<th> <strong><?php esc_html_e( 'Nom du Contact', 'call-manager' ) ?> </strong> | </th>
-				<th> <strong><?php esc_html_e( 'Nom de la Société', 'call-manager' ) ?> </strong> | </th>
-				<th> <strong><?php esc_html_e( 'Numéro de Téléphone', 'call-manager' ) ?> </strong> | </th>
-				<th> <strong><?php esc_html_e( 'E-mail', 'call-manager' ) ?> </strong> </th>
-				<th> | <strong><?php esc_html_e( 'Commentaire', 'call-manager' ) ?> </strong> </th>
+				<th style="white-space: nowrap;"> <strong><?php esc_html_e( "Date de réception de l'appel", 'call-manager' ) ?>  </strong> | </th>
+				<th style="white-space: nowrap;"> <strong><?php esc_html_e( 'Nom du Contact', 'call-manager' ) ?> </strong> | </th>
+				<th style="white-space: nowrap;"> <strong><?php esc_html_e( 'Nom de la Société', 'call-manager' ) ?> </strong> | </th>
+				<th style="white-space: nowrap;"> <strong><?php esc_html_e( 'Numéro de Téléphone', 'call-manager' ) ?> </strong> | </th>
+				<th style="white-space: nowrap;"> <strong><?php esc_html_e( 'E-mail', 'call-manager' ) ?> </strong> </th>
+				<th style="white-space: nowrap;"> | <strong><?php esc_html_e( 'Commentaire', 'call-manager' ) ?> </strong> </th>
 			</tr>
 			<?php
 			$comment = array(

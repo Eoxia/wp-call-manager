@@ -1,4 +1,22 @@
 
+jQuery( document ).on( 'click', "#dialog-recall a", function(e) {
+	e.preventDefault();
+	var link = jQuery( this );
+	var href = link.attr( 'href' );
+	var data = null;
+	jQuery.get( href, data, function() {
+		link.closest( "tr" ).remove();
+	});
+});
+jQuery( document ).on( 'click', "#dialog-will-recall a", function(e) {
+	e.preventDefault();
+	var link = jQuery( this );
+	var href = link.attr( 'href' );
+	var data = null;
+	jQuery.get( href, data, function() {
+		link.closest( "tr" ).remove();
+	});
+});
 jQuery( document ).ready( function( $ ) {
 	function validateEmail( $email ) {
 		var emailReg = /^([\w-\.]+@([\w-]+\.)+[\w-]{2,20})?$/;
@@ -82,28 +100,35 @@ jQuery( document ).ready( function( $ ) {
 			}
 		}
 	});
-	jQuery( "#wp-admin-bar-imputation_recall .ab-action-recall" ).click( function(){
-		jQuery( "#dialog-recall" ).dialog( {
-			autoOpen: true,
-			resizable: false,
-			height: "auto",
-			width: "auto",
-			modal: true,
-			buttons: {
-				Fermer: function() {
-					$( this ).dialog( "close" );
-				}
+	jQuery( "#dialog-recall" ).dialog( {
+		autoOpen: false,
+		resizable: false,
+		height: "auto",
+		width: "auto",
+		modal: true,
+		buttons: {
+			Fermer: function() {
+				$( this ).dialog( "close" );
 			}
-		});
+		}
 	});
-	jQuery( "#dialog-recall a" ).click ( function (e) {
-		e.preventDefault();
-		var link = jQuery( this );
-		var href = link.attr( 'href' );
-		var data = null;
-		jQuery.get( href, data, function() {
-			link.closest( "tr" ).remove();
-		});
+	jQuery( "#dialog-will-recall" ).dialog( {
+		autoOpen: false,
+		resizable: false,
+		height: "auto",
+		width: "auto",
+		modal: true,
+		buttons: {
+			Fermer: function() {
+				$( this ).dialog( "close" );
+			}
+		}
+	});
+	jQuery( "#wp-admin-bar-imputation_recall .ab-action-recall" ).click( function(){
+		jQuery("#dialog-recall").dialog("open");
+	});
+	jQuery( "#wp-admin-bar-imputation_will_recall .ab-action-will-recall" ).click( function(){
+		jQuery("#dialog-will-recall").dialog("open");
 	});
 	jQuery( ".ab-action-recap-monthly" ).click( function () {
 		jQuery( this ).closest( "ul" ).find( ".pop-up" ).dialog( {
@@ -133,23 +158,42 @@ jQuery( document ).ready( function( $ ) {
 			}
 		});
 	});
-	jQuery(document).on( 'heartbeat-tick', function() {
+	jQuery( document ).on( 'heartbeat-tick', function() {
+		var data = {
+			'action': 'display',
+		};
+		jQuery.post( ajaxurl, data, function( rep ) {
+			jQuery( "#dialog-recall" ).find( "table" ).html( rep );
+		});
+
 		var data = {
 			'action': 'display_button_recall',
 		};
-		jQuery.post( ajaxurl, data, function ( response ) {
-			if ( "oui" === response.data.retour ) {
+		jQuery.post( ajaxurl, data, function ( reponse ) {
+			if ( "oui" === reponse.data.retour ) {
 				jQuery( "#wp-admin-bar-imputation_recall #spanny" ).removeClass( "hidden" );
 			}
-			if ( "non" === response.data.retour ) {
+			if ( "non" === reponse.data.retour ) {
 				jQuery( "#wp-admin-bar-imputation_recall #spanny" ).addClass( "hidden" );
 			}
 		});
+
 		var data = {
-			'action': 'display_recall',
+			'action': 'display_deux',
 		};
-		jQuery.post( ajaxurl, data, function( response ) {
-			document.querySelector( "#dialog-recall" ).outerHTML=response;
+		jQuery.post( ajaxurl, data, function( resp ) {
+			jQuery( "#dialog-will-recall" ).find( "table" ).html( resp );
 		});
-  });
+		var data = {
+			'action': 'display_button_will_recall',
+		};
+		jQuery.post( ajaxurl, data, function ( response ) {
+			if ( "yes" === response.data.return ) {
+				jQuery( "#wp-admin-bar-imputation_will_recall #spanny-deux" ).removeClass( "hidden" );
+			}
+			if ( "no" === response.data.return ) {
+				jQuery( "#wp-admin-bar-imputation_will_recall #spanny-deux" ).addClass( "hidden" );
+			}
+		});
+	});
 });
