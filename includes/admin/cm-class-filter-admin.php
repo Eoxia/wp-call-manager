@@ -53,7 +53,8 @@ class Cm_Filter_Admin {
 			}
 		}
 		include( plugin_dir_path( __FILE__ ) . 'views/task-manager/summary-filter.php' );
-		include( plugin_dir_path( __FILE__ ) . 'views/task-manager/summary-recap.php' );
+		include( plugin_dir_path( __FILE__ ) . 'views/task-manager/summary-call-recap.php' );
+		include( plugin_dir_path( __FILE__ ) . 'views/task-manager/summary-blame-recap.php' );
 	}
 }
 

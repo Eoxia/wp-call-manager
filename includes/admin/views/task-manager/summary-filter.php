@@ -8,12 +8,28 @@
 
 if ( null !== $day ) {
 	?>
-	<li class='temp'> <span style="cursor:pointer;" class="ab-action-recap-daily"> <span class="dashicons dashicons-phone"></span> <strong> <?php echo esc_html( $number_call ); ?> </strong> </span></li>
-	<li class='temp'> <span class="dashicons dashicons-businessman"></span> <strong> <?php echo esc_html( $number_blame ); ?> </strong></li>
+		<span style="cursor:pointer;" class="ab-action-recap-call-daily" data-id="<?php echo esc_attr( $user_id . $year . $month . $day ); ?>">
+			<span class="dashicons dashicons-phone"> </span>
+			<strong> <?php echo esc_html( $number_call ); ?> </strong>
+		</span>
+	</li>
+		<span style="cursor:pointer;" class="ab-action-recap-blame-daily" data-id="<?php echo esc_attr( $user_id . $year . $month . $day ); ?>">
+			<span class="dashicons dashicons-businessman"> </span>
+			<strong> <?php echo esc_html( $number_blame ); ?> </strong>
+		</span>
+	</li>
 	<?php
 } else {
 	?>
-	<li class='temp'> <span style="cursor:pointer;" class="ab-action-recap-monthly"> <span class="dashicons dashicons-phone"></span> <strong> <?php echo esc_html( $number_call ); ?> </strong> </span></li>
-	<li class='temp'> <span class="dashicons dashicons-businessman"></span> <strong> <?php echo esc_html( $number_blame ); ?> </strong></li>
+		<span style="cursor:pointer;" class="ab-action-recap-call-monthly" data-id="<?php echo esc_attr( $user_id . $year . $month ); ?>">
+			<span class="dashicons dashicons-phone"> </span>
+			<strong> <?php echo esc_html( $number_call ); ?> </strong>
+		</span>
+	</li>
+		<span style="cursor:pointer;" class="ab-action-recap-blame-monthly" data-id="<?php echo esc_attr( $user_id . $year . $month ); ?>">
+			<span class="dashicons dashicons-businessman"> </span>
+			<strong> <?php echo esc_html( $number_blame ); ?> </strong>
+		</span>
+	</li>
 	<?php
 }

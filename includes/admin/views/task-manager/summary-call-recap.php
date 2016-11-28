@@ -1,14 +1,12 @@
 <?php
 /**
- * [FR]  Page ajoutant la div contenant le dialog du recap dans chronologie de task-maanger.
- * [ENG] This Php file contain a div for the recap's pop-up from Chronology in task-maanger.
  *
  * @package WordPress.
  * @subpackage Call & Blame.
  */
 
 ?>
-<div id="cm-summary-recap" class="hidden pop-up"
+<div id="cm-summary-call-recap-<?php echo esc_attr( $user_id . $year . $month . $day ); ?>" class="hidden pop-up"
 <?php if ( null !== $day ) {
 	?> title="<?php esc_attr_e( 'Voici la liste des personnes qui vous ont contacté ce jour-là' , 'call-manager' ) ?>" <?php
 } else {
@@ -30,7 +28,7 @@
 			$comment = array(
 				'meta_key' => '_eocm_receiver_id',
 				'meta_value' => get_current_user_id(),
-				'status' => array( 'treated', 'recall', 'transfered' ),
+				'status' => array( 'treated', 'recall', 'transfered', 'will-recall' ),
 				'order' => 'ASC',
 				'date_query' => array( 'year' => $year, 'month' => $month, 'day' => $day ),
 			);

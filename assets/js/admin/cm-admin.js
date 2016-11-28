@@ -130,8 +130,8 @@ jQuery( document ).ready( function( $ ) {
 	jQuery( "#wp-admin-bar-imputation_will_recall .ab-action-will-recall" ).click( function(){
 		jQuery("#dialog-will-recall").dialog("open");
 	});
-	jQuery( ".ab-action-recap-monthly" ).click( function () {
-		jQuery( this ).closest( "ul" ).find( ".pop-up" ).dialog( {
+	jQuery( ".ab-action-recap-call-monthly" ).click( function () {
+		jQuery( "#cm-summary-call-recap-" + jQuery( this ).data( 'id') ).dialog( {
 			autoOpen: true,
 			resizable: true,
 			height: "600",
@@ -144,11 +144,39 @@ jQuery( document ).ready( function( $ ) {
 			}
 		});
 	});
-	jQuery( ".ab-action-recap-daily" ).click( function () {
-		jQuery( this ).closest( "ul" ).find( ".pop-up" ).dialog( {
+	jQuery( ".ab-action-recap-blame-monthly" ).click( function () {
+		jQuery( "#cm-summary-blame-recap-" + jQuery( this ).data( 'id' ) ).dialog( {
+			autoOpen: true,
+			resizable: true,
+			height: "auto",
+			width: "auto",
+			modal: true,
+			buttons: {
+				Fermer: function() {
+					$( this ).dialog( "close" );
+				}
+			}
+		});
+	});
+	jQuery( ".ab-action-recap-call-daily" ).click( function () {
+		jQuery( "#cm-summary-call-recap-" + jQuery( this ).data( 'id' ) ).dialog( {
 			autoOpen: true,
 			resizable: true,
 			height: "600",
+			width: "auto",
+			modal: true,
+			buttons: {
+				Fermer: function() {
+					$( this ).dialog( "close" );
+				}
+			}
+		});
+	});
+	jQuery( ".ab-action-recap-blame-daily" ).click( function () {
+		jQuery( "#cm-summary-blame-recap-" + jQuery( this ).data( 'id' ) ).dialog( {
+			autoOpen: true,
+			resizable: true,
+			height: "auto",
 			width: "auto",
 			modal: true,
 			buttons: {
