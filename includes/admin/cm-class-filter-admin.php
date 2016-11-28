@@ -31,9 +31,23 @@ class Cm_Filter_Admin {
 	 * @param  int   $year    L'année de la chronologie affichée.
 	 * @param  int   $month   Le mois en cours de la chronologie.
 	 * @param  int   $day     Le jour en cours de la chronologie.
-	 * @return mixed $content Ajout sous forme de text dans la chronologie du mois.
 	 */
 	public function display( $content, $user_id, $year, $month, $day = null ) {
+		$this->display_total( $content, $user_id, $year, $month, $day );
+		$this->display_recap( $content, $user_id, $year, $month, $day );
+	}
+
+	/**
+	 * Affichage des totaux dans la chronologie.
+	 *
+	 * @method display_total
+	 * @param  mixed $content Le contenu.
+	 * @param  int   $user_id L'id de la personne en cours d'affichage.
+	 * @param  int   $year    L'année de la chronologie affichée.
+	 * @param  int   $month   Le mois en cours de la chronologie.
+	 * @param  int   $day     Le jour en cours de la chronologie.
+	 */
+	public function display_total( $content, $user_id, $year, $month, $day = null ) {
 		$number_call = 0;
 		$number_blame = 0;
 		$selection = get_user_meta( $user_id, 'imputation_' . $year . '' . $month, true );
@@ -52,9 +66,20 @@ class Cm_Filter_Admin {
 				}
 			}
 		}
-
 		include( plugin_dir_path( __FILE__ ) . 'views/task-manager/summary-filter.php' );
+	}
 
+	/**
+	 * Ajout des récaps.
+	 *
+	 * @method display_recap
+	 * @param  mixed $content Le contenu.
+	 * @param  int   $user_id L'id de la personne en cours d'affichage.
+	 * @param  int   $year    L'année de la chronologie affichée.
+	 * @param  int   $month   Le mois en cours de la chronologie.
+	 * @param  int   $day     Le jour en cours de la chronologie.
+	 */
+	public function display_recap( $content, $user_id, $year, $month, $day = null ) {
 		$select = get_user_meta( get_current_user_id(),'imputation_' . $year . $month, true );
 		$id_select = get_users( 'orderby=nicename&role=administrator&exclude=' . get_current_user_id() . '' );
 		$i = 0;
@@ -103,10 +128,9 @@ class Cm_Filter_Admin {
 					}
 				}
 			}
+			include( plugin_dir_path( __FILE__ ) . 'views/task-manager/summary-call-recap.php' );
+			include( plugin_dir_path( __FILE__ ) . 'views/task-manager/summary-blame-recap.php' );
 		}
-
-		include( plugin_dir_path( __FILE__ ) . 'views/task-manager/summary-call-recap.php' );
-		include( plugin_dir_path( __FILE__ ) . 'views/task-manager/summary-blame-recap.php' );
 	}
 }
 
