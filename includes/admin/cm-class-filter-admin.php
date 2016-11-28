@@ -8,7 +8,7 @@
  */
 
 /**
- * Blabla.
+ * Class qui gère les ajouts sur Task Manager..
  */
 class Cm_Filter_Admin {
 	/**

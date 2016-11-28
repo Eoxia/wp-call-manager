@@ -8,7 +8,7 @@
  */
 
 /**
- * Blabla.
+ * Class gérant l'ajax du plugin..
  */
 class Cm_Ajax_Admin {
 	/**

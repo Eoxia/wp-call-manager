@@ -8,7 +8,7 @@
  */
 
 /**
- * Blabla.
+ * Class qui s'occupe d'intégrer et d'ajouter des formulaires aux boutons.
  */
 class Cm_Barmenu_Admin {
 	/**
