@@ -1,5 +1,7 @@
 <?php
 /**
+ * [FR]  Page ajoutant la div contenant le dialog du call-recap dans chronologie de task-maanger.
+ * [ENG] This Php file contain a div for the call-recap's pop-up from Chronology in task-maanger.
  *
  * @package WordPress.
  * @subpackage Call & Blame.
