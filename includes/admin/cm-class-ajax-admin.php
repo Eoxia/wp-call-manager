@@ -106,12 +106,12 @@ class Cm_Ajax_Admin {
 			if ( '' !== $_POST['number_contact_call'] ) {
 				$number_contact_call = $_POST['number_contact_call'];
 			} else {
-				$number_contact_call = 'empty_phone';
+				$number_contact_call = 'empty';
 			}
 			if ( '' !== $_POST['email_contact_call'] ) {
 				$email_contact_call = $_POST['email_contact_call'];
 			} else {
-				$email_contact_call = 'empty_mail';
+				$email_contact_call = 'empty';
 			}
 			if ( '' !== $_POST['comment_content_call'] ) {
 				$comment_content_call = $_POST['comment_content_call'];
@@ -121,12 +121,12 @@ class Cm_Ajax_Admin {
 			if ( '' !== $_POST['name_contact_call'] ) {
 				$name_contact_call = $_POST['name_contact_call'];
 			} else {
-				$name_contact_call = 'empty_name';
+				$name_contact_call = 'empty';
 			}
 			if ( '' !== $_POST['society_contact_call'] ) {
 				$society_contact_call = $_POST['society_contact_call'];
 			} else {
-				$society_contact_call = 'empty_society';
+				$society_contact_call = 'empty';
 			}
 			if ( '' !== $_POST['to_call'] ) {
 				$to_call = $_POST['to_call'];

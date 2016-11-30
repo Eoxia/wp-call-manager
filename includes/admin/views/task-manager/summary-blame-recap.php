@@ -21,7 +21,7 @@ if ( null !== $day ) {
 			<tr>
 		<?php
 		if ( null !== $day ) {
-			foreach ( $cm_blame_recap_day_array as $name => $nbr_blame_day ) {
+			foreach ( $cm_recap_day_array as $name => $nbr_blame_day ) {
 				?>
 				<td> <?php echo esc_html( $name . ' : ' . $nbr_blame_day . '.' ) ?> </td>
 				<td> </td> <td> </td> <td> </td> <td> </td> <td> </td>
@@ -32,7 +32,7 @@ if ( null !== $day ) {
 				}
 			}
 		} elseif ( null === $day ) {
-			foreach ( $cm_blame_recap_month_array as $name => $nbr_blame_month ) {
+			foreach ( $cm_recap_month_array as $name => $nbr_blame_month ) {
 				?>
 				<td> <?php echo esc_html( $name . ' : ' . $nbr_blame_month . '.' ) ?> </td>
 				<td> </td> <td> </td> <td> </td> <td> </td> <td> </td>
