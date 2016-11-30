@@ -16,45 +16,73 @@
 }
 ?>
 >
-	<p>
-		<table style="text-align: center; table-layout: fixed;">
+	<table border="1" cellspacing="0" cellpadding="5" style="text-align: center; table-layout: fixed; margin: 0 auto;">
+		<tr bgcolor="bbbbbb"> <th colspan="6"> Liste des appels reçus que vous devez rappeler </td> </th>
+		<?php
+		include( plugin_dir_path( __FILE__ ) . 'summary-call-recap-title-row.php' );
+		foreach ( $array_recall_comment as $key => $value ) {
+			?>
 			<tr>
-				<th style="white-space: nowrap;"> <strong><?php esc_html_e( "Date de réception de l'appel", 'call-manager' ) ?>  </strong> | </th>
-				<th style="white-space: nowrap;"> <strong><?php esc_html_e( 'Nom du Contact', 'call-manager' ) ?> </strong> | </th>
-				<th style="white-space: nowrap;"> <strong><?php esc_html_e( 'Nom de la Société', 'call-manager' ) ?> </strong> | </th>
-				<th style="white-space: nowrap;"> <strong><?php esc_html_e( 'Numéro de Téléphone', 'call-manager' ) ?> </strong> | </th>
-				<th style="white-space: nowrap;"> <strong><?php esc_html_e( 'E-mail', 'call-manager' ) ?> </strong> </th>
-				<th style="white-space: nowrap;"> | <strong><?php esc_html_e( 'Commentaire', 'call-manager' ) ?> </strong> </th>
+				<td> <?php echo esc_html( $value['date_comment'] ); ?> </td>
+				<td> <?php echo esc_html( $value['name_caller'] ); ?> </td>
+				<td> <?php echo esc_html( $value['society_caller'] ); ?> </td>
+				<td> <?php echo esc_html( $value['phone_caller'] ); ?> </td>
+				<td> <?php echo esc_html( $value['mail_caller'] ); ?> </td>
+				<td> <div style="width: 200px; word-wrap: break-word;"> <?php echo esc_html( $value['comment_content_receive'] ); ?> </div> </td>
 			</tr>
 			<?php
-			$comment = array(
-				'meta_key' => '_eocm_receiver_id',
-				'meta_value' => get_current_user_id(),
-				'status' => array( 'treated', 'recall', 'transfered', 'will-recall' ),
-				'order' => 'ASC',
-				'date_query' => array( 'year' => $year, 'month' => $month, 'day' => $day ),
-			);
-			$data_comment = get_comments( $comment );
-			foreach ( $data_comment as $data ) {
-				$id = $data->comment_ID;
-				$date_comment = get_comment_date( '', $id );
-				$name_caller = get_comment_meta( $id, '_eocm_caller_name', true );
-				$society_caller = get_comment_meta( $id, '_eocm_caller_society', true );
-				$phone_caller = get_comment_meta( $id, '_eocm_caller_phone', true );
-				$mail_caller = get_comment_meta( $id, '_eocm_caller_email', true );
-				$comment_content_receive = get_comment( $id, ARRAY_A );
-				?>
-				<tr>
-					<td> <?php echo esc_html( $date_comment ); ?> </td>
-					<td> <?php echo esc_html( $name_caller ); ?> </td>
-					<td> <?php echo esc_html( $society_caller ); ?> </td>
-					<td> <?php echo esc_html( $phone_caller ); ?> </td>
-					<td> <?php echo esc_html( $mail_caller ); ?> </td>
-					<td> <div style="width: 200px; word-wrap: break-word;"> <?php echo esc_html( $comment_content_receive['comment_content'] ); ?> </div> </td>
-				</tr>
-				<?php
-			}
+		}
+		?>
+		<tr bgcolor="bbbbbb"> <th colspan="6"> Liste des appels reçus qui rappelleront </td> </th>
+		<?php
+		include( plugin_dir_path( __FILE__ ) . 'summary-call-recap-title-row.php' );
+		foreach ( $array_will_recall_comment as $key => $value ) {
 			?>
-		</table>
-	</p>
+			<tr>
+				<td> <?php echo esc_html( $value['date_comment'] ); ?> </td>
+				<td> <?php echo esc_html( $value['name_caller'] ); ?> </td>
+				<td> <?php echo esc_html( $value['society_caller'] ); ?> </td>
+				<td> <?php echo esc_html( $value['phone_caller'] ); ?> </td>
+				<td> <?php echo esc_html( $value['mail_caller'] ); ?> </td>
+				<td> <div style="width: 200px; word-wrap: break-word;"> <?php echo esc_html( $value['comment_content_receive'] ); ?> </div> </td>
+			</tr>
+			<?php
+		}
+		?>
+		<tr bgcolor="bbbbbb"> <th colspan="6"> Liste des appels traités </td> </th>
+		<?php
+		include( plugin_dir_path( __FILE__ ) . 'summary-call-recap-title-row.php' );
+		foreach ( $array_treated_comment as $key => $value ) {
+			?>
+			<tr>
+				<td> <?php echo esc_html( $value['date_comment'] ); ?> </td>
+				<td> <?php echo esc_html( $value['name_caller'] ); ?> </td>
+				<td> <?php echo esc_html( $value['society_caller'] ); ?> </td>
+				<td> <?php echo esc_html( $value['phone_caller'] ); ?> </td>
+				<td> <?php echo esc_html( $value['mail_caller'] ); ?> </td>
+				<td> <div style="width: 200px; word-wrap: break-word;"> <?php echo esc_html( $value['comment_content_receive'] ); ?> </div> </td>
+			</tr>
+			<?php
+		}
+		?>
+		<tr bgcolor="bbbbbb"> <th colspan="6"> Liste des appels transférés </td> </th>
+		<?php
+		include( plugin_dir_path( __FILE__ ) . 'summary-call-recap-title-row.php' );
+		foreach ( $array_transfered_comment as $key => $value ) {
+			?>
+			<tr>
+				<td> <?php echo esc_html( $value['date_comment'] ); ?> </td>
+				<td> <?php echo esc_html( $value['name_caller'] ); ?> </td>
+				<td> <?php echo esc_html( $value['society_caller'] ); ?> </td>
+				<td> <?php echo esc_html( $value['phone_caller'] ); ?> </td>
+				<td> <?php echo esc_html( $value['mail_caller'] ); ?> </td>
+				<td> <div style="width: 200px; word-wrap: break-word;"> <?php echo esc_html( $value['comment_content_receive'] ); ?> </div> </td>
+			</tr>
+			<?php
+		}
+		?>
+		<pre>
+			<?php echo esc_html( 'Vous avez reçu ' . $number_call . ' appels et renseigné ' . $data_self_comment_count . ', traité ' . $data_treated_comment_count . ', ' . $data_transfered_comment_count . ' vous ont été transférés, vous devez en rappeler ' . $data_recall_comment_count . ' et ' . $data_will_recall_comment_count . ' doivent vous rappeler.' ); ?>
+		</pre>
+	</table>
 </div>
