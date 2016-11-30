@@ -17,6 +17,7 @@ if ( null !== $day ) {
 }
 ?>
 >
+<p style="text-align: center; margin: 0 auto;"> <?php echo esc_html( 'Total : ' . $number_call . '. Renseigné : ' . $data_self_comment_count . '. Traité : ' . $data_treated_comment_count . '. Transféré : ' . $data_transfered_comment_count . '. A rappeler : ' . $data_recall_comment_count . '. Rappellera : ' . $data_will_recall_comment_count . '.' ); ?> </p>
 	<table border="1" cellspacing="0" cellpadding="5" style="text-align: center; table-layout: fixed; margin: 0 auto;">
 		<?php
 		if ( $data_recall_comment_count > 0 ) {
@@ -36,9 +37,6 @@ if ( null !== $day ) {
 			include( plugin_dir_path( __FILE__ ) . 'summary-call-recap-child.php' );
 		}
 		?>
-		<pre>
-			<?php echo esc_html( 'Vous avez reçu ' . $number_call . ' appels et renseigné ' . $data_self_comment_count . ', traité ' . $data_treated_comment_count . ', ' . $data_transfered_comment_count . ' vous ont été transférés, vous devez en rappeler ' . $data_recall_comment_count . ' et ' . $data_will_recall_comment_count . ' doivent vous rappeler.' ); ?>
-		</pre>
 	</table>
 </div>
 <?php

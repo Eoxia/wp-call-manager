@@ -8,7 +8,7 @@
  */
 
 ?>
-<tr bgcolor="bbbbbb">
+<tr style="background-color: #BBBBBB;">
 	<th colspan="6">
 		<?php
 		if ( 'recall' === $cm_array['0']['status'] ) {
@@ -23,7 +23,7 @@
 		?>
 	</th>
 </tr>
-<tr bgcolor="eeeeee">
+<tr style="background-color: #e0e0e0;">
 	<th style="white-space: nowrap;"> <?php esc_html_e( "Date de réception de l'appel", 'call-manager' ) ?> </th>
 	<th style="white-space: nowrap;"> <?php esc_html_e( 'Nom du Contact', 'call-manager' ) ?> </th>
 	<th style="white-space: nowrap;"> <?php esc_html_e( 'Nom de la Société', 'call-manager' ) ?> </th>
@@ -35,7 +35,7 @@
 unset( $cm_array['0'] );
 foreach ( $cm_array as $key => $value ) {
 	?>
-	<tr>
+	<tr style="background-color: #eeeeee;">
 		<td> <?php echo esc_html( $value['date_comment'] ); ?> </td>
 		<td> <?php echo esc_html( $value['name_caller'] ); ?> </td>
 		<td> <?php echo esc_html( $value['society_caller'] ); ?> </td>
