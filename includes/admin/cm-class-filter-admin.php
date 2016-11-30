@@ -105,10 +105,10 @@ class Cm_Filter_Admin {
 		$data_transfered_comment_count = 0;
 		$data_recall_comment_count = 0;
 		$data_will_recall_comment_count = 0;
-		$array_treated_comment = array();
-		$array_transfered_comment = array();
-		$array_recall_comment = array();
-		$array_will_recall_comment = array();
+		$array_treated_comment['0'] = array( 'status' => 'treated' );
+		$array_transfered_comment['0'] = array( 'status' => 'transfered' );
+		$array_recall_comment['0'] = array( 'status' => 'recall' );
+		$array_will_recall_comment['0'] = array( 'status' => 'will_recall' );
 		foreach ( $data_comment as $data ) {
 			$temp_data_comment = array(
 				'status' => $data->comment_approved,
@@ -139,7 +139,7 @@ class Cm_Filter_Admin {
 				$array_will_recall_comment[ $data_will_recall_comment_count ] = $temp_data_comment;
 			}
 		}
-		include( plugin_dir_path( __FILE__ ) . 'views/task-manager/summary-call-recap.php' );
+		include( plugin_dir_path( __FILE__ ) . 'views/task-manager/summary-call-recap-parent.php' );
 	}
 
 	/**
