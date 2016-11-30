@@ -19,7 +19,7 @@
 	}
 	?> class="hidden"
 >
-	<table style="text-align: center; table-layout: fixed;">
+	<table border="1" cellspacing="0" cellpadding="5" style="text-align: center; table-layout: fixed;">
 	<?php include( plugin_dir_path( __FILE__ ) . 'dialog-child.php' ); ?>
 	</table>
 </div>
