@@ -24,7 +24,7 @@ if ( null !== $day ) {
 			$cm_array = $array_recall_comment;
 			include( plugin_dir_path( __FILE__ ) . 'summary-call-recap-child.php' );
 		}
-		if ( $array_will_recall_comment > 0 ) {
+		if ( $data_will_recall_comment_count > 0 ) {
 			$cm_array = $array_will_recall_comment;
 			include( plugin_dir_path( __FILE__ ) . 'summary-call-recap-child.php' );
 		}
@@ -32,7 +32,7 @@ if ( null !== $day ) {
 			$cm_array = $array_treated_comment;
 			include( plugin_dir_path( __FILE__ ) . 'summary-call-recap-child.php' );
 		}
-		if ( $array_transfered_comment > 0 ) {
+		if ( $data_transfered_comment_count > 0 ) {
 			$cm_array = $array_transfered_comment;
 			include( plugin_dir_path( __FILE__ ) . 'summary-call-recap-child.php' );
 		}
