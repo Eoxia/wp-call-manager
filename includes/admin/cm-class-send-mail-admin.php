@@ -29,7 +29,10 @@ class Cm_Mail_Sender {
 		if ( ! wp_next_scheduled( 'cm_mail' ) ) {
 			wp_schedule_event( time(), 'daily', 'cm_mail' );
 		}
-		add_action( 'cm_mail', array( $this, 'send_mail' ), 108 );
+		$user_data = get_userdata( get_current_user_id() );
+		if ( 'administrator' === implode( ', ', $user_data->roles ) ) {
+			add_action( 'cm_mail', array( $this, 'send_mail' ), 108 );
+		}
 	}
 
 	/**
