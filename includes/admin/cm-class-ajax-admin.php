@@ -22,8 +22,8 @@ class Cm_Ajax_Admin {
 		add_action( 'wp_ajax_count', array( $this, 'count_callback' ), 105 );
 		add_action( 'wp_ajax_form_call', array( $this, 'form_call_callback' ), 105 );
 		add_action( 'wp_ajax_treated', array( $this, 'treated_callback' ), 105 );
-		add_action( 'wp_ajax_display', array( $this, 'display_callback' ), 105 );
-		add_action( 'wp_ajax_display_deux', array( $this, 'display_deux_callback' ), 105 );
+		add_action( 'wp_ajax_display', array( $this, 'display_recall_callback' ), 105 );
+		add_action( 'wp_ajax_display_deux', array( $this, 'display_will_recall_callback' ), 105 );
 		add_action( 'wp_ajax_display_button_recall', array( $this, 'display_button_recall_callback' ), 105 );
 		add_action( 'wp_ajax_display_button_will_recall', array( $this, 'display_button_will_recall_callback' ), 105 );
 	}
@@ -209,12 +209,20 @@ class Cm_Ajax_Admin {
 	 * @method treated_callback
 	 */
 	public function treated_callback() {
-		$id = $_GET['comment_id'];
 		$treated['comment_approved'] = 'treated';
-		$treated['comment_ID'] = $id;
+		$treated['comment_ID'] = $_GET['comment_id'];
 		wp_update_comment( $treated );
+		$new_comment = array(
+			'comment_parent' => $_GET['comment_id'],
+			'comment_approved' => 'treated',
+			'comment_content' => $_GET['new_comment'],
+			'user_id' => get_current_user_id(),
+		);
+		wp_insert_comment( $new_comment );
 		wp_die();
 	}
+
+
 
 	/**
 	 * Bouton Recall qui ne s'affiche que quand vous avez une personne à rappeler.
@@ -281,7 +289,7 @@ class Cm_Ajax_Admin {
 	 *
 	 * @method display_deux_callback
 	 */
-	public function display_callback() {
+	public function display_recall_callback() {
 		$comment = array(
 			'meta_key' => '_eocm_receiver_id',
 			'meta_value' => get_current_user_id(),
@@ -306,7 +314,7 @@ class Cm_Ajax_Admin {
 	 *
 	 * @method display_recall_callback
 	 */
-	public function display_deux_callback() {
+	public function display_will_recall_callback() {
 		$comment = array(
 			'meta_key' => '_eocm_receiver_id',
 			'meta_value' => get_current_user_id(),

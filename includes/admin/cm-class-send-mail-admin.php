@@ -12,18 +12,30 @@
 class Cm_Mail_Sender {
 
 	/**
-	 * [__construct description]
+	 * BLA.
 	 *
 	 * @method __construct
 	 */
 	public function __construct() {
-		add_action( 'admin_footer', array( $this, 'send_mail' ), 107 );
+		add_action( 'admin_footer', array( $this, 'prepare_send_mail' ), 107 );
 	}
 
 	/**
-	 * [mail description]
+	 * Envoie un mail par jour.
 	 *
-	 * @method mail
+	 * @method prepare_send_mail
+	 */
+	public function prepare_send_mail() {
+		if ( ! wp_next_scheduled( 'cm_mail' ) ) {
+			wp_schedule_event( time(), 'daily', 'cm_mail' );
+		}
+		add_action( 'cm_mail', array( $this, 'send_mail' ), 108 );
+	}
+
+	/**
+	 * La fonction qui envoie le mail.
+	 *
+	 * @method send_mail
 	 */
 	public function send_mail() {
 		$comment = array(
