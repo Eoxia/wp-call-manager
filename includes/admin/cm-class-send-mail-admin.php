@@ -76,10 +76,8 @@ class Cm_Mail_Sender {
 			$cm_get_email = get_userdata( get_current_user_id() );
 			$to = $cm_get_email->user_email;
 			$sujet = 'Vous devez rappeler des clients !';
-			$message = 'Content-Type: text/html; charset="UTF-8"';
-			$message .= 'Content-Transfer-Encoding: 8bit';
-			$message .= $contents;
-			$header = 'Content-Type: multipart/alternative;';
+			$message = $contents;
+			$header = array( 'Content-Type: text/html; charset=UTF-8' );
 			wp_mail( $to, $sujet, $message, $header );
 		}
 	}
