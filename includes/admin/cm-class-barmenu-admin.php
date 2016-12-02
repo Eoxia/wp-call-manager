@@ -222,6 +222,12 @@ class Cm_Barmenu_Admin {
 	}
 
 	/**
+	 * [cm_call_manager_menu description]
+	 *
+	 * @method cm_call_manager_menu
+	 */
+
+	/**
 	 * [FR]  Création de la Div pour la pop-up du bouton Call & Recall.
 	 * [ENG] Here we create a div for the pop-up dialog when you clic on the Call & Recall buttons.
 	 *

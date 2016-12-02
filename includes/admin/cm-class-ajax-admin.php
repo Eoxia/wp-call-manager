@@ -222,8 +222,6 @@ class Cm_Ajax_Admin {
 		wp_die();
 	}
 
-
-
 	/**
 	 * Bouton Recall qui ne s'affiche que quand vous avez une personne à rappeler.
 	 *

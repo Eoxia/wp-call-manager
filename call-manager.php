@@ -16,3 +16,4 @@
 include( 'includes/admin/cm-class-ajax-admin.php' );
 include( 'includes/admin/cm-class-barmenu-admin.php' );
 include( 'includes/admin/cm-class-filter-admin.php' );
+include( 'includes/admin/cm-class-send-mail-admin.php' );
