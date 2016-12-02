@@ -21,6 +21,7 @@ class Cm_Barmenu_Admin {
 		add_action( 'admin_bar_menu', array( $this, 'cm_blame' ), 101 );
 		add_action( 'admin_bar_menu', array( $this, 'cm_recall' ), 102 );
 		add_action( 'admin_bar_menu', array( $this, 'cm_will_recall' ), 102 );
+		add_action( 'admin_menu', array( $this, 'cm_call_manager_menu' ), 102 );
 		add_action( 'admin_footer', array( $this, 'dialog' ), 103 );
 		add_action( 'admin_enqueue_scripts', array( $this, 'cm_custom_wp_toolbar_css_admin' ), 104 );
 		add_action( 'wp_enqueue_scripts', array( $this, 'cm_custom_wp_toolbar_css_admin' ), 104 );
@@ -226,6 +227,9 @@ class Cm_Barmenu_Admin {
 	 *
 	 * @method cm_call_manager_menu
 	 */
+	public function cm_call_manager_menu() {
+		add_menu_page( 'Call Manager', 'Call Manager', 'administrator', 'cm-menu' );
+	}
 
 	/**
 	 * [FR]  Création de la Div pour la pop-up du bouton Call & Recall.
