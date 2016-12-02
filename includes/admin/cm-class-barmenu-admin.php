@@ -228,7 +228,40 @@ class Cm_Barmenu_Admin {
 	 * @method cm_call_manager_menu
 	 */
 	public function cm_call_manager_menu() {
-		add_menu_page( 'Call Manager', 'Call Manager', 'administrator', 'cm-menu' );
+		$user_data = get_userdata( get_current_user_id() );
+		if ( 'administrator' === implode( ', ', $user_data->roles ) ) {
+			add_menu_page( 'Call Manager', 'Call Manager', 'administrator', 'cm-menu', array( $this, 'cm_call_manager_menu_callback' ), 'dashicons-book-alt' );
+		}
+	}
+
+	/**
+	 * [cm_call_manager_menu_callback description]
+	 *
+	 * @method cm_call_manager_menu_callback.
+	 */
+	public function cm_call_manager_menu_callback() {
+		$data_users = get_users( 'orderby=nicename&role=administrator' );
+		$year = current_time( 'Y' );
+		$month = current_time( 'm' );
+		$day = intval( current_time( 'd' ) );
+		$color = 5;
+		if ( ! empty( $_POST['_wpnonce_up'] ) && check_admin_referer( 'up_check', '_wpnonce_up' ) ) {
+			if ( ( current_time( 'm' ) !== $_POST['month'] ) and ( current_time( 'Y' ) !== $_POST['year'] ) ) {
+				$year = $_POST['year'];
+				$month = $_POST['month'];
+			} elseif ( ( current_time( 'm' ) === $_POST['month'] ) and ( current_time( 'Y' ) !== $_POST['year'] ) ) {
+				$year = $_POST['year'];
+				$month = current_time( 'm' );
+			} elseif ( ( current_time( 'm' ) !== $_POST['month'] ) and ( current_time( 'Y' ) === $_POST['year'] ) ) {
+				$year = current_time( 'Y' );
+				$month = $_POST['month'];
+			}
+			if ( isset( $_POST['color'] ) ) {
+				$color = abs( $_POST['color'] );
+			}
+		}
+		include( plugin_dir_path( __FILE__ ) . 'views/form-global-recap.php' );
+		include( plugin_dir_path( __FILE__ ) . 'views/global-recap-parent.php' );
 	}
 
 	/**
