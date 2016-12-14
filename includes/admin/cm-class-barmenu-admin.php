@@ -36,7 +36,7 @@ class Cm_Barmenu_Admin {
 	 */
 	public function cm_call( $wp_admin_bar ) {
 		$user_data = get_userdata( get_current_user_id() );
-		if ( 'administrator' === implode( ', ', $user_data->roles ) ) {
+		if ( in_array( 'administrator', $user_data->roles, true ) ) {
 			$time_db = current_time( 'Ym' );
 			$day = intval( current_time( 'd' ) );
 			$select = get_user_meta( get_current_user_id(),'imputation_' . $time_db, true );
@@ -83,7 +83,7 @@ class Cm_Barmenu_Admin {
 	 */
 	public function cm_blame( $wp_admin_bar ) {
 		$user_data = get_userdata( get_current_user_id() );
-		if ( 'administrator' === implode( ', ', $user_data->roles ) ) {
+		if ( in_array( 'administrator', $user_data->roles, true ) ) {
 			$time_db = current_time( 'Ym' );
 			$day = intval( current_time( 'd' ) );
 			$select = get_user_meta( get_current_user_id(),'imputation_' . $time_db, true );
@@ -176,7 +176,7 @@ class Cm_Barmenu_Admin {
 	 */
 	public function cm_recall( $wp_admin_bar ) {
 		$user_data = get_userdata( get_current_user_id() );
-		if ( 'administrator' === implode( ', ', $user_data->roles ) ) {
+		if ( in_array( 'administrator', $user_data->roles, true ) ) {
 			$select_comment = array(
 				'meta_key' => '_eocm_receiver_id',
 				'meta_value' => get_current_user_id(),
@@ -203,7 +203,7 @@ class Cm_Barmenu_Admin {
 	 */
 	public function cm_will_recall( $wp_admin_bar ) {
 		$user_data = get_userdata( get_current_user_id() );
-		if ( 'administrator' === implode( ', ', $user_data->roles ) ) {
+		if ( in_array( 'administrator', $user_data->roles, true ) ) {
 			$select_comment = array(
 				'meta_key' => '_eocm_receiver_id',
 				'meta_value' => get_current_user_id(),
@@ -229,7 +229,7 @@ class Cm_Barmenu_Admin {
 	 */
 	public function cm_call_manager_menu() {
 		$user_data = get_userdata( get_current_user_id() );
-		if ( 'administrator' === implode( ', ', $user_data->roles ) ) {
+		if ( in_array( 'administrator', $user_data->roles, true ) ) {
 			add_menu_page( 'Call Manager', 'Call Manager', 'administrator', 'cm-menu', array( $this, 'cm_call_manager_menu_callback' ), 'dashicons-book-alt' );
 		}
 	}
