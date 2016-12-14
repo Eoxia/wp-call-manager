@@ -29,22 +29,11 @@ foreach ( $user_meta as $data_meta ) {
 		$total_blame = $total_blame + $user_meta[ $day ]['blame']['999999'];
 	}
 	?>
-	<td>
-		<table border="1" cellspacing="0" cellpadding="5" style="text-align: center;">
-			<tr style="background-color: #e0e0e0;">
-				<td colspan="2">
-					Jour <?php echo esc_html( $d ); ?>
-				</td>
-			</tr>
-			<tr style="background-color: #eeeeee;">
-				<td style="color: <?php if ( $color < $user_meta[ $day ]['call'] ) { echo 'red'; } ?>;" >
-					<span class="dashicons dashicons-phone"></span> <?php echo esc_html( $user_meta[ $day ]['call'] ); ?>
-				</td>
-				<td style="color: <?php if ( $color < $total_blame ) { echo 'red'; } ?>;">
-					<span class="dashicons dashicons-businessman"></span> <?php echo esc_html( $total_blame ); ?>
-				</td>
-			</tr>
-		</table>
+	<td style="color: <?php if ( $color < $user_meta[ $day ]['call'] ) { echo 'red'; } ?>;" >
+		<?php echo esc_html( $user_meta[ $day ]['call'] ); ?>
+	</td>
+	<td style="color: <?php if ( $color < $total_blame ) { echo 'red'; } ?>;">
+		<?php echo esc_html( $total_blame ); ?>
 	</td>
 	<?php
 }
