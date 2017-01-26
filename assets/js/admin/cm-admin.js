@@ -26,7 +26,7 @@ jQuery( document ).on( 'click', "#dialog-recall a", function(e) {
 });*/
 
 
-jQuery( ".eopcm-comment-status" ).click(function(e)
+jQuery( ".eopcm-comment-status" ).on('click', function(e)
 {
 	alert("toto");
 	e.preventDefault();
