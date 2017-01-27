@@ -11,7 +11,9 @@
 <div id="dialog" title="Renseignements">
 <br>
 	<div class="img" align="center">
-    <img src="<?php echo site_url("/"); ?>wp-content/plugins/wp-call-manager/includes/admin/views/images/call-add.png" alt="Fjords" width="50" height="50">
+
+
+    <img src="<?php echo ABSPATH; ?>wp-call-manager/includes/admin/views/images/call-add.png" alt="Fjords" width="50" height="50">
 </div>
 <br>
 
