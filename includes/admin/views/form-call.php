@@ -11,13 +11,13 @@
 <div id="dialog" title="Renseignements">
 <br>
 	<div class="img" align="center">
-    <img src="http://localhost/tuto/wordpress/wp-content/plugins/wp-call-manager/includes/admin/views/images/call-add.png" alt="Fjords" width="50" height="50">
+    <img src="<?php echo site_url("/"); ?>wp-content/plugins/wp-call-manager/includes/admin/views/images/call-add.png" alt="Fjords" width="50" height="50">
 </div>
 <br>
 
 	<p>
 		<form id="form-dialog" align="center" action="<?php echo esc_html( admin_url( 'admin-ajax.php' ) ); ?>">
-			
+
 			<?php
 			wp_nonce_field( 'form_dialog_check', '_wpnonce_dialog' );
 			$admin_user = get_users( 'orderby=nicename&role=administrator' );
@@ -43,7 +43,7 @@
 			<input type="text" id="society_contact_call" name="society_contact_call" placeholder="<?php esc_attr_e( 'Société du contact', 'call-manager' ) ?>"> <br />
 			<input type="text" id="number_contact_call" name="number_contact_call" placeholder="<?php esc_attr_e( 'Numéro du contact', 'call-manager' ) ?>"> <br />
 			<input type="email" id="email_contact_call" name="email_contact_call" placeholder="<?php esc_attr_e( 'E-mail du contact', 'call-manager' ) ?>"> <br />
-			<textarea rows="3" cols="15" id="comment_content_call" form="form-dialog" name="comment_content_call" placeholder="<?php esc_attr_e( 'Commentaire', 'call-manager' ) ?>"></textarea> 
+			<textarea rows="3" cols="15" id="comment_content_call" form="form-dialog" name="comment_content_call" placeholder="<?php esc_attr_e( 'Commentaire', 'call-manager' ) ?>"></textarea>
 		</form>
 	</p>
 </div>

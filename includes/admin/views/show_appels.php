@@ -12,7 +12,17 @@
 	<br>
 		<div class="wrap"><br>
 		<table border="2" cellspacing="0" cellpadding="1" style="text-align: center; table-layout: fixed; margin: 0 auto;" >
-<tr style="background-color: #BBBBBB;"><th> <?php echo esc_html( 'Des personnes veulent vous rappeler', 'call-manager' ); ?></th><th></th><th></th><th></th><th></th><th></th><th></th> </tr>
+
+<?php
+	if ( 'will_recall' === $comment['status'] )
+	{
+?> <tr style="background-color: #BBBBBB;"><th> <?php echo esc_html( 'Des personnes veulent vous rappeler', 'call-manager' ); ?></th><th></th><th></th><th></th><th></th><th></th><th></th> </tr>
+<?php
+	} elseif ( 'recall' === $comment['status'] )
+	{?> <tr style="background-color: #BBBBBB;"><th> <?php echo esc_html( 'Vous avez des personnes a rappeler', 'call-manager' ); ?></th><th></th><th></th><th></th><th></th><th></th><th></th> </tr>
+<?php
+}?>
+
 <tr style="background-color: #BBBBBB;">
 
 	<th style="white-space: nowrap;"> <?php esc_html_e( "Date de réception de l'appel", 'call-manager' ) ?> </th>
@@ -22,15 +32,14 @@
 	<th style="white-space: nowrap;"> <?php esc_html_e( 'E-mail', 'call-manager' ) ?> </th>
 	<th style="white-space: nowrap;"> <?php esc_html_e( 'Commentaire', 'call-manager' ) ?> </th>
 	<th style="white-space: nowrap;">
-		<?php
-		if ( 'will_recall' === $comment['status'] ) {
-			esc_html_e( 'A rappelé ?', 'call-manager' );
-		} elseif ( 'recall' === $comment['status'] ) {
-			esc_html_e( 'Traité ?', 'call-manager' );
-		}
-		?>
-		</strong>
-	</th>
+	<?php
+	if ( 'will_recall' === $comment['status'] ) {
+		esc_html_e( 'A rappelé ?', 'call-manager' );
+	} elseif ( 'recall' === $comment['status'] ) {
+		esc_html_e( 'Traité ?', 'call-manager' );
+	}
+	?>
+	</strong>
 </tr>
 <?php
 foreach ( $data_comment as $data ) {
@@ -43,13 +52,13 @@ foreach ( $data_comment as $data ) {
 		<td> <?php echo esc_html( $data->mail_caller ); ?> </td>
 		<td> <div style="width: 200px; word-wrap: break-word;"> <?php echo esc_html( $data->comment_content ); ?> </div> </td>
 		<td>
-			<a class="eopcm-comment-status"  href="<?php echo esc_attr( $data->url ); ?>">
+			<a class="eopcm-comment-status" href="<?php echo esc_attr( $data->url ); ?>">
 			<?php
-			if ( 'will_recall' === $comment['status'] ) {
+			if ('will_recall' === $comment['status']) {
 				esc_html_e( 'A rappelé', 'call-manager' );
 			} elseif ( 'recall' === $comment['status'] ) {
-				esc_html_e( 'Traité', 'call-manager' );
-			} ?>
+					esc_html_e( 'Traité', 'call-manager' );
+			}?>
 			</a>
 		</td>
 	</tr>
@@ -61,4 +70,3 @@ foreach ( $data_comment as $data ) {
 	</div>
 </div>
 <?php
-

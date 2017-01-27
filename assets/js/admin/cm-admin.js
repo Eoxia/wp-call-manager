@@ -21,7 +21,7 @@ jQuery( document ).on( 'click', "#dialog-recall a", function(e) {
 	var href = href + '&new_comment=' + input_user;
 	jQuery.get( href, data, function() {
 		link.closest( "tr" ).remove();
-	
+
 	});
 });*/
 
@@ -37,7 +37,7 @@ jQuery( ".eopcm-comment-status" ).on('click', function(e)
 	var href = href + '&new_comment=' + input_user;
 	jQuery.get( href, data, function() {
 		link.closest( "tr" ).remove();
-	
+
 	});
 });
 

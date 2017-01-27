@@ -279,11 +279,22 @@ class Cm_Barmenu_Admin {
 			$comments->phone_caller = get_comment_meta( $comments->comment_ID, '_eocm_caller_phone', true );
 			$comments->mail_caller = get_comment_meta( $comments->comment_ID, '_eocm_caller_email', true );
 			$comments->url = admin_url( 'admin-ajax.php?action=treated&comment_id=' . $comments->comment_ID );
-
-			
 		}
-		include( plugin_dir_path( __FILE__ ) . 'views/show_appels2.php' );
 
+		include( plugin_dir_path( __FILE__ ) . 'views/show_appels.php' );
+
+		$comment['status'] = 'will_recall';
+		$data_comment = get_comments( $comment );
+		foreach ( $data_comment as $comments ) {
+			$comments->date_comment = get_comment_date( '', $comments->comment_ID );
+			$comments->name_caller = get_comment_meta( $comments->comment_ID, '_eocm_caller_name', true );
+			$comments->society_caller = get_comment_meta( $comments->comment_ID, '_eocm_caller_society', true );
+			$comments->phone_caller = get_comment_meta( $comments->comment_ID, '_eocm_caller_phone', true );
+			$comments->mail_caller = get_comment_meta( $comments->comment_ID, '_eocm_caller_email', true );
+			$comments->url = admin_url( 'admin-ajax.php?action=treated&comment_id=' . $comments->comment_ID );
+
+
+		}
 		include( plugin_dir_path( __FILE__ ) . 'views/show_appels.php' );
 
 		/*wp_die();*/
