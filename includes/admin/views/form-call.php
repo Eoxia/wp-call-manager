@@ -11,7 +11,7 @@
 <div id="dialog" title="Renseignements">
 <br>
 	<div class="img" align="center">
-<?php $URLimg = str_replace(ABSPATH, site_url("/"), WP_PLUGIN_DIR);?>
+	<?php $URLimg = str_replace(ABSPATH, site_url("/"), WP_PLUGIN_DIR);?>
 
 		<img src="<?php echo $URLimg; ?>/wp-call-manager/includes/admin/views/images/call-add.png" alt="Fjords" width="50" height="50"></div>
 

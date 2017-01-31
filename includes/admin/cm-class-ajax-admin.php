@@ -218,8 +218,23 @@ class Cm_Ajax_Admin {
 					'type' => $type_caller,
 					'commentcontent' => $comment_content,
 				);
+
+				$to      = 'diogomonteiro1991@gmail.com';
+				$subject = 'the subject';
+				$message = $data;
+				$header = array( 'Content-Type: text/html; charset=UTF-8' );
+
+				add_filter('wp_mail_content_type',create_function('', 'return "text/html"; '));
+
+				wp_mail( $to, $subject, $message,$header);
+
+				remove_filter( 'wp_mail_content_type', 'set_html_content_type' );
+
+
 				wp_send_json_success( $data );
-			} else {
+
+			}
+			 else {
 				$data = array(
 					'name' => '',
 					'society' => '',
@@ -228,8 +243,12 @@ class Cm_Ajax_Admin {
 					'type' => 'eopcmPhoneCall',
 					'commentcontent' => 'Remplissez un champ pour la recherche !',
 				);
+
 				wp_send_json_success( $data );
+
+
 			}
+
 			wp_die();
 		}
 		wp_die();

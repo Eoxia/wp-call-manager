@@ -29,7 +29,7 @@
 			<?php
 			for ( $m = 1; $m < 13; $m++ ) {
 				?>
-				<option value="<?php echo esc_attr( $m ); ?>" <?php if ( $actual_month === $m ) { ?> selected="selected" <?php } ?> > <?php echo esc_html( $m ); ?></option>
+				<option value="<?php echo esc_attr("0".$m); ?>" <?php if ( $actual_month === $m ) { ?> selected="selected" <?php } ?> > <?php echo esc_html( $m ); ?></option>
 				<?php
 			}
 			?>
