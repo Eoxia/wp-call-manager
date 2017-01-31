@@ -15,7 +15,7 @@ jQuery( document ).on( 'click', "#dialog-recall a", function(e) {
 
 
 
-jQuery( ".eopcm-comment-status" ).on('click', function(e)
+/*jQuery( ".eopcm-comment-status" ).on('click', function(e)
 {
 	alert("toto");
 	e.preventDefault();
@@ -27,6 +27,21 @@ jQuery( ".eopcm-comment-status" ).on('click', function(e)
 	jQuery.get( href, data, function() {
 		link.closest( "tr" ).remove();
 
+	});
+});*/
+
+jQuery(".eopcm-comment-status").on('click', '#eopcm-comment-status a', function(e)
+{
+	//alert("toto");
+	e.preventDefault();
+	var link = jQuery( this );
+	var href = link.attr( 'href' );
+	var data = null;
+  var input_user = prompt( 'Nouveau commentaire !' );
+	var href = href + '&new_comment=' + input_user;
+	jQuery.get( href, data, function()
+	{
+		link.closest( "tr" ).remove();
 	});
 });
 
@@ -97,7 +112,8 @@ jQuery( document ).ready( function( $ ) {
 						jQuery( "#form-dialog #comment_content_call" ).attr( "value" , comment );
 					});
 				}	else {
-					window.alert("E-mail non valide!");
+
+							window.alert("E-mail non valide!");
 
 					//var comment = "non valide!";
 					//jQuery( "#form-dialog #comment_content_call" ).attr( "value" , comment );
@@ -112,7 +128,8 @@ jQuery( document ).ready( function( $ ) {
 					jQuery( "#form-dialog" )[0].reset();
 					jQuery( "#dialog" ).dialog( "close" );
 				}	else {
-window.alert("E-mail non valide!");
+
+							window.alert("E-mail non valide!");
 
 				//	var comment = "non valide!";
 
