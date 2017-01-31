@@ -12,18 +12,7 @@ jQuery( document ).on( 'click', "#dialog-recall a", function(e) {
 	});
 });
 
-/*jQuery( document ).on( 'click', "#admin_menu a", function(e) {
-	e.preventDefault();
-	var link = jQuery( this );
-	var href = link.attr( 'href' );
-	var data = null;
-	var input_user = prompt( 'Nouveau commentaire !' );
-	var href = href + '&new_comment=' + input_user;
-	jQuery.get( href, data, function() {
-		link.closest( "tr" ).remove();
 
-	});
-});*/
 
 
 jQuery( ".eopcm-comment-status" ).on('click', function(e)
@@ -108,8 +97,12 @@ jQuery( document ).ready( function( $ ) {
 						jQuery( "#form-dialog #comment_content_call" ).attr( "value" , comment );
 					});
 				}	else {
-					var comment = "E-mail non valide !";
-					jQuery( "#form-dialog #comment_content_call" ).attr( "value" , comment );
+					window.alert("E-mail non valide!");
+
+					//var comment = "non valide!";
+					//jQuery( "#form-dialog #comment_content_call" ).attr( "value" , comment );
+
+
 				}
 			},
 			OK: function() {
@@ -119,8 +112,12 @@ jQuery( document ).ready( function( $ ) {
 					jQuery( "#form-dialog" )[0].reset();
 					jQuery( "#dialog" ).dialog( "close" );
 				}	else {
-					var comment = "E-mail non valide !";
-					jQuery( "#form-dialog #comment_content_call" ).attr( "value" , comment );
+window.alert("E-mail non valide!");
+
+				//	var comment = "non valide!";
+
+					//jQuery( "#form-dialog #comment_content_call" ).attr( "value" , comment );
+
 				}
 			},
 			Annuler: function() {

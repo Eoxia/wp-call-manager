@@ -38,10 +38,10 @@ class Cm_Ajax_Admin {
 	 *
 	 * @method fill_fields
 	 */
-	public function fill_fields() 
+	public function fill_fields()
 	{
 		global $wpdb;
-	
+
 	$wpdb->update('wp_comments', array('comment_type' => 'eopcmPhoneCall'), array('comment_approved' => 'treated'));
 	$wpdb->update('wp_comments', array('comment_type' => 'eopcmPhoneCall'), array('comment_approved' => 'recall'));
 	$wpdb->update('wp_comments', array('comment_type' => 'eopcmPhoneCall'), array('comment_approved' => 'transfered'));
@@ -155,11 +155,6 @@ class Cm_Ajax_Admin {
 			} else {
 				$to_call = 'empty';
 			}
-		/*	if ( '' !== $_POST['comment_type'] ) {
-				$comment_type = $_POST['comment_type'];
-			} else {
-				$comment_type = 'appel';
-			}*/
 
 			$comment = array(
 				'comment_approved' => $button_call,
@@ -344,6 +339,8 @@ class Cm_Ajax_Admin {
 		}
 		include( plugin_dir_path( __FILE__ ) . 'views/dialog-child.php' );
 		wp_die();
+
+
 	}
 
 	/**
@@ -366,7 +363,7 @@ class Cm_Ajax_Admin {
 			$comments->phone_caller = get_comment_meta( $comments->comment_ID, '_eocm_caller_phone', true );
 			$comments->mail_caller = get_comment_meta( $comments->comment_ID, '_eocm_caller_email', true );
 			$comments->url = admin_url( 'admin-ajax.php?action=treated&comment_id=' . $comments->comment_ID );
-			
+
 		}
 		include( plugin_dir_path( __FILE__ ) . 'views/dialog-child.php' );
 		wp_die();
