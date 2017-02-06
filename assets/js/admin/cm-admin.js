@@ -11,24 +11,15 @@ jQuery( document ).on( 'click', "#dialog-recall a", function(e) {
 
 	});
 });
+/*
+<script type="text/javascript" src="chosen/chosen.jquery.min.js"></script>
 
-
-
-
-/*jQuery( ".eopcm-comment-status" ).on('click', function(e)
+jQuery(".chosen-select").ready(function()
 {
-	alert("toto");
-	e.preventDefault();
-	var link = jQuery( this );
-	var href = link.attr( 'href' );
-	var data = null;
-	var input_user = prompt( 'Nouveau commentaire !' );
-	var href = href + '&new_comment=' + input_user;
-	jQuery.get( href, data, function() {
-		link.closest( "tr" ).remove();
+	 jQuery(".chosen-select").chosen();
+});
 
-	});
-});*/
+*/
 
 jQuery(".eopcm-comment-status").on('click', '#eopcm-comment-status a', function(e)
 {
@@ -114,11 +105,8 @@ jQuery( document ).ready( function( $ ) {
 				}	else {
 
 							window.alert("E-mail non valide!");
-
 					//var comment = "non valide!";
 					//jQuery( "#form-dialog #comment_content_call" ).attr( "value" , comment );
-
-
 				}
 			},
 			OK: function() {

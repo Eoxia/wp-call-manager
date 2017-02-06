@@ -218,7 +218,7 @@ class Cm_Ajax_Admin {
 					'type' => $type_caller,
 					'commentcontent' => $comment_content,
 				);
-
+/*
 				$to      = 'diogomonteiro1991@gmail.com';
 				$subject = 'the subject';
 				$message = $data;
@@ -229,7 +229,7 @@ class Cm_Ajax_Admin {
 				wp_mail( $to, $subject, $message,$header);
 
 				remove_filter( 'wp_mail_content_type', 'set_html_content_type' );
-
+*/
 
 				wp_send_json_success( $data );
 

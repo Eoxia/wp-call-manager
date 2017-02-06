@@ -21,6 +21,10 @@
 	} elseif ( 'recall' === $comment['status'] )
 	{?> <tr style="background-color: #BBBBBB;"><th> <?php echo esc_html( 'Vous avez des personnes a rappeler', 'call-manager' ); ?></th><th></th><th></th><th></th><th></th><th></th><th></th> </tr>
 <?php
+}
+ elseif (['will_recall', 'recall', 'transfered', 'treated'] === $comment['status'])
+{?> <tr style="background-color: #BBBBBB;"><th> <?php echo esc_html( 'Toutes les appels', 'call-manager' ); ?></th><th></th><th></th><th></th><th></th><th></th><th></th> </tr>
+<?php
 }?>
 
 <tr style="background-color: #BBBBBB;">

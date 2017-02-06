@@ -299,7 +299,46 @@ class Cm_Barmenu_Admin {
 		}
 		include( plugin_dir_path( __FILE__ ) . 'views/show_appels.php' );
 
-	
+
+
+				/*$args = array(
+					'meta_key' => '_eocm_receiver_id',
+					'meta_value' => get_current_user_id(),
+					'orderby' => 'name_contact_call',
+					'comment_approved' => ['will_recall', 'recall', 'transfered', 'treated'],
+					'date_query' => array( 'year' => $year, 'month' => $month),
+				);
+
+				$comments_query = new WP_Comment_Query;
+				$comment = $comments_query->query( $args );
+*/
+				$comment = array(
+				//	'meta_key' => '_eocm_receiver_id',
+				//'meta_value' => get_current_user_id(),
+				'meta_query' => array(
+	        array('meta_key'=> '_eocm_receiver_id',
+				'value' => get_current_user_id())),
+					'order' => 'ASC',
+					'orderby'   => 'meta_value',
+					'meta_key'  => '_eocm_caller_name',
+					'date_query' => array( 'year' => $year, 'month' => $month),
+				);
+
+
+				$comment['status'] = ['will_recall', 'recall', 'transfered', 'treated'];
+			//	$comment['v'] = $current_month;
+
+				$data_comment = get_comments( $comment );
+				foreach ( $data_comment as $comments ) {
+					$comments->date_comment = get_comment_date( '', $comments->comment_ID );
+					$comments->name_caller = get_comment_meta( $comments->comment_ID, '_eocm_caller_name', true );
+					$comments->society_caller = get_comment_meta( $comments->comment_ID, '_eocm_caller_society', true );
+					$comments->phone_caller = get_comment_meta( $comments->comment_ID, '_eocm_caller_phone', true );
+					$comments->mail_caller = get_comment_meta( $comments->comment_ID, '_eocm_caller_email', true );
+					$comments->url = admin_url( 'admin-ajax.php?action=treated&comment_id=' . $comments->comment_ID );
+				}
+				include( plugin_dir_path( __FILE__ ) . 'views/show_appels.php' );
+
 	}
 
 	/**
