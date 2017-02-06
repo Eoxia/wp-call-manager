@@ -1,5 +1,5 @@
 
-jQuery( document ).on( 'click', "#dialog-recall a", function(e) {
+jQuery( document ).on('click', "#dialog-recall a", function(e) {
 	e.preventDefault();
 	var link = jQuery( this );
 	var href = link.attr( 'href' );
@@ -11,18 +11,9 @@ jQuery( document ).on( 'click', "#dialog-recall a", function(e) {
 
 	});
 });
-/*
-<script type="text/javascript" src="chosen/chosen.jquery.min.js"></script>
 
-jQuery(".chosen-select").ready(function()
-{
-	 jQuery(".chosen-select").chosen();
-});
 
-*/
-
-jQuery(".eopcm-comment-status").on('click', '#eopcm-comment-status a', function(e)
-{
+jQuery(".eopcm-comment-status").on('click', '#eopcm-comment-status a', function(e){
 	//alert("toto");
 	e.preventDefault();
 	var link = jQuery( this );

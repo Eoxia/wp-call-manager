@@ -317,7 +317,7 @@ class Cm_Barmenu_Admin {
 				//'meta_value' => get_current_user_id(),
 				'meta_query' => array(
 	        array('meta_key'=> '_eocm_receiver_id',
-				'value' => get_current_user_id())),
+				  'value' => get_current_user_id())),
 					'order' => 'ASC',
 					'orderby'   => 'meta_value',
 					'meta_key'  => '_eocm_caller_name',
