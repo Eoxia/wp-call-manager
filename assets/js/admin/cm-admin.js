@@ -13,19 +13,6 @@ jQuery( document ).on('click', "#dialog-recall a", function(e) {
 });
 
 
-jQuery(".eopcm-comment-status").on('click', '#eopcm-comment-status a', function(e){
-	//alert("toto");
-	e.preventDefault();
-	var link = jQuery( this );
-	var href = link.attr( 'href' );
-	var data = null;
-  var input_user = prompt( 'Nouveau commentaire !' );
-	var href = href + '&new_comment=' + input_user;
-	jQuery.get( href, data, function()
-	{
-		link.closest( "tr" ).remove();
-	});
-});
 
 jQuery( document ).on( 'click', "#dialog-will-recall a", function(e) {
 	e.preventDefault();
@@ -38,7 +25,23 @@ jQuery( document ).on( 'click', "#dialog-will-recall a", function(e) {
 		link.closest( "tr" ).remove();
 	});
 });
+
 jQuery( document ).ready( function( $ ) {
+
+	jQuery(document).on('click', '.eopcm-comment-status', function(e){
+		//alert("toto");
+		e.preventDefault();
+		var link = jQuery( this );
+		var href = link.attr( 'href' );
+		var data = null;
+	  var input_user = prompt( 'Nouveau commentaire !' );
+		var href = href + '&new_comment=' + input_user;
+		jQuery.get( href, data, function()
+		{
+				window.location.reload(true);
+		});
+	});
+
 	function validateEmail( $email ) {
 		var emailReg = /^([\w-\.]+@([\w-]+\.)+[\w-]{2,20})?$/;
 		return emailReg.test( $email );
@@ -106,6 +109,7 @@ jQuery( document ).ready( function( $ ) {
 					jQuery( "#form-dialog" ).click().attr( "method", "POST" ).ajaxSubmit();
 					jQuery( "#form-dialog" )[0].reset();
 					jQuery( "#dialog" ).dialog( "close" );
+
 				}	else {
 
 							window.alert("E-mail non valide!");
@@ -115,6 +119,7 @@ jQuery( document ).ready( function( $ ) {
 					//jQuery( "#form-dialog #comment_content_call" ).attr( "value" , comment );
 
 				}
+
 			},
 			Annuler: function() {
 				var data = {
@@ -126,7 +131,9 @@ jQuery( document ).ready( function( $ ) {
 				jQuery( "#form-dialog" )[0].reset();
 				jQuery( "#dialog" ).dialog( "close" );
 			}
+
 		}
+
 	});
 	jQuery( "#dialog-recall" ).dialog( {
 		autoOpen: false,
@@ -252,4 +259,19 @@ jQuery( document ).ready( function( $ ) {
 			}
 		});
 	});
+
+	jQuery(".ck").click(function(event)
+	{
+
+	//	window.location.reload(true);
+
+
+	});
+
+
+
+		jQuery(".chosen-select").data("placeholder","Choisissez..").chosen();
+
+
+
 });

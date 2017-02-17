@@ -22,6 +22,9 @@ class Cm_Barmenu_Admin {
 		add_action( 'admin_bar_menu', array( $this, 'cm_recall' ), 102 );
 		add_action( 'admin_bar_menu', array( $this, 'cm_will_recall' ), 102 );
 		add_action( 'admin_menu', array( $this, 'cm_call_manager_menu' ), 102 );
+
+	//	add_action( 'admin_menu', array( $this, 'cm_call_manager_filtre_nom' ), 102 );
+
 		add_action( 'admin_footer', array( $this, 'dialog' ), 103 );
 		add_action( 'admin_enqueue_scripts', array( $this, 'cm_custom_wp_toolbar_css_admin' ), 104 );
 		add_action( 'wp_enqueue_scripts', array( $this, 'cm_custom_wp_toolbar_css_admin' ), 104 );
@@ -263,37 +266,86 @@ class Cm_Barmenu_Admin {
 		include( plugin_dir_path( __FILE__ ) . 'views/form-global-recap.php' );
 		include( plugin_dir_path( __FILE__ ) . 'views/global-recap-parent.php' );
 
-				/*$args = array(
-					'meta_key' => '_eocm_receiver_id',
-					'meta_value' => get_current_user_id(),
-					'orderby' => 'name_contact_call',
-					'comment_approved' => ['will_recall', 'recall', 'transfered', 'treated'],
-					'date_query' => array( 'year' => $year, 'month' => $month),
-				);
+		if ( ! empty( $_POST['_wpnonce_bt-nombre'] ) && check_admin_referer( 'bt-nombre_check', '_wpnonce_bt-nombre' ) )
+	  {
+			global $wpdb;
+				$result = $wpdb -> get_results("SELECT  *, COUNT(*) AS itemcount FROM wp_comments INNER JOIN wp_commentmeta ON
+					( wp_comments.comment_ID = wp_commentmeta.comment_id )  INNER JOIN
+					wp_commentmeta AS mt1 ON ( wp_comments.comment_ID = mt1.comment_id )
+					 WHERE ( comment_approved = 'will_recall' OR comment_approved = 'recall' OR
+						 comment_approved = 'transfered' OR comment_approved = 'treated' ) AND (
+  wp_commentmeta.meta_key = '_eocm_caller_society'AND(mt1.meta_value =  ".get_current_user_id().")
+) GROUP BY wp_commentmeta.meta_value ORDER BY itemcount DESC");
+	//	echo "<pre>";print_r($result);echo "</pre>";
+	$comment['status'] = ['will_recall', 'recall', 'transfered', 'treated'];
 
-				$comments_query = new WP_Comment_Query;
-				$comment = $comments_query->query( $args );
-*/
-				$comment = array(
-				//	'meta_key' => '_eocm_receiver_id',
-				//'meta_value' => get_current_user_id(),
-				'meta_query' => array(
-	        array('meta_key'=> '_eocm_receiver_id',
-				  'value' => get_current_user_id())),
-					'order' => 'ASC',
-					'orderby'   => 'meta_value',
-					'meta_key'  => '_eocm_caller_name',
-					'date_query' => array( 'year' => $year, 'month' => $month),
-				);
+	$data_comment = $result;
 
+	 		include( plugin_dir_path( __FILE__ ) . 'views/show_appels.php' );
+
+	 }
+	 elseif ( ! empty( $_POST['_wpnonce_bt-date'] ) && check_admin_referer( 'bt-date_check', '_wpnonce_bt-date' ))
+	 {
+		 $comment = array(
+		 //	'meta_key' => '_eocm_receiver_id',
+		 //'meta_value' => get_current_user_id(),
+			 'meta_query' => array(
+			 array('meta_key'=> '_eocm_receiver_id',
+			 'value' => get_current_user_id())),
+			 //'order' => 'DESC',
+			 'orderby'   => 'meta_value',
+		//	 'meta_key'  => '_eocm_caller_name',
+			 'date_query' => array( 'year' => $year, 'month' => $month),
+			 'order' => 'DESC',
+		 );
+
+		 	//	echo "<pre>";print_r($comment);echo "</pre>";
+		 $comment['status'] = ['will_recall', 'recall', 'transfered', 'treated'];
+	 //	$comment['v'] = $current_month;
+
+		 $data_comment = get_comments( $comment );
+		 include( plugin_dir_path( __FILE__ ) . 'views/show_appels.php' );
+	 }
+	 elseif ( ! empty( $_POST['_wpnonce_ck-groupe'] ) && check_admin_referer( 'ck-groupe_check', '_wpnonce_ck-groupe' ))
+	 {
+		 	$comment = array(
+ 	 		'meta_query' => array(
+ 		 	array('meta_key'=> '_eocm_receiver_id',
+ 		 	'value' => get_current_user_id())),
+ 		 	'orderby'   => 'meta_value',
+ 		 	'meta_key'  => '_eocm_caller_name',
+
+ 	 );
 
 				$comment['status'] = ['will_recall', 'recall', 'transfered', 'treated'];
-			//	$comment['v'] = $current_month;
 
 				$data_comment = get_comments( $comment );
-				include( plugin_dir_path( __FILE__ ) . 'views/show_appels.php' );
 
+				include( plugin_dir_path( __FILE__ ) . 'views/show_appels.php' );
+	 }
+	 else{
+	 $comment = array(
+	//	'meta_key' => '_eocm_receiver_id',
+	//'meta_value' => get_current_user_id(),
+		'meta_query' => array(
+		array('meta_key'=> '_eocm_receiver_id',
+		'value' => get_current_user_id())),
+		'orderby'   => 'meta_value',
+		'meta_key'  => '_eocm_caller_name',
+		//'order' => 'DESC',
+		'date_query' => array( 'year' => $year, 'month' => $month),
+		'order' => 'DESC',
+	);
+
+
+	$comment['status'] = ['will_recall', 'recall', 'transfered', 'treated'];
+//	$comment['v'] = $current_month;
+
+	$data_comment = get_comments( $comment );
+	include( plugin_dir_path( __FILE__ ) . 'views/show_appels.php' );
+}
 	}
+
 
 	/**
 	 * [FR]  Création de la Div pour la pop-up du bouton Call & Recall.

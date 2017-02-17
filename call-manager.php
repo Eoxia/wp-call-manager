@@ -10,7 +10,7 @@
  * Plugin Name: Call Manager
  * Description: Un plugin pour les devs d'Eoxia.
  * Version: 1.13.0.0.
- * Author: Damien.
+ * Author: Diogo Monteiro.
 */
 
 include( 'includes/admin/cm-class-ajax-admin.php' );

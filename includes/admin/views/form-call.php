@@ -42,6 +42,16 @@
 			<input type="radio" id="will_recall" name="button_call" value="will_recall"> <label for="will_recall"> <?php esc_html_e( 'Rappellera', 'call-manager' ); ?> </label> <br />
 			<input type="radio" id="recall" name="button_call" value="recall"> <label for="recall"> <?php esc_html_e( 'A rappeler', 'call-manager' ); ?> </label> <br /><br>
 
+				<select class="chosen-select" style="width:200px;">
+			            <option value=""></option>
+			            <option value="op1">1</option>
+			            <option value="op2">2</option>
+			            <option value="op3">3</option>
+			            <option value="op4">4</option>
+			            <option value="op5">5</option>
+					 </select>
+
+
 <br /><br>
 		<?php esc_html_e( 'Informations contact :', 'call-manager' ) ?> <br />
 			<input type="text" id="name_contact_call" name="name_contact_call" placeholder="<?php esc_attr_e( 'Nom du contact', 'call-manager' ) ?>"> <br />

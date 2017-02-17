@@ -31,14 +31,13 @@ class Cm_Mail_Sender {
 	 */
 	public function prepare_send_mail() {
 		if ( ! wp_next_scheduled( 'cm_mail' ) ) {
-			//wp_schedule_event( time(), 'hourly', 'cm_mail' );
 			wp_schedule_event( time(), 'hourly', 'cm_mail' );
-			
+
 		}
-		/*$user_data = get_userdata( get_current_user_id() );
+		$user_data = get_userdata( get_current_user_id() );
 		if ( 'administrator' === implode( ', ', $user_data->roles ) ) {
 			add_action( 'cm_mail', array( $this, 'send_mail' ), 108 );
-		}*/
+		}
 		add_action( 'cm_mail', 'send_mail' );
 	}
 
@@ -48,7 +47,7 @@ class Cm_Mail_Sender {
 	 * @method send_mail
 	 */
 	public function send_mail() {
-		/*$comment = array(
+		$comment = array(
 			'meta_key' => '_eocm_receiver_id',
 			'meta_value' => get_current_user_id(),
 			'status' => array( 'recall', 'will_recall' ),
@@ -95,15 +94,13 @@ class Cm_Mail_Sender {
 			</table>
 			<?php
 			$contents = ob_get_clean();
-			$cm_get_email = get_userdata( get_current_user_id() );*/
-			//$to = $cm_get_email->user_email;
-			$to = 'diogomonteiro1991@gmail.com';
+			$cm_get_email = get_userdata( get_current_user_id() );
+			$to = $cm_get_email->user_email;
 			$sujet = 'Vous devez rappeler des clients !';
-			//$message = $contents;
-			$message = 'Ola';
+			$message = $contents;
 			$header = array( 'Content-Type: text/html; charset=UTF-8' );
 			wp_mail( $to, $sujet, $message, $header );
-		/*}*/
+		}
 	}
 }
 

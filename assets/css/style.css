@@ -22,3 +22,25 @@
 	content: "\f460";
 	top: 3px;
 }
+
+.recap-tb .dashicons-yes{
+	color: #74DF00;
+}
+
+.recap-tb .dashicons-redo{
+	color: #D7DF01;
+}
+
+.container {
+width: 455px;
+    }
+
+    .bt1 {
+      display: inline;
+    }
+		.bt2 {
+			display: inline;
+		}
+		.bt3 {
+			display: inline;
+		}

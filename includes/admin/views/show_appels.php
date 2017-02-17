@@ -8,11 +8,27 @@
  */
 
 ?>
+
 <div class="wrap">
+
 	<br>
 		<div class="wrap"><br>
-		<table border="2" cellspacing="0" cellpadding="1" style="text-align: center; table-layout: fixed; margin: 0 auto;" >
+		<table class="recap-tb" border="2" cellspacing="0" cellpadding="1" style="text-align: center; table-layout: fixed; margin: 0 auto;" >
+		<div class ="container" align="center">
+			<form class="bt1" method="post">
+					<?php	wp_nonce_field( 'bt-nombre_check', '_wpnonce_bt-nombre' );?>
+					<input type="submit" name="bt-nombre" value="Trier par nombre">
+			</form>
 
+			<form class="bt2" method="post">
+					<?php wp_nonce_field( 'bt-date_check', '_wpnonce_bt-date' );?>
+					<input type="submit" name="bt-date" value="Trier par date">
+			</form>
+			<form class="bt3" name="ckf" method="post">
+					<?php wp_nonce_field( 'ck-groupe_check', '_wpnonce_ck-groupe' );?>
+					<input class="ck" type="checkbox" name="ck-groupe" checked onchange="this.form.submit()"><?php echo esc_html( 'Regrouper', 'call-manager' ); ?>
+			</form>
+		</div>
 <?php
 	if ( 'will_recall' === $comment['status'] )
 	{
@@ -52,6 +68,14 @@ foreach ( $data_comment as $data ) {
 			if ( in_array( $data->comment_approved, array( 'recall', 'will_recall' ), true ) ) :
 			?>
 			<a class="eopcm-comment-status" href="<?php echo esc_attr( admin_url( 'admin-ajax.php?action=treated&comment_id=' . $data->comment_ID ) ); ?>"><?php echo esc_html_e( 'Traité', 'call-manager' ); ?> </a>
+
+			<?php
+			elseif( in_array( $data->comment_approved, array( 'treated' ), true ) ):
+			?>
+			<a><span class="dashicons dashicons-yes"></span> </a>
+		<?php else:
+			?>
+			<a><span class="dashicons dashicons-redo"></span> </a>
 			<?php
 			endif;
 			?>
@@ -62,6 +86,7 @@ foreach ( $data_comment as $data ) {
 ?>
 
 </table>
+</form>
 	</div>
 </div>
 <?php

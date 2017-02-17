@@ -39,4 +39,6 @@
 		<input type="submit" name="up" value="Filtrer">
 	</form>
 </div>
+
+
 <?php
