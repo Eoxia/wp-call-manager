@@ -144,6 +144,16 @@ class Cm_Ajax_Admin {
 			add_comment_meta( $id_comment, '_eocm_caller_society', $society_contact_call );
 			add_comment_meta( $id_comment, '_eocm_caller_name', $name_contact_call );
 			add_comment_meta( $id_comment, '_eocm_receiver_id', $to_call );
+
+			if ( 'recall' === $button_call ) {
+				$cm_mail_sender = new Cm_Mail_Sender();
+				$cm_mail_sender->send_mail( $to_call, array(
+					'name' => $name_contact_call,
+					'society' => $society_contact_call,
+					'phone' => $number_contact_call,
+					'email' => $email_contact_call,
+				), $comment );
+			}
 		} elseif ( ! empty( $_GET['_wpnonce_dialog'] ) && check_admin_referer( 'form_dialog_check', '_wpnonce_dialog' ) ) {
 			if ( ( '' !== $_GET['number_contact_call'] ) or ( '' !== $_GET['email_contact_call'] ) or ( '' !== $_GET['name_contact_call'] ) or ( '' !== $_GET['society_contact_call'] ) ) {
 				$comment = array(
@@ -221,6 +231,8 @@ class Cm_Ajax_Admin {
 		wp_insert_comment( $new_comment );
 		wp_die();
 	}
+
+
 
 	/**
 	 * Bouton Recall qui ne s'affiche que quand vous avez une personne à rappeler.

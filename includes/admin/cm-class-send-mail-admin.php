@@ -16,85 +16,35 @@ class Cm_Mail_Sender {
 	 *
 	 * @method __construct
 	 */
-	public function __construct() {
-		add_action( 'admin_footer', array( $this, 'prepare_send_mail' ), 107 );
-	}
+	public function __construct() {}
 
 	/**
-	 * Envoie un mail par jour.
+	 * Envoi un email au destinataire avec les informations du contact.
 	 *
-	 * @method prepare_send_mail
+	 * @param  string $email_receiver L'adresse email du receveur.
+	 * @param  array  $contact        Les données du contact.
+	 * @param  array  $comment        Les données du commentaires.
+	 *
+	 * @return void
+	 *
+	 * @since 1.12.0.1
+	 * @version 1.12.0.1
 	 */
-	public function prepare_send_mail() {
-		if ( ! wp_next_scheduled( 'cm_mail' ) ) {
-			wp_schedule_event( time(), 'hourly', 'cm_mail' );
-		}
-		$user_data = get_userdata( get_current_user_id() );
-		if ( 'administrator' === implode( ', ', $user_data->roles ) ) {
-			add_action( 'cm_mail', array( $this, 'send_mail' ), 108 );
-		}
-	}
+	public function send_mail( $user_receiver_id, $contact, $comment ) {
+		$comment_user_data = get_userdata( $comment['user_id'] );
+		$user_receiver_data = get_userdata( $user_receiver_id );
+		$contents = '<p>Vous devez <b>rappeler</b> le client suivant:</p><ul>';
+		$contents .= '<li>Nom du contact: <b>' . $contact['name'] . '</b></li>';
+		$contents .= '<li>Société du contact: <b>' . $contact['society'] . '</b></li>';
+		$contents .= '<li>Numéro du contact: <b>' . $contact['phone'] . '</b></li>';
+		$contents .= '<li>E-mail du contact: <b>' . $contact['email'] . '</b></li>';
+		$contents .= '</ul>';
 
-	/**
-	 * La fonction qui envoie le mail.
-	 *
-	 * @method send_mail
-	 */
-	public function send_mail() {
-		$comment = array(
-			'meta_key' => '_eocm_receiver_id',
-			'meta_value' => get_current_user_id(),
-			'status' => array( 'recall', 'will_recall' ),
-			'order' => 'ASC',
-		);
-		$data_comment = get_comments( $comment );
-		$data_recall_comment_count = 0;
-		$data_will_recall_comment_count = 0;
-		$array_recall_comment['0'] = array( 'status' => 'recall' );
-		$array_will_recall_comment['0'] = array( 'status' => 'will_recall' );
-		foreach ( $data_comment as $data ) {
-			$temp_data_comment = array(
-				'status' => $data->comment_approved,
-				'date_comment' => get_comment_date( '', $data->comment_ID ),
-				'name_caller' => get_comment_meta( $data->comment_ID, '_eocm_caller_name', true ),
-				'society_caller' => get_comment_meta( $data->comment_ID, '_eocm_caller_society', true ),
-				'phone_caller' => get_comment_meta( $data->comment_ID, '_eocm_caller_phone', true ),
-				'mail_caller' => get_comment_meta( $data->comment_ID, '_eocm_caller_email', true ),
-				'comment_content_receive' => $data->comment_content,
-			);
-			if ( 'recall' === $temp_data_comment['status'] ) {
-				$data_recall_comment_count++;
-				$array_recall_comment[ $data_recall_comment_count ] = $temp_data_comment;
-			}
-			if ( 'will_recall' === $temp_data_comment['status'] ) {
-				$data_will_recall_comment_count++;
-				$array_will_recall_comment[ $data_will_recall_comment_count ] = $temp_data_comment;
-			}
-		}
-		if ( ( $data_recall_comment_count > 0 ) or ( $data_will_recall_comment_count > 0 ) ) {
-			ob_start();
-			?>
-			<table border="1" cellspacing="0" cellpadding="5" style="text-align: center; table-layout: fixed; margin: 0 auto;">
-			<?php
-			if ( $data_recall_comment_count > 0 ) {
-				$cm_array = $array_recall_comment;
-				include( plugin_dir_path( __FILE__ ) . 'views/task-manager/summary-call-recap-child.php' );
-			}
-			if ( $data_will_recall_comment_count > 0 ) {
-				$cm_array = $array_will_recall_comment;
-				include( plugin_dir_path( __FILE__ ) . 'views/task-manager/summary-call-recap-child.php' );
-			}
-			?>
-			</table>
-			<?php
-			$contents = ob_get_clean();
-			$cm_get_email = get_userdata( get_current_user_id() );
-			$to = $cm_get_email->user_email;
-			$sujet = 'Vous devez rappeler des clients !';
-			$message = $contents;
-			$header = array( 'Content-Type: text/html; charset=UTF-8' );
-			wp_mail( $to, $sujet, $message, $header );
-		}
+		$contents .= '<p>Commentaire de la notification par ' . $comment_user_data->display_name . '</p>';
+		$contents .= '<p>' . $comment['comment_content'] . '</p>';
+		$sujet = '[Call Manager] Vous avez un client a rappeler:';
+		$header = array( 'Content-Type: text/html; charset=UTF-8' );
+		wp_mail( $user_receiver_data->user_email, $sujet, $contents, $header );
 	}
 }
 

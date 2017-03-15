@@ -15,8 +15,6 @@ jQuery( document ).on( 'click', "#dialog-will-recall a", function(e) {
 	var link = jQuery( this );
 	var href = link.attr( 'href' );
 	var data = null;
-	var input_user = prompt( 'Nouveau commentaire !' );
-	var href = href + '&new_comment=' + input_user;
 	jQuery.get( href, data, function() {
 		link.closest( "tr" ).remove();
 	});

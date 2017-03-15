@@ -21,7 +21,6 @@ class Cm_Barmenu_Admin {
 		add_action( 'admin_bar_menu', array( $this, 'cm_blame' ), 101 );
 		add_action( 'admin_bar_menu', array( $this, 'cm_recall' ), 102 );
 		add_action( 'admin_bar_menu', array( $this, 'cm_will_recall' ), 102 );
-		add_action( 'admin_menu', array( $this, 'cm_call_manager_menu' ), 102 );
 		add_action( 'admin_footer', array( $this, 'dialog' ), 103 );
 		add_action( 'admin_enqueue_scripts', array( $this, 'cm_custom_wp_toolbar_css_admin' ), 104 );
 		add_action( 'wp_enqueue_scripts', array( $this, 'cm_custom_wp_toolbar_css_admin' ), 104 );
@@ -36,7 +35,7 @@ class Cm_Barmenu_Admin {
 	 */
 	public function cm_call( $wp_admin_bar ) {
 		$user_data = get_userdata( get_current_user_id() );
-		if ( in_array( 'administrator', $user_data->roles, true ) ) {
+		if ( 'administrator' === implode( ', ', $user_data->roles ) ) {
 			$time_db = current_time( 'Ym' );
 			$day = intval( current_time( 'd' ) );
 			$select = get_user_meta( get_current_user_id(),'imputation_' . $time_db, true );
@@ -83,7 +82,7 @@ class Cm_Barmenu_Admin {
 	 */
 	public function cm_blame( $wp_admin_bar ) {
 		$user_data = get_userdata( get_current_user_id() );
-		if ( in_array( 'administrator', $user_data->roles, true ) ) {
+		if ( 'administrator' === implode( ', ', $user_data->roles ) ) {
 			$time_db = current_time( 'Ym' );
 			$day = intval( current_time( 'd' ) );
 			$select = get_user_meta( get_current_user_id(),'imputation_' . $time_db, true );
@@ -176,7 +175,7 @@ class Cm_Barmenu_Admin {
 	 */
 	public function cm_recall( $wp_admin_bar ) {
 		$user_data = get_userdata( get_current_user_id() );
-		if ( in_array( 'administrator', $user_data->roles, true ) ) {
+		if ( 'administrator' === implode( ', ', $user_data->roles ) ) {
 			$select_comment = array(
 				'meta_key' => '_eocm_receiver_id',
 				'meta_value' => get_current_user_id(),
@@ -203,7 +202,7 @@ class Cm_Barmenu_Admin {
 	 */
 	public function cm_will_recall( $wp_admin_bar ) {
 		$user_data = get_userdata( get_current_user_id() );
-		if ( in_array( 'administrator', $user_data->roles, true ) ) {
+		if ( 'administrator' === implode( ', ', $user_data->roles ) ) {
 			$select_comment = array(
 				'meta_key' => '_eocm_receiver_id',
 				'meta_value' => get_current_user_id(),
@@ -220,48 +219,6 @@ class Cm_Barmenu_Admin {
 				$wp_admin_bar->add_node( $bouton_will_recall );
 			}
 		}
-	}
-
-	/**
-	 * [cm_call_manager_menu description]
-	 *
-	 * @method cm_call_manager_menu
-	 */
-	public function cm_call_manager_menu() {
-		$user_data = get_userdata( get_current_user_id() );
-		if ( in_array( 'administrator', $user_data->roles, true ) ) {
-			add_menu_page( 'Call Manager', 'Call Manager', 'administrator', 'cm-menu', array( $this, 'cm_call_manager_menu_callback' ), 'dashicons-book-alt' );
-		}
-	}
-
-	/**
-	 * [cm_call_manager_menu_callback description]
-	 *
-	 * @method cm_call_manager_menu_callback.
-	 */
-	public function cm_call_manager_menu_callback() {
-		$data_users = get_users( 'orderby=nicename&role=administrator' );
-		$year = current_time( 'Y' );
-		$month = current_time( 'm' );
-		$day = intval( current_time( 'd' ) );
-		$color = 5;
-		if ( ! empty( $_POST['_wpnonce_up'] ) && check_admin_referer( 'up_check', '_wpnonce_up' ) ) {
-			if ( ( current_time( 'm' ) !== $_POST['month'] ) and ( current_time( 'Y' ) !== $_POST['year'] ) ) {
-				$year = $_POST['year'];
-				$month = $_POST['month'];
-			} elseif ( ( current_time( 'm' ) === $_POST['month'] ) and ( current_time( 'Y' ) !== $_POST['year'] ) ) {
-				$year = $_POST['year'];
-				$month = current_time( 'm' );
-			} elseif ( ( current_time( 'm' ) !== $_POST['month'] ) and ( current_time( 'Y' ) === $_POST['year'] ) ) {
-				$year = current_time( 'Y' );
-				$month = $_POST['month'];
-			}
-			if ( isset( $_POST['color'] ) ) {
-				$color = abs( $_POST['color'] );
-			}
-		}
-		include( plugin_dir_path( __FILE__ ) . 'views/form-global-recap.php' );
-		include( plugin_dir_path( __FILE__ ) . 'views/global-recap-parent.php' );
 	}
 
 	/**
