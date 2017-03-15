@@ -188,42 +188,42 @@ jQuery( document ).ready( function( $ ) {
 			}
 		});
 	});
-	jQuery( document ).on( 'heartbeat-tick', function() {
-		var data = {
-			'action': 'display',
-		};
-		jQuery.post( ajaxurl, data, function( rep ) {
-			jQuery( "#dialog-recall" ).find( "table" ).html( rep );
-		});
-
-		var data = {
-			'action': 'display_button_recall',
-		};
-		jQuery.post( ajaxurl, data, function ( reponse ) {
-			if ( "oui" === reponse.data.retour ) {
-				jQuery( "#wp-admin-bar-imputation_recall #spanny" ).removeClass( "hidden" );
-			}
-			if ( "non" === reponse.data.retour ) {
-				jQuery( "#wp-admin-bar-imputation_recall #spanny" ).addClass( "hidden" );
-			}
-		});
-
-		var data = {
-			'action': 'display_deux',
-		};
-		jQuery.post( ajaxurl, data, function( resp ) {
-			jQuery( "#dialog-will-recall" ).find( "table" ).html( resp );
-		});
-		var data = {
-			'action': 'display_button_will_recall',
-		};
-		jQuery.post( ajaxurl, data, function ( response ) {
-			if ( "yes" === response.data.return ) {
-				jQuery( "#wp-admin-bar-imputation_will_recall #spanny-deux" ).removeClass( "hidden" );
-			}
-			if ( "no" === response.data.return ) {
-				jQuery( "#wp-admin-bar-imputation_will_recall #spanny-deux" ).addClass( "hidden" );
-			}
-		});
-	});
+	// jQuery( document ).on( 'heartbeat-tick', function() {
+	// 	var data = {
+	// 		'action': 'display',
+	// 	};
+	// 	jQuery.post( ajaxurl, data, function( rep ) {
+	// 		jQuery( "#dialog-recall" ).find( "table" ).html( rep );
+	// 	});
+	//
+	// 	var data = {
+	// 		'action': 'display_button_recall',
+	// 	};
+	// 	jQuery.post( ajaxurl, data, function ( reponse ) {
+	// 		if ( "oui" === reponse.data.retour ) {
+	// 			jQuery( "#wp-admin-bar-imputation_recall #spanny" ).removeClass( "hidden" );
+	// 		}
+	// 		if ( "non" === reponse.data.retour ) {
+	// 			jQuery( "#wp-admin-bar-imputation_recall #spanny" ).addClass( "hidden" );
+	// 		}
+	// 	});
+	//
+	// 	var data = {
+	// 		'action': 'display_deux',
+	// 	};
+	// 	jQuery.post( ajaxurl, data, function( resp ) {
+	// 		jQuery( "#dialog-will-recall" ).find( "table" ).html( resp );
+	// 	});
+	// 	var data = {
+	// 		'action': 'display_button_will_recall',
+	// 	};
+	// 	jQuery.post( ajaxurl, data, function ( response ) {
+	// 		if ( "yes" === response.data.return ) {
+	// 			jQuery( "#wp-admin-bar-imputation_will_recall #spanny-deux" ).removeClass( "hidden" );
+	// 		}
+	// 		if ( "no" === response.data.return ) {
+	// 			jQuery( "#wp-admin-bar-imputation_will_recall #spanny-deux" ).addClass( "hidden" );
+	// 		}
+	// 	});
+	// });
 });
