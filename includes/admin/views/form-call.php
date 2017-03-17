@@ -7,6 +7,8 @@
  * @subpackage Call & Blame.
  */
 
+$wps_customer = new wps_customer_ctr();
+$customer_lists = $wps_customer->custom_user_list( array( 'name'=>'user[customer_id]', 'id' => 'user_customer_id' ));
 ?>
 <div id="dialog" title="Renseignements">
 	<p>
@@ -25,6 +27,10 @@
 				}
 				?>
 			</select> <br />
+			<label><?php _e( 'Search and choose a customer', 'wpshop'); ?> :</label>
+			<div class="wps-form" id="wps_customer_list_container" data-nonce="<?php wp_create_nonce( 'wps_order_refresh_customer_list' ); ?>">
+				<?php echo $customer_lists; ?>
+			</div>
 			<input type="hidden" name="action" value="form_call">
 			<?php esc_html_e( 'Choisissez votre option :', 'call-manager' ) ?> <br />
 			<input type="radio" id="treated" name="button_call" value="treated" checked="checked"> <label for="treated"><?php esc_html_e( 'Traité', 'call-manager' ); ?> </label> <br />

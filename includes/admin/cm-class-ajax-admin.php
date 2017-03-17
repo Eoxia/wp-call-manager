@@ -133,17 +133,95 @@ class Cm_Ajax_Admin {
 			} else {
 				$to_call = 'empty';
 			}
-			$comment = array(
-				'comment_approved' => $button_call,
-				'comment_content' => $comment_content_call,
-				'user_id' => get_current_user_id(),
-			);
-			$id_comment = wp_insert_comment( $comment );
-			add_comment_meta( $id_comment, '_eocm_caller_phone', $number_contact_call );
-			add_comment_meta( $id_comment, '_eocm_caller_email', $email_contact_call );
-			add_comment_meta( $id_comment, '_eocm_caller_society', $society_contact_call );
-			add_comment_meta( $id_comment, '_eocm_caller_name', $name_contact_call );
-			add_comment_meta( $id_comment, '_eocm_receiver_id', $to_call );
+
+
+			// On ajoute une tâche.
+			if ( ! empty( $_POST['user']['customer_id'] ) ) { // WPCS: CRSF ok.
+				global $task_controller, $point_controller, $time_controller, $wpdb;
+
+				$customer_id = wps_customer_ctr::get_customer_id_by_author_id( $_POST['user']['customer_id'] );
+
+				$query = new WP_Query( array(
+					'fields' => 'ids',
+					'post_parent' => $customer_id,
+					'post_type' => 'wpeo-task',
+					'posts_per_page' => 1,
+					'tax_query' => array(
+						array(
+							'taxonomy' => 'wpeo_tag',
+							'field' => 'slug',
+							'terms' => 'commercial',
+						),
+					),
+				) );
+
+				if ( 0 === $query->post_count ) {
+					$task = $task_controller->create( array(
+						'title' => __( 'Appel téléphonique', 'task-manager' ),
+						'parent_id' => $customer_id,
+						'author_id' => get_current_user_id(),
+						'option' => array(
+							'user_info' => array(
+								'owner_id' => get_current_user_id(),
+							),
+						),
+					) );
+
+					$tag_selected = get_term_by( 'slug', 'commercial', 'wpeo_tag' );
+					$task->taxonomy['wpeo_tag'][] = (int) $tag_selected->term_id;
+					$task = $task_controller->update( $task );
+				} else {
+					$task = $task_controller->show( $query->posts[0] );
+				}
+
+				$comment_point = $name_contact_call . ' - ' . $society_contact_call . ' - ' . $number_contact_call . ' - ' . $email_contact_call;
+
+				$comment = array(
+					'post_id' => $task->id,
+					'status' => '-34070',
+					'content' => $comment_point,
+					'comment_type' => 'phone_call',
+					'user_id' => get_current_user_id(),
+					'date' => current_time( 'mysql' ),
+				);
+
+				$point = $point_controller->create( $comment );
+				$task->option['task_info']['order_point_id'][] = (int) $point->id;
+				$task_controller->update( $task );
+
+				$time_controller->create( array(
+					'post_id' => $task->id,
+					'parent_id' => $point->id,
+					'status' => '-34070',
+					'content' => $comment_content_call,
+					'comment_type' => 'phone_call_comment',
+					'user_id' => get_current_user_id(),
+					'date' => current_time( 'mysql' ),
+				) );
+
+				// $point_id = $wpdb->get_var(
+				// 	"SELECT comment_ID FROM $wpdb->comments
+				// 	WHERE comment_content='Appel téléphonique'
+				// 	AND comment_post_ID=" . $task->id );
+				//
+				// if ( empty( $point_id ) ) {
+				// 	$point = $point_controller->create( array(
+				// 		'author_id' => get_current_user_id(),
+				// 		'status' => '-34070',
+				// 		'date' => current_time( 'mysql' ),
+				// 		'content' => 'Appel téléphonique',
+				// 		'post_id' => $task->id,
+				// 	) );
+				//
+				// 	/** Add to the order point */
+				// 	$task->option['task_info']['order_point_id'][] = (int) $point->id;
+				// 	$task_controller->update( $task );
+				// } else {
+				// 	$point = $point_controller->show( $point_id );
+				// }
+				//
+				// $time_controller->create( $comment );
+			}
 
 			if ( 'recall' === $button_call ) {
 				$cm_mail_sender = new Cm_Mail_Sender();

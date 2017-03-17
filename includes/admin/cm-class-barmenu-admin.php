@@ -18,7 +18,7 @@ class Cm_Barmenu_Admin {
 	 */
 	public function __construct() {
 		add_action( 'admin_bar_menu', array( $this, 'cm_call' ), 100 );
-		add_action( 'admin_bar_menu', array( $this, 'cm_blame' ), 101 );
+		// add_action( 'admin_bar_menu', array( $this, 'cm_blame' ), 101 );
 		add_action( 'admin_bar_menu', array( $this, 'cm_recall' ), 102 );
 		add_action( 'admin_bar_menu', array( $this, 'cm_will_recall' ), 102 );
 		add_action( 'admin_footer', array( $this, 'dialog' ), 103 );
