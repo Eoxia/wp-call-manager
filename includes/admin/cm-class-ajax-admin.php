@@ -383,7 +383,7 @@ class Cm_Ajax_Admin {
 			'meta_value' => get_current_user_id(),
 			'order' => 'ASC',
 		);
-		$comment['status'] = 'recall';
+		$comment['status'] = array( 'recall', 'will_recall' );
 		$data_comment = get_comments( $comment );
 		foreach ( $data_comment as $comments ) {
 			$comments->date_comment = get_comment_date( '', $comments->comment_ID );

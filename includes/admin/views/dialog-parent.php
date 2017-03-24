@@ -8,17 +8,7 @@
  */
 
 ?>
-<div
-	<?php
-	if ( 'will_recall' === $comment['status'] ) {
-	?> id="dialog-will-recall" title="Voici les personnes qui vont rappeler"
-	<?php
-	} elseif ( 'recall' === $comment['status'] ) {
-	?> id="dialog-recall" title="Voici les personnes que vous devez rappeler"
-	<?php
-	}
-	?> class="hidden"
->
+<div id="dialog-recall" title="<?php esc_html_e( 'Personne voulant vous contacter', 'phonecall' ); ?>" class="hidden" >
 	<table border="1" cellspacing="0" cellpadding="5" style="text-align: center; table-layout: fixed;">
 	<?php include( plugin_dir_path( __FILE__ ) . 'dialog-child.php' ); ?>
 	</table>
