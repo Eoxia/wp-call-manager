@@ -35,7 +35,7 @@ class Cm_Filter_Admin {
 	public function display( $content, $user_id, $year, $month, $day = null ) {
 		$this->display_total( $content, $user_id, $year, $month, $day );
 		$this->display_call_recap( $content, $user_id, $year, $month, $day );
-		$this->display_blame_recap( $content, $user_id, $year, $month, $day );
+		// $this->display_blame_recap( $content, $user_id, $year, $month, $day );
 	}
 
 	/**
