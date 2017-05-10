@@ -52,7 +52,7 @@ class Cm_Filter_Admin {
 		$number_call = 0;
 		$number_blame = 0;
 		$selection = get_user_meta( $user_id, 'imputation_' . $year . '' . $month, true );
-		if ( 10 > $day ) {
+		if ( ( null != $day ) && ( 10 > $day ) ) {
 			$day = substr( $day, -1 );
 		}
 		if ( ! empty( $selection ) ) {
@@ -70,6 +70,7 @@ class Cm_Filter_Admin {
 				}
 			}
 		}
+
 		include( plugin_dir_path( __FILE__ ) . 'views/task-manager/summary-filter.php' );
 	}
 
@@ -86,7 +87,7 @@ class Cm_Filter_Admin {
 	public function display_call_recap( $content, $user_id, $year, $month, $day = null ) {
 		$number_call = 0;
 		$selection = get_user_meta( $user_id, 'imputation_' . $year . '' . $month, true );
-		if ( 10 > $day ) {
+		if ( ( null != $day ) && ( 10 > $day ) ) {
 			$day = substr( $day, -1 );
 		}
 		if ( ! empty( $selection ) ) {

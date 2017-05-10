@@ -8,7 +8,7 @@
 
 if ( null !== $day ) {
 	?>
-	<li class='cm_summary_recap_daily' style="height: 36px; line-height: 36px; width: 20%; text-align: center;" >
+	<li class='cm_summary_recap_daily' style="height: 36px; line-height: 36px; width: 20%; text-align: center" >
 		<span style="cursor:pointer;" class="ab-action-recap-call-daily" data-id="<?php echo esc_attr( $user_id . $year . $month . $day ); ?>">
 			<span class="dashicons dashicons-phone"> </span>
 			<strong> <?php echo esc_html( $number_call ); ?> </strong>
