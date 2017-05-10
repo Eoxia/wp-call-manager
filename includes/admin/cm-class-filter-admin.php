@@ -52,6 +52,9 @@ class Cm_Filter_Admin {
 		$number_call = 0;
 		$number_blame = 0;
 		$selection = get_user_meta( $user_id, 'imputation_' . $year . '' . $month, true );
+		if ( 10 > $day ) {
+			$day = substr( $day, -1 );
+		}
 		if ( ! empty( $selection ) ) {
 			if ( null === $day ) {
 				foreach ( $selection as $key => $call ) {
@@ -83,6 +86,9 @@ class Cm_Filter_Admin {
 	public function display_call_recap( $content, $user_id, $year, $month, $day = null ) {
 		$number_call = 0;
 		$selection = get_user_meta( $user_id, 'imputation_' . $year . '' . $month, true );
+		if ( 10 > $day ) {
+			$day = substr( $day, -1 );
+		}
 		if ( ! empty( $selection ) ) {
 			if ( null === $day ) {
 				foreach ( $selection as $key => $call ) {
@@ -139,6 +145,7 @@ class Cm_Filter_Admin {
 				$array_will_recall_comment[ $data_will_recall_comment_count ] = $temp_data_comment;
 			}
 		}
+
 		include( plugin_dir_path( __FILE__ ) . 'views/task-manager/summary-call-recap-parent.php' );
 	}
 
