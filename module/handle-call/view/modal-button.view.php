@@ -1,6 +1,6 @@
 <?php
 /**
- * Main view of "Hello_World" module.
+ * Form view of "Call Manager" module.
  *
  * @author You <you@mail>
  * @since 2.0.0
@@ -9,12 +9,11 @@
  * @package call_manager
  */
 
-namespace hello_world;
+namespace handle_call;
 
 if ( ! defined( 'ABSPATH' ) ) {
 	exit;
 } ?>
-
-<div class="wrap wpeo-wrap">
-	<h1>Hello World</h1>
+<div class="wpeo-button button-main action-input" data-parent="modal-container">
+	<span>Validé</span>
 </div>

@@ -1,9 +1,10 @@
 {
-	"name": "Starter",
+	"name": "Call_manager",
 	"slug": "starter",
 	"modules": [
 		"core/core.config.json",
-		"module/hello-world/hello_world.config.json"
+		"module/hello-world/hello_world.config.json",
+		"module/handle-call/handle_call.config.json"
 	],
 	"version": "0.1.0"
 }

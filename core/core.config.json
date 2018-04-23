@@ -1,7 +1,7 @@
 {
 	"name": "Core",
 	"slug": "core",
-	"version": "0.1.0",
+	"version": "2.0.0",
 	"description": "Main files of call_manager",
 	"path": "core/",
 	"dependencies": {

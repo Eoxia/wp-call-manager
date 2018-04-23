@@ -1,6 +1,6 @@
 <?php
 /*
-Plugin Name: EO Framework Starter
+Plugin Name: Call mangerV2
 Plugin URI:
 Description:
 Version: 0.1.0

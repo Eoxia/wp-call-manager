@@ -3,9 +3,9 @@
  * Main actions of call_manager
  *
  * @author You <you@mail>
- * @since 0.1.0
- * @version 0.1.0
- * @copyright 2017+
+ * @since 2.0.0
+ * @version 2.0.0
+ * @copyright 2018
  * @package call_manager
  */
 
@@ -33,8 +33,8 @@ class Core_Action {
 	/**
 	 * Init style and script
 	 *
-	 * @since 0.1.0
-	 * @version 0.1.0
+	 * @since 2.0.0
+	 * @version 2.0.0
 	 *
 	 * @return void nothing
 	 */

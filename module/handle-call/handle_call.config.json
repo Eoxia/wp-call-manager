@@ -1,0 +1,9 @@
+{
+	"name": "Handle Call",
+	"slug": "handle_call",
+	"version": "0.1.0",
+	"path": "module/handle-call",
+	"dependencies": {
+		"action": {}
+	}
+}

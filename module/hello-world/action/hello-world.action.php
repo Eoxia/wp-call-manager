@@ -3,9 +3,9 @@
  * Action of "Hello_World" module.
  *
  * @author You <you@mail>
- * @since 0.1.0
- * @version 0.1.0
- * @copyright 2017+
+ * @since 2.0.0
+ * @version 2.0.0
+ * @copyright 2018+
  * @package call_manager
  */
 
@@ -18,7 +18,7 @@ if ( ! defined( 'ABSPATH' ) ) {
 /**
  * Action of "Hello_World" module.
  */
-class Hello_World_Action {
+class hello_world_Action {
 
 	/**
 	 * Constructor
@@ -52,4 +52,4 @@ class Hello_World_Action {
 	}
 }
 
-new Hello_World_Action();
+new hello_world_Action();
