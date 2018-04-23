@@ -1,0 +1,9 @@
+{
+	"name": "Starter",
+	"slug": "starter",
+	"modules": [
+		"core/core.config.json",
+		"module/hello-world/hello_world.config.json"
+	],
+	"version": "0.1.0"
+}
