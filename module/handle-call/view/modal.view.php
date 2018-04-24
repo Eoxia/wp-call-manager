@@ -14,15 +14,19 @@ namespace handle_call;
 if ( ! defined( 'ABSPATH' ) ) {
 	exit;
 } ?>
-<p><strong>Liste des personnes Connectée(s)</strong></p>
 
-<div>img.Avatar</div>
-<hr>
 
 
 <div class="wpeo">
 	<form class="wpeo-form">
 <input type="hidden" name="action" value="send_form">
+
+<?php
+	foreach ( $users as $user ) :
+		echo $user->data['email'];
+	endforeach;
+?>
+
 <span class="form-label"><strong>Status des Appels</strong></span>
 	<div class="wpeo-grid grid-4">
 		<label class="form-field-container">
@@ -70,7 +74,7 @@ if ( ! defined( 'ABSPATH' ) ) {
 		<div class="form-element">
 <span class="form-label">Commentaire</span>
 <label class="form-field-container">
-	<textarea class="form-field" rows="5" cols="5" name="content" placeholder="loremipsum...."></textarea>
+	<textarea class="form-field" rows="5" cols="5" name="Commentaire" placeholder="loremipsum...."></textarea>
 </label>
 </div>
 	</form>
