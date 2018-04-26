@@ -3,8 +3,9 @@
 	"slug": "starter",
 	"modules": [
 		"core/core.config.json",
-		"module/hello-world/hello_world.config.json",
-		"module/handle-call/handle_call.config.json"
+		"modules/hello-world/hello_world.config.json",
+		"modules/handle-call/handle_call.config.json",
+		"modules/call-comment/call-comment.config.json"
 	],
 	"version": "0.1.0"
 }

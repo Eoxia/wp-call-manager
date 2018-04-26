@@ -2,7 +2,7 @@
 	"name": "Hello World",
 	"slug": "hello_world",
 	"version": "0.1.0",
-	"path": "module/hello-world",
+	"path": "modules/hello-world",
 	"dependencies": {
 		"action": {}
 	},

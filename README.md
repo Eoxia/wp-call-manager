@@ -1,11 +1,16 @@
 Backlog :
-// faire boutton telephone (voir wp-admin-bar)
+
+2btn :admin_bar
+
+--faire un bouton qui cree les 4 category .
+--table =>Taxonomy (cree les 4 category qui coressonde au status des appels)
 
 
-*defi,ir la fonction  WP_send_json_success
-*
-//recup fonction recherche de wp-shop
+
+--faire un bouton qui cree 4 post
+-et faire pour chaque Post une fonction qui les lie a une category .
 
 
 
-//cree une class sur le btn validé action-input data-parent
+
+--au moment de l insert comment via le btn validé  lier le comment au Post qui correspond a la category selected .

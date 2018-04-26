@@ -29,17 +29,19 @@ class Handle_Call_Action {
 	public function __construct() {
 		add_action( 'admin_bar_menu', array( $this, 'button_toolbar' ) );
 		add_action( 'wp_ajax_ajax_launch', array( $this, 'ajax_load' ) );
-
-		add_action( 'wp_ajax_send_form', array( $this, 'submit_form', 'insert_form' ) );
-
 		add_action( 'wp_ajax_affich_users', array( $this, 'select_users' ) );
+		add_action( 'wp_ajax_ajax_hook1', array( $this, 'cree_category' ) );
 
 	}
 	/**
-	* Add Button "call".
-	* @since 2.0.0
-	* @version 2.0.0
-	*/
+	 * Add Button "call".
+	 *
+	 * @var string $wp_admin_bar.
+	 *
+	 * @since 2.0.0
+	 *
+	 * @version 2.0.0
+	 */
 	public function button_toolbar( $wp_admin_bar ) {
 		ob_start();
 		\eoxia\View_Util::exec( 'starter', 'handle_call', 'button' );
@@ -75,31 +77,12 @@ class Handle_Call_Action {
 		) );
 	}
 	/**
-	 * Add function submit for form.
-	 *
-	 * @since 2.0.0
-	 * @version 2.0.0
-	 */
-	public function submit_form() {
-		echo '<pre>';
-		//print_r( $_POST['type'] ) AND $_POST['Commentaire'] );
-		echo '</pre>';
-	}
-	/**
 	 * Add insert request for the form.
 	 *
 	 * @since 2.0.0
 	 * @version 2.0.0
 	 */
-	public function insert_form() {
-		if ( isset( $_POST['Commentaire'] ) || isset( $_POST['type'] ) && ( '' !== $_POST['Commentaire'] ) ) {
-			global $wpdb;
-			$commentaire = $_POST['Commentaire'];
-			$type        = $_POST['type'];
-			$wpdb->insert( "{$wpdb->prefix}comments", array( 'comment_content' => $commentaire, 'comment_approved' => $type  ) );
 
-		}
-	}
 		/**
 		 * Add function SELECT users.
 		 *
@@ -107,25 +90,30 @@ class Handle_Call_Action {
 		 * @version 2.0.0
 		 */
 	public function select_users() {
-			// $uilisateur_co = $wpdb->get_row( "SELECT user_login FROM {$wpdb->prefix}users" );
-
 			ob_start();
 			\eoxia\View_Util::exec( 'starter', 'handle_call', 'modal-users' );
-			// echo esc_html( $uilisateur_co );
 			$modal_view = ob_get_clean();
-
-
 			wp_send_json_success( array(
-				'view'         => $modal_view,
-
+				'view' => $modal_view,
 			) );
-
-
+	}
+	/**
+	 * Add function qui cree 4 category.
+	 *
+	 * @since 2.0.0
+	 * @version 2.0.0
+	 */
+	public function cree_category() {
+		$traite     = array( 'name' => 'traite', 'slug' => 'traite' );
+		$transferer = array( 'name' => 'transferer', 'slug' => 'transferer' );
+		$a_rappeler = array( 'name' => 'a rappeler', 'slug' => 'a rappeler' );
+		$rappelera  = array( 'name' => 'Rappelera', 'slug' => 'Rappelera' );
+		My_Category_Class::g()->create( $traite );
+		My_Category_Class::g()->create( $transferer );
+		My_Category_Class::g()->create( $a_rappeler );
+		My_Category_Class::g()->create( $rappelera );
+		wp_send_json_success();
 	}
 
 }
-
-
-
-
 new Handle_call_Action();

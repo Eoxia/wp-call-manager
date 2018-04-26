@@ -21,3 +21,9 @@ if ( ! defined( 'ABSPATH' ) ) {
 	>
 	<i class="#"></i> <span>Call Manager modal</span>
 </div>
+
+<div class="wpeo-button button-yellow action-input"
+	data-action="ajax_hook1"
+	>
+	<i class="#"></i> <span>Cree Category</span>
+</div>
