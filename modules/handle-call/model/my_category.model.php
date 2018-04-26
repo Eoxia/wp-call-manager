@@ -15,10 +15,13 @@ if ( ! defined( 'ABSPATH' ) ) {
 	exit;
 }
 
-/**
-* Handle call-model
-*/
+	/**
+	 * Handle call-model.
+	 */
 class My_Category_Model extends \eoxia\Term_Model  {
+	/**
+	 * Bof !
+	 */
 	public function __construct( $object, $req_method = null ) {
 
 

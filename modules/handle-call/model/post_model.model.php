@@ -19,6 +19,9 @@ if ( ! defined( 'ABSPATH' ) ) {
 * Handle call-model
 */
 class Post_Model extends \eoxia\Post_Model  {
+	/**
+	 * Model Post_Model .
+	 */
 	public function __construct( $object, $req_method = null ) {
 		$this->schema['taxonomy'] = array(
 			'type'      => 'array',
@@ -28,13 +31,9 @@ class Post_Model extends \eoxia\Post_Model  {
 					'meta_type'  => 'multiple',
 					'array_type' => 'integer',
 					'type'       => 'array',
-					//ici --
 				),
 			),
 		);
-
-
-
 		parent::__construct( $object, $req_method );
 	}
 }

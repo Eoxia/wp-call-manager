@@ -123,8 +123,8 @@ class Handle_Call_Action {
 	 */
 	public function cree_posts() {
 		$cats = My_Category_Class::g()->get();
-		foreach( $cats as $cat ) {
-			$args  = array( 'title' => $cat->data['name'] );
+		foreach ( $cats as $cat ) {
+			$args = array( 'title' => $cat->data['name'] );
 			$post = Post_Model_Class::g()->create( $args );
 			//echo "<pre>"; print_r($cat->data['id']); echo "</pre>";
 			//echo "<pre>"; print_r($cat->data['name']); echo "</pre>";
@@ -132,7 +132,7 @@ class Handle_Call_Action {
 			$post->data['taxonomy'][ My_Category_Class::g()->get_type() ][] = $cat->data['id'];
 			Post_Model_Class::g()->update( $post->data );
 		}
-		echo "<pre>"; print_r($cats); echo "</pre>";exit;
+
 		wp_send_json_success();
 	}
 

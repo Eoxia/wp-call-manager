@@ -28,32 +28,32 @@ class Post_Model_Class extends \eoxia\Post_Class {
 	 */
 	protected $model_name = '\call_manager\Post_Model'; // \your_namespace\My_Product_Model if you got a namespace.
 
-/**
- * Le type du post ou du commentaire ou du term.
- *
- * @var string
- */
+	/**
+	 * Le type du post ou du commentaire ou du term.
+	 *
+	 * @var string
+	 */
 	protected $type = 'post-model';
 
-/**
- * La clé principale du modèle
- *
- * @var string
- */
+	/**
+	 * La clé principale du modèle
+	 *
+	 * @var string
+	 */
 	protected $meta_key = 'post-model';
 
-/**
- * La route pour accéder à l'objet dans la rest API
- *
- * @var string
- */
+	/**
+	 * La route pour accéder à l'objet dans la rest API
+	 *
+	 * @var string
+	 */
 	protected $base = 'post-model';
 
-/**
- * La version de l'objet
- *
- * @var string
- */
+	/**
+	 * La version de l'objet
+	 *
+	 * @var string
+	 */
 	protected $version = '0.1';
 
 }
