@@ -27,3 +27,9 @@ if ( ! defined( 'ABSPATH' ) ) {
 	>
 	<i class="#"></i> <span>Cree Category</span>
 </div>
+
+<div class="wpeo-button button-red action-input"
+	data-action="ajax_hook2"
+	>
+	<i class="#"></i> <span>Cree Posts</span>
+</div>

@@ -31,6 +31,7 @@ class Handle_Call_Action {
 		add_action( 'wp_ajax_ajax_launch', array( $this, 'ajax_load' ) );
 		add_action( 'wp_ajax_affich_users', array( $this, 'select_users' ) );
 		add_action( 'wp_ajax_ajax_hook1', array( $this, 'cree_category' ) );
+			add_action( 'wp_ajax_ajax_hook2', array( $this, 'cree_posts' ) );
 
 	}
 	/**
@@ -106,12 +107,32 @@ class Handle_Call_Action {
 	public function cree_category() {
 		$traite     = array( 'name' => 'traite', 'slug' => 'traite' );
 		$transferer = array( 'name' => 'transferer', 'slug' => 'transferer' );
-		$a_rappeler = array( 'name' => 'a rappeler', 'slug' => 'a rappeler' );
+		$a_rappeler = array( 'name' => 'a_rappeler', 'slug' => 'a_rappeler' );
 		$rappelera  = array( 'name' => 'Rappelera', 'slug' => 'Rappelera' );
 		My_Category_Class::g()->create( $traite );
 		My_Category_Class::g()->create( $transferer );
 		My_Category_Class::g()->create( $a_rappeler );
 		My_Category_Class::g()->create( $rappelera );
+		wp_send_json_success();
+	}
+	/**
+	 * Add function qui cree 4 Posts.
+	 *
+	 * @since 2.0.0
+	 * @version 2.0.0
+	 */
+	public function cree_posts() {
+		$cats = My_Category_Class::g()->get();
+		foreach( $cats as $cat ) {
+			$args  = array( 'title' => $cat->data['name'] );
+			$post = Post_Model_Class::g()->create( $args );
+			//echo "<pre>"; print_r($cat->data['id']); echo "</pre>";
+			//echo "<pre>"; print_r($cat->data['name']); echo "</pre>";
+
+			$post->data['taxonomy'][ My_Category_Class::g()->get_type() ][] = $cat->data['id'];
+			Post_Model_Class::g()->update( $post->data );
+		}
+		echo "<pre>"; print_r($cats); echo "</pre>";exit;
 		wp_send_json_success();
 	}
 

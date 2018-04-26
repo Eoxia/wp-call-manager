@@ -8,6 +8,12 @@ Backlog :
 
 
 --faire un bouton qui cree 4 post
+
+
+ici :
+cree les post au moment ou je cree les Category.
+
+l'association ce fais toujours par l id :
 -et faire pour chaque Post une fonction qui les lie a une category .
 
 
