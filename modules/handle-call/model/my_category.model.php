@@ -20,13 +20,9 @@ if ( ! defined( 'ABSPATH' ) ) {
 	 */
 class My_Category_Model extends \eoxia\Term_Model  {
 	/**
-	 * Bof !
+	 * J appel le constructeur parent .
 	 */
 	public function __construct( $object, $req_method = null ) {
-
-
-
-
 		parent::__construct( $object, $req_method );
 	}
 }
