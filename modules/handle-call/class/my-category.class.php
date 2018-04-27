@@ -14,8 +14,6 @@ namespace call_manager;
 if ( ! defined( 'ABSPATH' ) ) {
 	exit;
 }
-
-
 /**
  * Class of my_product controlleur.
  */
@@ -28,32 +26,32 @@ class My_Category_Class extends \eoxia\Term_Class {
 	 */
 	protected $model_name = '\call_manager\My_Category_Model'; // \your_namespace\My_Product_Model if you got a namespace.
 
-/**
- * Le type du post ou du commentaire ou du term.
- *
- * @var string
- */
+	/**
+	 * Le type du post ou du commentaire ou du term.
+	 *
+	 * @var string
+	 */
 	protected $type = 'my-category';
 
-/**
- * La clé principale du modèle
- *
- * @var string
- */
+	/**
+	 * La clé principale du modèle
+	 *
+	 * @var string
+	 */
 	protected $meta_key = 'my-category';
 
-/**
- * La route pour accéder à l'objet dans la rest API
- *
- * @var string
- */
+	/**
+	 * La route pour accéder à l'objet dans la rest API
+	 *
+	 * @var string
+	 */
 	protected $base = 'my-category';
 
-/**
- * La version de l'objet
- *
- * @var string
- */
+	/**
+	 * La version de l'objet
+	 *
+	 * @var string
+	 */
 	protected $version = '0.1';
 
 }

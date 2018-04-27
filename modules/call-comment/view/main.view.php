@@ -14,6 +14,5 @@ namespace starter;
 if ( ! defined( 'ABSPATH' ) ) {
 	exit;
 } ?>
-
 <div class="wrap wpeo-wrap">
 </div>

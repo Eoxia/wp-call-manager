@@ -14,7 +14,6 @@ namespace handle_call;
 if ( ! defined( 'ABSPATH' ) ) {
 	exit;
 } ?>
-
 <p><strong>Liste des personnes Connectée(s)</strong></p>
 
 <div class="#" data-parent="modal-container" value="affich_users">img.Avatar</div>

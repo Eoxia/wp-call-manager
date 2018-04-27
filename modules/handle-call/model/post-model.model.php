@@ -21,9 +21,9 @@ class Post_Model extends \eoxia\Post_Model {
 	/**
 	 * Model Post_Model .
 	 *
-	 * @param string $object sqdsqdsq.
+	 * @param string $object !.
 	 *
-	 * @param string $req_method sqdsqdsq.
+	 * @param string $req_method !.
 	 */
 	public function __construct( $object, $req_method = null ) {
 		$this->schema['taxonomy'] = array(

@@ -19,7 +19,6 @@ if ( ! defined( 'ABSPATH' ) ) {
  * Action of "Handle_call" module.
  */
 class Handle_Call_Action {
-
 	/**
 	 * Constructor
 	 *
@@ -28,12 +27,11 @@ class Handle_Call_Action {
 	 */
 	public function __construct() {
 		add_action( 'admin_bar_menu', array( $this, 'button_toolbar' ) );
-		add_action( 'wp_ajax_ajax_launch', array( $this, 'ajax_load' ) );
 		add_action( 'wp_ajax_affich_users', array( $this, 'select_users' ) );
 		add_action( 'wp_ajax_ajax_hook1', array( $this, 'cree_category' ) );
 			add_action( 'wp_ajax_ajax_hook2', array( $this, 'cree_posts' ) );
+			add_action( 'wp_ajax_ajax_launch', array( $this, 'ajax_load' ) );
 	}
-
 	/**
 	 * Fonction qui ajoute un boutton dans la toolbar de wp !
 	 *
@@ -52,33 +50,9 @@ class Handle_Call_Action {
 		);
 		$wp_admin_bar->add_node( $args );
 	}
-	/**
-	 * Add function ajax.
-	 *
-	 * @since 2.0.0
-	 * @version 2.0.0
-	 */
-	public function ajax_load() {
-		$users = \eoxia\User_Class::g()->get( array(
-			'role' => 'administrator',
-		) );
 
-		ob_start();
-		\eoxia\View_Util::exec( 'starter', 'handle_call', 'modal', array(
-			'users' => $users,
-		) );
-		$modal_view = ob_get_clean();
-		ob_start();
-		\eoxia\View_Util::exec( 'starter', 'handle_call', 'modal-button' );
-		$modal_button_view = ob_get_clean();
-
-		wp_send_json_success( array(
-			'view'         => $modal_view,
-			'buttons_view' => $modal_button_view,
-		) );
-	}
 		/**
-		 * Add function SELECT users.
+		 * Add function envoyer view users.
 		 *
 		 * @since 2.0.0
 		 * @version 2.0.0
@@ -134,7 +108,34 @@ class Handle_Call_Action {
 			$post->data['taxonomy'][ My_Category_Class::g()->get_type() ][] = $cat->data['id'];
 			Post_Model_Class::g()->update( $post->data );
 		}
-		wp_send_json_success();
+				wp_send_json_success();
+	}
+	/**
+	 * Add function qui charge les vues .
+	 * Si l'arret est vide je recup tous .
+	 *
+	 * @since 2.0.0
+	 * @version 2.0.0
+	 */
+	public function ajax_load() {
+		$users = \eoxia\User_Class::g()->get( array(
+			'role' => 'administrator',
+		) );
+		$posts = Post_Model_Class::g()->get( array() );
+		ob_start();
+		\eoxia\View_Util::exec( 'starter', 'handle_call', 'modal', array(
+			'users' => $users,
+			'posts' => $posts,
+		) );
+		$modal_view = ob_get_clean();
+		ob_start();
+		\eoxia\View_Util::exec( 'starter', 'handle_call', 'modal-button' );
+		$modal_button_view = ob_get_clean();
+
+		wp_send_json_success( array(
+			'view'         => $modal_view,
+			'buttons_view' => $modal_button_view,
+		) );
 	}
 }
 new Handle_call_Action();
