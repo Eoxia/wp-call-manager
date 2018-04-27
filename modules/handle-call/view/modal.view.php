@@ -14,16 +14,13 @@ namespace handle_call;
 if ( ! defined( 'ABSPATH' ) ) {
 	exit;
 } ?>
-
-
-
 <div class="wpeo">
 	<form  class="wpeo-form">
 <input type="hidden" name="action" value="send_form">
-
 <?php
+wp_nonce_field( 'send_form' );
 foreach ( $users as $user ) :
-		echo "<a href='#'>" . esc_html( $user->data['displayname'] ). "</a>";
+		echo "<a href='#'>" . esc_html( $user->data['displayname'] ) . '</a>';
 	endforeach;
 ?>
 </br>
@@ -32,14 +29,12 @@ foreach ( $users as $user ) :
 <hr>
 <?php
 foreach ( $posts as $post ) :
-
 	echo '<div class="form-field">';
 		echo '<input type="radio" class="form-field" name="le_status" checked="true" value="' . esc_html( $post->data['id'] ) . '">';
-    echo "<label for='radio1'>" . esc_html( $post->data['title'] ) . "</label></div>";
-
+		echo "<label for='radio1'>" . esc_html( $post->data['title'] ) . '</label></div>';
 	endforeach;
-		?>
 ?>
+
 
 
 		<div class="wpeo-autocomplete">

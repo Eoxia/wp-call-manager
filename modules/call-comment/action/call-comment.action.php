@@ -33,14 +33,15 @@ class Call_Comment_Action {
 	 * Fonction insert commentaire.
 	 */
 	public function insert_comment() {
+		check_ajax_referer( 'send_form' );
+		$pcomment = substr( $_POST['commentaire'], 0, 155 );
+		$pstatus  = (int) $_POST['le_status'];
 		if ( '' === $_POST['commentaire'] ) {
 			exit;
 		} else {
-			$pstatus  = (int) $_POST['le_status'];
 			$args_com = array(
 				'post_id' => $pstatus,
-
-				'content' => $_POST['commentaire'],
+				'content' => $pcomment,
 			);
 					Call_Comment_Class::g()->create( $args_com );
 					wp_send_json_success();

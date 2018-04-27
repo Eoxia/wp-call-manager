@@ -16,8 +16,9 @@ l'association ce fais toujours par l id :
 chaque input doit avoir la value qui est = a  l id du post
 
 
+
+---si le comment à un id dans l entrer post_id dans le json c est great !
+
 **
 Je suis ICI:
 **
-
----si le comment à un id dans l entrer post_id dans le json c est great !
