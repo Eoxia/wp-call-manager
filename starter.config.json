@@ -3,7 +3,6 @@
 	"slug": "starter",
 	"modules": [
 		"core/core.config.json",
-		"modules/hello-world/hello_world.config.json",
 		"modules/handle-call/handle_call.config.json",
 		"modules/call-comment/call-comment.config.json"
 	],

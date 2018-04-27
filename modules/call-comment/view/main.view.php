@@ -9,7 +9,7 @@
  * @package {{plugin_name | underscore}}
  */
 
-namespace starter;
+namespace call_manager;
 
 if ( ! defined( 'ABSPATH' ) ) {
 	exit;

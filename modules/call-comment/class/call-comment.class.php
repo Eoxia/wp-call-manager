@@ -9,7 +9,7 @@
  * @package starter
  */
 
-namespace starter;
+namespace call_manager;
 
 if ( ! defined( 'ABSPATH' ) ) {
 	exit;
@@ -25,28 +25,35 @@ class Call_Comment_Class extends \eoxia\Comment_Class {
 	 *
 	 * @var string
 	 */
-	protected $model_name = '\starter\Call_Comment_Model';
+	protected $model_name = '\call_manager\Call_Comment_Model';
 
 	/**
 	 * Post type
 	 *
 	 * @var string
 	 */
-	protected $type = 'call_comment';
+	protected $type = 'call-comment';
 
 	/**
 	 * La clé principale du modèle
 	 *
 	 * @var string
 	 */
-	protected $meta_key = 'call_comment';
+	protected $meta_key = 'call-comment';
 
 	/**
 	 * La route pour accéder à l'objet dans la rest API
 	 *
 	 * @var string
 	 */
-	protected $base = 'call_comment';
-}
+	protected $base = 'call-comment';
 
+	/**
+	 * La route pour accéder à l'objet dans la rest API
+	 *
+	 * @var string
+	 */
+	protected $version = '0.1.0';
+
+}
 Call_Comment_Class::g();

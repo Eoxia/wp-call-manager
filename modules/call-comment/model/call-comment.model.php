@@ -9,7 +9,7 @@
  * @package starter
  */
 
-namespace starter;
+namespace call_manager;
 
 if ( ! defined( 'ABSPATH' ) ) {
 	exit;
@@ -26,4 +26,5 @@ class Call_Comment_Model extends \eoxia\Comment_Model {
 	 *
 	 * @param string $req_method sdqsdsqd.
 	 */
+
 }

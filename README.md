@@ -12,6 +12,12 @@ l'association ce fais toujours par l id :
 --au moment de l insert comment via le btn validé  lier le comment au Post qui correspond a la category selected .
 
 --afficher les posts dans la modal.view
+--relier par le "post_id"
+chaque input doit avoir la value qui est = a  l id du post
+
+
 **
- Je suis ICI:
+Je suis ICI:
 **
+
+---si le comment à un id dans l entrer post_id dans le json c est great !

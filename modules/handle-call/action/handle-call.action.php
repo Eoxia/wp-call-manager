@@ -14,7 +14,6 @@ namespace call_manager;
 if ( ! defined( 'ABSPATH' ) ) {
 	exit;
 }
-
 /**
  * Action of "Handle_call" module.
  */
@@ -50,7 +49,6 @@ class Handle_Call_Action {
 		);
 		$wp_admin_bar->add_node( $args );
 	}
-
 		/**
 		 * Add function envoyer view users.
 		 *

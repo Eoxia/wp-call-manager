@@ -18,7 +18,7 @@ if ( ! defined( 'ABSPATH' ) ) {
 
 
 <div class="wpeo">
-	<form class="wpeo-form">
+	<form  class="wpeo-form">
 <input type="hidden" name="action" value="send_form">
 
 <?php
@@ -27,20 +27,18 @@ foreach ( $users as $user ) :
 	endforeach;
 ?>
 </br>
-<div class="wpeo-grid grid-4">
+<div class="wpeo-grid">
 <span class="form-label"><strong>Status des Appels</strong></span>
+<hr>
 <?php
 foreach ( $posts as $post ) :
-	?>
-<label class="form-field-container">
 
-	<div class="form-field-inline">
-		<input type="radio" id="radio1" class="form-field" name="type" checked value="traite">
-		<?php echo "<label for='radio1'>" . esc_html( $post->data['title'] ) . "</label>"; ?>
-	</div>
-	</label>
-	<?php
+	echo '<div class="form-field">';
+		echo '<input type="radio" class="form-field" name="le_status" checked="true" value="' . esc_html( $post->data['id'] ) . '">';
+    echo "<label for='radio1'>" . esc_html( $post->data['title'] ) . "</label></div>";
+
 	endforeach;
+		?>
 ?>
 
 

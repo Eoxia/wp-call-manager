@@ -9,7 +9,7 @@
  * @package starter
  */
 
-namespace starter;
+namespace call_manager;
 
 if ( ! defined( 'ABSPATH' ) ) {
 	exit;
@@ -33,13 +33,18 @@ class Call_Comment_Action {
 	 * Fonction insert commentaire.
 	 */
 	public function insert_comment() {
+		if ( '' === $_POST['commentaire'] ) {
+			exit;
+		} else {
+			$pstatus  = (int) $_POST['le_status'];
+			$args_com = array(
+				'post_id' => $pstatus,
 
-		$args      = array(
-			'content' => $_POST['commentaire'],
-		);
-
-		$c_comment = Call_Comment_Class::g()->create( $args );
-		wp_send_json_success();
+				'content' => $_POST['commentaire'],
+			);
+					Call_Comment_Class::g()->create( $args_com );
+					wp_send_json_success();
+		}
 	}
 }
 

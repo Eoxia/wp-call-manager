@@ -21,14 +21,14 @@ if ( ! defined( 'ABSPATH' ) ) {
 	<i class="#"></i> <span>Call Manager modal</span>
 </div>
 
-<div class="wpeo-button button-yellow action-input"
-	data-action="ajax_hook1"
+<!-- <div class="wpeo-button button-yellow action-input"
+	data-action="#"
 	>
 	<i class="#"></i> <span>Cree Category</span>
 </div>
 
 <div class="wpeo-button button-red action-input"
-	data-action="ajax_hook2"
+	data-action="#"
 	>
 	<i class="#"></i> <span>Cree Posts et lie aux cates</span>
-</div>
+</div> -->
