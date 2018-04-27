@@ -31,5 +31,5 @@ if ( ! defined( 'ABSPATH' ) ) {
 <div class="wpeo-button button-red action-input"
 	data-action="ajax_hook2"
 	>
-	<i class="#"></i> <span>Cree Posts</span>
+	<i class="#"></i> <span>Cree Posts et lie aux cates</span>
 </div>

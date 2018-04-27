@@ -14,13 +14,16 @@ namespace call_manager;
 if ( ! defined( 'ABSPATH' ) ) {
 	exit;
 }
-
 /**
-* Handle call-model
-*/
-class Post_Model extends \eoxia\Post_Model  {
+ * Handle call-model
+ */
+class Post_Model extends \eoxia\Post_Model {
 	/**
 	 * Model Post_Model .
+	 *
+	 * @param string $object sqdsqdsq.
+	 *
+	 * @param string $req_method sqdsqdsq.
 	 */
 	public function __construct( $object, $req_method = null ) {
 		$this->schema['taxonomy'] = array(

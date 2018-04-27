@@ -16,8 +16,8 @@ if ( ! defined( 'ABSPATH' ) ) {
 }
 
 /**
-* Handle call-comment
-*/
+ * Handle call-comment
+ */
 class Call_Comment_Class extends \eoxia\Comment_Class {
 
 	/**

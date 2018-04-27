@@ -1,6 +1,6 @@
 <?php
 /**
- * Action of "Hello_World" module.
+ * Module Handele-Call.
  *
  * @author You <you@mail>
  * @since 2.0.0
@@ -16,7 +16,7 @@ if ( ! defined( 'ABSPATH' ) ) {
 }
 
 /**
- * Action of "Hello_World" module.
+ * Action of "Handle_call" module.
  */
 class Handle_Call_Action {
 
@@ -32,11 +32,10 @@ class Handle_Call_Action {
 		add_action( 'wp_ajax_affich_users', array( $this, 'select_users' ) );
 		add_action( 'wp_ajax_ajax_hook1', array( $this, 'cree_category' ) );
 			add_action( 'wp_ajax_ajax_hook2', array( $this, 'cree_posts' ) );
-
 	}
 
 	/**
-	 * [sdqsdsqdqd.
+	 * Fonction qui ajoute un boutton dans la toolbar de wp !
 	 *
 	 * @method button_toolbar   .
 	 *
@@ -78,13 +77,6 @@ class Handle_Call_Action {
 			'buttons_view' => $modal_button_view,
 		) );
 	}
-	/**
-	 * Add insert request for the form.
-	 *
-	 * @since 2.0.0
-	 * @version 2.0.0
-	 */
-
 		/**
 		 * Add function SELECT users.
 		 *
@@ -129,7 +121,7 @@ class Handle_Call_Action {
 		wp_send_json_success();
 	}
 	/**
-	 * Add function qui cree 4 Posts.
+	 * Add function qui cree 4 Posts et les lie au category.
 	 *
 	 * @since 2.0.0
 	 * @version 2.0.0
@@ -142,9 +134,7 @@ class Handle_Call_Action {
 			$post->data['taxonomy'][ My_Category_Class::g()->get_type() ][] = $cat->data['id'];
 			Post_Model_Class::g()->update( $post->data );
 		}
-
 		wp_send_json_success();
 	}
-
 }
 new Handle_call_Action();

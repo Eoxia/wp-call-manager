@@ -16,14 +16,14 @@ if ( ! defined( 'ABSPATH' ) ) {
 }
 
 /**
-* Handle call-comment
-*/
+ * Handle Comment_Model
+ */
 class Call_Comment_Model extends \eoxia\Comment_Model {
-	public function __construct( $object, $req_method = null ) {
-
-
-
-
-		parent::__construct( $object, $req_method );
-	}
+	/**
+	 * Le nom du modèle
+	 *
+	 * @param string $object sds.
+	 *
+	 * @param string $req_method sdqsdsqd.
+	 */
 }

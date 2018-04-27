@@ -9,7 +9,7 @@
  * @package {{plugin_name | underscore}}
  */
 
-namespace {{plugin_name | underscore | lowercase}};
+namespace starter;
 
 if ( ! defined( 'ABSPATH' ) ) {
 	exit;
