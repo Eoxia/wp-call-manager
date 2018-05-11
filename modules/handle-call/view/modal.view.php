@@ -57,7 +57,7 @@ foreach ( $four_categorys as $keys => $four_category ) :
 
 <button class="ajou_client">Ajouter clients</button>
 
-<div id="erf" class="wpeo-grid grid-4" style="display:none;">
+<div id="erf" class="wpeo-grid grid-4">
 
 	<div class="form-element">
 		<span class="form-label">Ajouter un contact</span>

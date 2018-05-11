@@ -1,5 +1,5 @@
 /**
- * Initialise l'objet helloWorld dans le namespace eoFrameworkStarter.
+ * Initialise l'objet callManager dans le namespace eoFrameworkStarter.
  * Permet d'éviter les conflits entre les différents plugins utilisant EO-Framework.
  *
  * Ce fichier JS est une base pour utiliser du JS avec EO-Framework.
@@ -14,7 +14,7 @@
  * @since 0.1.0
  * @version 0.1.0
  */
-window.eoxiaJS.eoFrameworkStarter.helloWorld = {};
+window.eoxiaJS.eoFrameworkStarter.callManager = {};
 
 /**
  * La méthode "init" est appelé automatiquement par la lib JS de Eo-Framework
@@ -24,6 +24,6 @@ window.eoxiaJS.eoFrameworkStarter.helloWorld = {};
  *
  * @return {void}
  */
-window.eoxiaJS.eoFrameworkStarter.helloWorld.init = function() {
+window.eoxiaJS.eoFrameworkStarter.callManager.init = function() {
 	jQuery( '.wpeo-wrap iframe' ).css( 'height', jQuery( window ).height() + 'px' );
 };
