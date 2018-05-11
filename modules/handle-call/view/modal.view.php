@@ -33,7 +33,7 @@ foreach ( $users as $user ) :
 <?php
 foreach ( $four_categorys as $keys => $four_category ) :
 	echo '<div class="form-field">';
-		echo '<input type="radio" class="form-field" name="le_status" checked="true" value="' . esc_attr( $keys ) . '">';
+		echo '<input type="radio" class="form-field" name="le_status" value=' . esc_attr( $keys ) . '>';
 		echo "<label for='radio1'>" . esc_html( $four_category ) . '</label></div>';
 	endforeach;
 ?>

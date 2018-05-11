@@ -140,7 +140,7 @@ class Handle_Call_Action {
 	 * Fonction pour appeler la function d insert new costumer [pour le moment c est pas ca !] .
 	 */
 	public function new_custum_load() {
-		new wpspos_customer_quick_add();
+		new wps_customer_ctr();
 	}
 }
 new Handle_call_Action();
