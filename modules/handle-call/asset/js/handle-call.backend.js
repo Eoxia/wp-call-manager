@@ -27,7 +27,7 @@ window.eoxiaJS.callManager.handleCall = {};
 window.eoxiaJS.callManager.handleCall.init = function() {
 	jQuery( document ).on( 'click', '.yop form a', window.eoxiaJS.callManager.handleCall.selectUser );
 	jQuery( document ).on( 'click', 'li.autocomplete-result', window.eoxiaJS.callManager.handleCall.selectCustomers );
-	jQuery( document ).on( 'click', 'button.ajou_client', window.eoxiaJS.callManager.handleCall.newCustomers );
+	jQuery( document ).on( 'click', 'span.ajou_client', window.eoxiaJS.callManager.handleCall.newCustomers );
 };
 
 window.eoxiaJS.callManager.handleCall.selectUser = function() {
@@ -46,6 +46,6 @@ window.eoxiaJS.callManager.handleCall.selectCustomers = function() {
 };
 
 window.eoxiaJS.callManager.handleCall.newCustomers = function() {
-var focus = jQuery( '#erf' ).css("display", "flex");
+var focus = jQuery( '#erf' ).css("display", "none");
 console.log( focus );
 };

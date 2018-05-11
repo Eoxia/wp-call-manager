@@ -39,7 +39,7 @@ class Call_Comment_Action {
 		$id_cust      = (int) $_POST['id_cust'];
 		$id_admi      = (int) $_POST['id_admin'];
 		$post_status  = (string) $_POST['le_status'];
-		$post_content = (string) $_POST['commentaires'];
+		$post_content = (string) $_POST['commentaire'];
 
 		if ( empty( $id_admi ) && empty( $id_cust ) ) {
 					wp_send_json_error();

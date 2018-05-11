@@ -14,10 +14,10 @@ namespace handle_call;
 if ( ! defined( 'ABSPATH' ) ) {
 	exit;
 } ?>
-<div class="wpeo-button button-main wpeo-modal-event"
-	data-action="ajax_launch"
-	data-title="Call Manager"
-	data-class="yop"
+<div class="wpeo-button button-red wpeo-modal-event"
+	data-action="ajax_launch2"
+	data-title="List des Appels"
+	data-class=""
 	>
-	<i class="#"></i> <span>Call Manager</span>
+	<i class="#"></i> <span>List des appels</span>
 </div>

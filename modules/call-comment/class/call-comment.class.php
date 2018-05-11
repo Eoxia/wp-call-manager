@@ -33,6 +33,12 @@ class Call_Comment_Class extends \eoxia\Comment_Class {
 	 * @var string
 	 */
 	protected $type = 'call-comment';
+	/**
+	 * Post data
+	 *
+	 * @var string
+	 */
+	protected $data = 'call-comment';
 
 	/**
 	 * La clé principale du modèle

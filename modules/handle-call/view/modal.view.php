@@ -16,12 +16,12 @@ if ( ! defined( 'ABSPATH' ) ) {
 } ?>
 <div class="wpeo">
 	<form  class="wpeo-form">
+<h3 class="form-label"><strong>Les Admins</strong></h3>
 <input type="hidden" name="action" value="send_form">
-
 <?php
 wp_nonce_field( 'send_form' );
 foreach ( $users as $user ) :
-		echo "<a href='#' data-id='" . esc_html( $user->data['id'] ) . "'>" . esc_html( $user->data['displayname'] ) . '   /    </a>';
+		echo "<span class='wpeo-button button-main yop active' data-id='" . esc_html( $user->data['id'] ) . "'>" . esc_html( $user->data['displayname'] ) . '   </span>';
 	endforeach;
 ?>
 <input id='id_cust' type='hidden' name="id_cust" value="">
@@ -49,18 +49,19 @@ foreach ( $four_categorys as $keys => $four_category ) :
 					<div class="autocomplete-result-container">
 						<span class="autocomplete-result-title">Titre</span>
 						<span class="autocomplete-result-subtitle">Sous-titre</span>
+						<span class="wpeo-button button-main ajou_client">Nouveau clients WP_shop</span>
 					</div>
 				</li>
 			</ul>
 		</div>
 <hr>
 
-<button class="ajou_client">Ajouter clients</button>
 
-<div id="erf" class="wpeo-grid grid-4">
 
+<div id="erf" class="wpeo-grid grid-4" style="display:none;">
+<form>
 	<div class="form-element">
-		<span class="form-label">Ajouter un contact</span>
+		<span class="form-label">Ajouter un contact<p class="wpeo-button button-red"> in-progress</p></span>
 		<label class="form-field-container">
 			<span class="form-field-icon-prev"><i class="fas fa-building"></i></span>
 			<input type="text" class="form-field" placeholder="Société" />
@@ -84,9 +85,10 @@ foreach ( $four_categorys as $keys => $four_category ) :
 			<input type="text" class="form-field" placeholder="email" />
 		</label>
 	</div>
+	<span data-action="ajax_cree_cust" class="wpeo-button button-main">Crée</span>
 </div>
+</form>
 
-	</div>
 		<div class="form-element">
 <span class="form-label">Commentaire</span>
 <label class="form-field-container">

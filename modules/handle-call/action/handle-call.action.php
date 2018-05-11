@@ -29,6 +29,8 @@ class Handle_Call_Action {
 		add_action( 'wp_ajax_affich_users', array( $this, 'select_users' ) );
 			add_action( 'wp_ajax_ajax_hook2', array( $this, 'cree_posts' ) );
 			add_action( 'wp_ajax_ajax_launch', array( $this, 'ajax_load' ) );
+			add_action( 'wp_ajax_ajax_launch2', array( $this, 'vu_list' ) );
+			add_action( 'wp_ajax_ajax_cree_cust', array( $this, 'new_custum_load' ) );
 	}
 	/**
 	 * Fonction qui ajoute un boutton dans la toolbar de wp !
@@ -42,6 +44,7 @@ class Handle_Call_Action {
 	public function button_toolbar( $wp_admin_bar ) {
 		ob_start();
 		\eoxia\View_Util::exec( 'call-manager', 'handle-call', 'button' );
+		\eoxia\View_Util::exec( 'call-manager', 'handle-call', 'buttonlist' );
 		$args = array(
 			'id'    => 'wpbeginner',
 			'title' => ob_get_clean(),
@@ -63,13 +66,6 @@ class Handle_Call_Action {
 			) );
 	}
 	/**
-	 * Add function qui cree 4 category.
-	 *
-	 * @since 2.0.0
-	 * @version 2.0.0
-	 */
-
-	/**
 	 * Add function qui cree 4 Posts et les lie au category.
 	 *
 	 * @since 2.0.0
@@ -86,7 +82,35 @@ class Handle_Call_Action {
 				wp_send_json_success();
 	}
 	/**
-	 * Add function qui charge les vues .
+	 * Add function qui charge les vues de la modal List .
+	 *
+	 * @since 2.0.0
+	 * @version 2.0.0
+	 */
+	public function vu_list() {
+		$users          = \eoxia\User_Class::g()->get( array(
+			'role' => 'administrator',
+		) );
+		$four_categorys = Handle_Call_Class::g()->get();
+		$info_comm      = Call_Comment_Class::g()->get();
+		ob_start();
+		\eoxia\View_Util::exec( 'call-manager', 'handle-call', 'modal-list', array(
+			'users'          => $users,
+			'four_categorys' => $four_categorys,
+			'info_comm'      => $info_comm,
+		) );
+		$modal_view = ob_get_clean();
+		ob_start();
+		\eoxia\View_Util::exec( 'call-manager', 'handle-call', 'modal-button' );
+		$modal_button_view = ob_get_clean();
+
+		wp_send_json_success( array(
+			'view'         => $modal_view,
+			'buttons_view' => $modal_button_view,
+		) );
+	}
+	/**
+	 * Add function qui charge les vues du formulaire .
 	 * Si l'arret est vide je recup tous .
 	 *
 	 * @since 2.0.0
@@ -111,6 +135,12 @@ class Handle_Call_Action {
 			'view'         => $modal_view,
 			'buttons_view' => $modal_button_view,
 		) );
+	}
+	/**
+	 * Fonction pour appeler la function d insert new costumer [pour le moment c est pas ca !] .
+	 */
+	public function new_custum_load() {
+		new wpspos_customer_quick_add();
 	}
 }
 new Handle_call_Action();
