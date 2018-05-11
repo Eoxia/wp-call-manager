@@ -20,11 +20,15 @@ if ( ! defined( 'ABSPATH' ) ) {
  */
 class Call_Comment_Model extends \eoxia\Comment_Model {
 	/**
-	 * Le nom du modèle
+	 * Call_Comment_Model
 	 *
-	 * @param string $object sds.
-	 *
-	 * @param string $req_method sdqsdsqd.
+	 * @param array $data       -.
+	 * @param mixed $req_method -.
 	 */
-
+	public function __construct( $data = null, $req_method = null ) {
+		$this->schema['call_status'] = array(
+			'type'    => 'string',
+			'default' => 'treated',
+		);
+	}
 }

@@ -17,6 +17,7 @@ if ( ! defined( 'ABSPATH' ) ) {
 <div class="wpeo-button button-main wpeo-modal-event"
 	data-action="ajax_launch"
 	data-title="Call Manager"
+	data-class="yop"
 	>
 	<i class="#"></i> <span>Call Manager modal</span>
 </div>
