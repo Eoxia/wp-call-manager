@@ -27,7 +27,7 @@ class Call_Comment_Action {
 	 * @version 0.1.0
 	 */
 	public function __construct() {
-		add_action( 'wp_ajax_send_form', array( $this, 'insert_comment' ) );
+		add_action( 'wp_ajax_cree_cust', array( $this, 'insert_comment' ) );
 		add_action( 'wp_ajax_search_admins', array( $this, 'ajax_search_admis' ) );
 	}
 	/**
@@ -40,18 +40,27 @@ class Call_Comment_Action {
 		$id_admi      = (int) $_POST['id_admin'];
 		$post_status  = (string) $_POST['le_status'];
 		$post_content = (string) $_POST['commentaire'];
+		$username     = sanitize_text_field( $_POST['username'] );
+		$lastname     = sanitize_text_field( $_POST['lastname'] );
+		$societe      = sanitize_text_field( $_POST['societe'] );
+		$tel          = sanitize_text_field( $_POST['phone'] );
 
-		if ( empty( $id_admi ) && empty( $id_cust ) ) {
-					wp_send_json_error();
+		if ( empty( $id_admi ) ) {
+			wp_send_json_error();
 		}
-			$args_com = array(
-				'post_id'      => $id_cust,
-				'author_id'    => $id_admi,
-				'post_status'  => $post_status,
-				'post_content' => $post_content,
-			);
+		if ( empty( $id_cust ) ) {
+			$arg     = Handle_Call_Class::g()->create_customer( $username, $lastname, $societe, $tel );
+			$id_cust = (int) $arg;
+		}
+				$args_com = array(
+					'post_id'   => $id_cust,
+					'author_id' => $id_admi,
+					'status'    => $post_status,
+					'content'   => $post_content,
+				);
 					Call_Comment_Class::g()->create( $args_com );
-					wp_send_json_success();
+					wp_send_json_success( $args_com );
+
 	}
 	/**
 	 * Fonction auto complete.

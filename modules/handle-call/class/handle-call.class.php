@@ -19,17 +19,6 @@ if ( ! defined( 'ABSPATH' ) ) {
  */
 class Handle_Call_Class extends \eoxia\Singleton_Util {
 	/**
-	 * Tableau du status .
-	 *
-	 * @var string $four_category.
-	 */
-	// protected $array = array(
-	// 		'traité',
-	// 		'rappelera',
-	// 		'a-rappeler',
-	// 		'transferer',
-	// 	);
-	/**
 	 * Le nom du modèle
 	 *
 	 * @var string
@@ -80,6 +69,39 @@ class Handle_Call_Class extends \eoxia\Singleton_Util {
 			'slug4' => __( 'transferer' ),
 		);
 		return $four_categorys;
+	}
+	/**
+	 * Fonction pour appeler la function d insert new costumer [pour le moment c est pas ca !] .
+	 */
+	public function create_customer( $username, $lastname, $societe, $tel ) {
+		global $wpdb;
+		$random_password = wp_generate_password();
+		if ( ! empty( $username ) ) {
+
+			$cree_user = wp_create_user( $username, $random_password, $lastname );
+
+			if ( is_wp_error( $cree_user ) ) {
+				ob_start();
+				$ar = $cree_user->get_error_message();
+				\eoxia\View_Util::exec( 'call-manager', 'handle-call', 'modal-error', array(
+					'ar' => $ar,
+				) );
+				wp_send_json_success( array(
+					'namespace'        => 'callManager',
+					'module'           => 'handleCall',
+					'callback_success' => 'displayErrorCreateCustomer',
+					'view'             => ob_get_clean(),
+				) );
+			} else {
+				$user_id      = $cree_user;
+				$user_id_post = $wpdb->get_var( "SELECT ID FROM wp_posts WHERE post_type = 'wpshop_customers' AND post_author = " . $user_id . " ORDER BY ID DESC LIMIT 1 " );
+				update_user_meta( $user_id, 'first_name', $username );
+				update_user_meta( $user_id, 'last_name', $username );
+				update_user_meta( $user_id, 'wps_phone', $tel );
+				$wpdb->update( 'wp_posts', array( 'post_title' => $societe ), array( 'ID' => $user_id_post ) );
+			}
+		}
+		return $user_id_post;
 	}
 
 }

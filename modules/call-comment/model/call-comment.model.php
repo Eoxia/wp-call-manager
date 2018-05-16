@@ -30,5 +30,7 @@ class Call_Comment_Model extends \eoxia\Comment_Model {
 			'type'    => 'string',
 			'default' => 'treated',
 		);
+		parent::__construct( $data, $req_method );
 	}
+
 }

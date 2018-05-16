@@ -30,7 +30,6 @@ class Handle_Call_Action {
 			add_action( 'wp_ajax_ajax_hook2', array( $this, 'cree_posts' ) );
 			add_action( 'wp_ajax_ajax_launch', array( $this, 'ajax_load' ) );
 			add_action( 'wp_ajax_ajax_launch2', array( $this, 'vu_list' ) );
-			add_action( 'wp_ajax_ajax_cree_cust', array( $this, 'new_custum_load' ) );
 	}
 	/**
 	 * Fonction qui ajoute un boutton dans la toolbar de wp !
@@ -129,6 +128,7 @@ class Handle_Call_Action {
 		$modal_view = ob_get_clean();
 		ob_start();
 		\eoxia\View_Util::exec( 'call-manager', 'handle-call', 'modal-button' );
+		\eoxia\View_Util::exec( 'call-manager', 'handle-call', 'modal-error' );
 		$modal_button_view = ob_get_clean();
 
 		wp_send_json_success( array(
@@ -139,8 +139,8 @@ class Handle_Call_Action {
 	/**
 	 * Fonction pour appeler la function d insert new costumer [pour le moment c est pas ca !] .
 	 */
-	public function new_custum_load() {
-		new wps_customer_ctr();
-	}
+	// public function new_custum_load() {
+	// 	Handle_Call_Class::g()->create_customer();
+	// }
 }
 new Handle_call_Action();

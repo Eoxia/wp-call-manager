@@ -14,6 +14,14 @@ namespace handle_call;
 if ( ! defined( 'ABSPATH' ) ) {
 	exit;
 } ?>
-<div class="wpeo-button button-main action-input" data-action="cree_cust" data-parent="modal-container">
-	<span>Validé</span>
+<div id="displayerror">
+	<div id="displayerror">
+	<?php
+	if ( isset( $ar ) ) {
+
+		echo esc_html( $ar );
+
+	}
+	?>
+	</div>
 </div>

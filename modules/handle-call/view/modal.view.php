@@ -17,27 +17,34 @@ if ( ! defined( 'ABSPATH' ) ) {
 <div class="wpeo">
 	<form  class="wpeo-form">
 <h3 class="form-label"><strong>Les Admins</strong></h3>
-<input type="hidden" name="action" value="send_form">
+<!-- USless now -->
+<!-- <input type="hidden" name="action" value="send_form"> -->
 <?php
 wp_nonce_field( 'send_form' );
-foreach ( $users as $user ) :
+if ( isset( $users ) ) {
+	foreach ( $users as $user ) :
 		echo "<span class='wpeo-button button-main yop active' data-id='" . esc_html( $user->data['id'] ) . "'>" . esc_html( $user->data['displayname'] ) . '   </span>';
 	endforeach;
+}
 ?>
 <input id='id_cust' type='hidden' name="id_cust" value="">
 <input id="yup" type="hidden" class="#" name="id_admin" value="" >
 </br>
 <div class="wpeo-grid">
-<span class="form-label"><strong>Status des Appels</strong></span>
+<h3 class="form-label"><strong>Status de l'Appel</strong></h3>
 <hr>
 <?php
-foreach ( $four_categorys as $keys => $four_category ) :
-	echo '<div class="form-field">';
+if ( isset( $users ) ) {
+	foreach ( $four_categorys as $keys => $four_category ) :
+		echo '<div class="form-field">';
 		echo '<input type="radio" class="form-field" name="le_status" value=' . esc_attr( $keys ) . '>';
 		echo "<label for='radio1'>" . esc_html( $four_category ) . '</label></div>';
 	endforeach;
+}
 ?>
+
 		<div class="wpeo-autocomplete" data-action="search_admins">
+			<h3 class="form-label"><strong>Client</strong></h3>
 			<label class="autocomplete-label" for="autocomplete-search-admins">
 				<i class="autocomplete-icon-before far fa-search"></i>
 				<input id="mon-autocomplete" placeholder="Recherche..." class="autocomplete-search-input" type="text" />
@@ -49,45 +56,48 @@ foreach ( $four_categorys as $keys => $four_category ) :
 					<div class="autocomplete-result-container">
 						<span class="autocomplete-result-title">Titre</span>
 						<span class="autocomplete-result-subtitle">Sous-titre</span>
-						<span class="wpeo-button button-main ajou_client">Nouveau clients WP_shop</span>
+						<span class="wpeo-button button-main ajou_client">Nouveau clients WP_shop</a>
 					</div>
 				</li>
 			</ul>
 		</div>
-<hr>
-
-
 
 <div id="erf" class="wpeo-grid grid-4" style="display:none;">
-<form>
-	<div class="form-element">
-		<span class="form-label">Ajouter un contact<p class="wpeo-button button-red"> in-progress</p></span>
-		<label class="form-field-container">
-			<span class="form-field-icon-prev"><i class="fas fa-building"></i></span>
-			<input type="text" class="form-field" placeholder="Société" />
-		</label>
+
+		<h4 class="form-label">Ajouter un contact</h4>
+		<div class="form-element">
+			<label class="form-field-container">
+				<span class="form-field-icon-prev"><i class="fas fa-building"></i></span>
+				<input type="text"
+				name="societe" class="form-field" placeholder="société" />
+			</label>
 		</div>
-			<div class="form-element">
+		<div class="form-element">
 		<label class="form-field-container">
 			<span class="form-field-icon-prev"><i class="fas fa-user"></i></span>
-			<input type="text" class="form-field" placeholder="Nom" />
+			<input type="text" class="form-field"
+			name="username" placeholder="username" value="">
+			<input type="hidden" id="samplepermalinknonce" name="samplepermalinknonce" value="411fb0931e">
+
 		</label>
-	</div>
-			<div class="form-element">
-		<label class="form-field-container">
-			<span class="form-field-icon-prev"><i class="fas fa-user"></i></span>
-			<input type="text" class="form-field" placeholder="Prénom" />
-		</label>
-	</div>
-	<div class="form-element">
-		<label class="form-field-container">
-			<span class="form-field-icon-prev"><i class="fas fa-envelope"></i></span>
-			<input type="text" class="form-field" placeholder="email" />
-		</label>
-	</div>
-	<span data-action="ajax_cree_cust" class="wpeo-button button-main">Crée</span>
+
+			<label class="form-field-container">
+				<span class="form-field-icon-prev"><i class="fas fa-user"></i></span>
+				<input
+				name="lastname" type="text" class="form-field" placeholder="lastname" />
+			</label>
+			<label class="form-field-container">
+				<span class="form-field-icon-prev"><i class="fas fa-envelope"></i></span>
+				<input
+				name="email" type="email" class="form-field" placeholder="email" />
+			</label>
+			<label class="form-field-container">
+				<span class="form-field-icon-prev"><i class="fas fa-phone"></i></span>
+				<input
+				name="phone" type="tel" class="form-field" placeholder="tel" />
+			</label>
 </div>
-</form>
+</div>
 
 		<div class="form-element">
 <span class="form-label">Commentaire</span>
@@ -96,5 +106,4 @@ foreach ( $four_categorys as $keys => $four_category ) :
 </label>
 </div>
 	</form>
-
 </div>
