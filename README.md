@@ -1,16 +1,15 @@
 # Call Manager
-## version 2.0.0
-###### Call Manager is a WordPress' plugin which respect WordPress Coding Standards.
-
+### version 2.0.0
+###### Call Manager est un plugin WordPress qui nesseciste les plugins WP_shop & task_manager pour fonctionner correctement.
 
 ## Fonctionnality
 
-###### It adds two buttons in the admin_bar menu which serve to count interruption from Incoming Call and from your co-workers when you are working.
-###### It can display its data in the chronology in the WordPress plugin Task-manager.
-###### Its code is English friendly but his display will be in French, you are free to rewrite them.
+###### Le plugin ajoute 1 boutton supplementaire dans l'admin bar de WordPress .
+###### au click sur ce boutton une modal s'ouvre.
+###### dans cette modal il vous sera demander de selectionner l'administrateur conserner, le status de l'appel, le client Wp_shop .
+###### si le client Wp_shop est introuvaple il vous sera demander de click sur un boutton "ajouter nouveau client", apres un formulaire supplementaire va pop pour vous permetre de cree un nouveau clients WP_shop .
+###### Apres il vous reste juste à taper un commentaire consernant l'appel reçu et clické sur validé . le commentaire sera liée au clients et au administrateur conserné .
 
 ## EFfects
 
-###### After activated the plugin it will create an array in your WordPress database to stock monthly data for each admin user.
-###### When you click on the first one (with dashicons-phone) his count increment and open a pop-up which contains a form. This form can be fill by several information about the person who called you and make a research if this person has already called your agency.
-###### When you hover the second one a list of admin users shown and with a click on their name you can "blame" them. This will increment the total blame which is display at the right of the dashicons-businessman and increment the blame value associate with the admin's ID.
+###### Après son activation le plugin ne rajoute pas de table supplementaire les seul table utilisé sont 'wp_comments','wp_postmeta','wp_posts'.
