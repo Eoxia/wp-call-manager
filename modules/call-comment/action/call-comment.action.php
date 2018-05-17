@@ -63,20 +63,20 @@ class Call_Comment_Action {
 
 	}
 	/**
-	 * Fonction auto complete.
+	 * Fonction auto complete de la barre de recherche rapide.
 	 */
 	public function ajax_search_admis() {
-		$s = ! empty( $_POST['s'] ) ? sanitize_text_field( $_POST['s'] ) : '';
+		$ss = sanitize_text_field( $_POST['s'] );
+		$s  = ! empty( $ss ) ? $ss : '';
 		if ( empty( $s ) ) {
 			wp_send_json_error();
 		}
 
 		$call_consumer = new \wps_customer_mdl();
-		$u = $call_consumer->get_customer_list( 10, 0, array(
+		$u             = $call_consumer->get_customer_list( 10, 0, array(
 			's' => $s,
 		) );
-		//echo "<pre>"; print_r($u); echo "</pre>";exit;
-		$users = $u->posts;
+		$users         = $u->posts;
 
 		ob_start();
 		foreach ( $users as $user ) :
@@ -94,8 +94,4 @@ class Call_Comment_Action {
 		) );
 	}
 }
-
-
-
-
 new Call_Comment_Action();

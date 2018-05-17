@@ -5,6 +5,7 @@ Plugin URI:
 Description:
 Version: 0.1.0
 Author:
+Text Domain: Call-Manager
 Author URI:
 License:
 License URI:

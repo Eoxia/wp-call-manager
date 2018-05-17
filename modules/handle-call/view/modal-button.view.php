@@ -14,6 +14,6 @@ namespace handle_call;
 if ( ! defined( 'ABSPATH' ) ) {
 	exit;
 } ?>
-<div class="wpeo-button button-main action-input" data-action="cree_cust" data-parent="modal-container">
-	<span>Validé</span>
+<div class="wpeo-button button-main action-input modal-close" data-action="cree_cust" data-parent="modal-container">
+	<span><?php echo esc_html_e( 'Valid', 'Call-Manager' ); ?></span>
 </div>

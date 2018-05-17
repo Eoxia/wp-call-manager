@@ -16,9 +16,7 @@ if ( ! defined( 'ABSPATH' ) ) {
 } ?>
 <div class="wpeo">
 	<form  class="wpeo-form">
-<h3 class="form-label"><strong>Les Admins</strong></h3>
-<!-- USless now -->
-<!-- <input type="hidden" name="action" value="send_form"> -->
+<h3 class="form-label"><strong><?php echo esc_html_e( 'Administrator', 'Call-Manager' ); ?></strong></h3>
 <?php
 wp_nonce_field( 'send_form' );
 if ( isset( $users ) ) {
@@ -31,20 +29,20 @@ if ( isset( $users ) ) {
 <input id="yup" type="hidden" class="#" name="id_admin" value="" >
 </br>
 <div class="wpeo-grid">
-<h3 class="form-label"><strong>Status de l'Appel</strong></h3>
+<h3 class="form-label"><strong><?php echo esc_html_e( 'Call Status', 'Call-Manager' ); ?></strong></h3>
 <hr>
 <?php
 if ( isset( $users ) ) {
 	foreach ( $four_categorys as $keys => $four_category ) :
 		echo '<div class="form-field">';
 		echo '<input type="radio" class="form-field" name="le_status" value=' . esc_attr( $keys ) . '>';
-		echo "<label for='radio1'>" . esc_html( $four_category ) . '</label></div>';
+		echo "<label for='radio1'>" . $four_category . '</label></div>';
+		//faire la traduction de $four_category. +XSS
 	endforeach;
 }
 ?>
-
 		<div class="wpeo-autocomplete" data-action="search_admins">
-			<h3 class="form-label"><strong>Client</strong></h3>
+			<h3 class="form-label"><strong><?php echo esc_html_e( 'customers', 'Call-Manager' ); ?></strong></h3>
 			<label class="autocomplete-label" for="autocomplete-search-admins">
 				<i class="autocomplete-icon-before far fa-search"></i>
 				<input id="mon-autocomplete" placeholder="Recherche..." class="autocomplete-search-input" type="text" />
@@ -61,10 +59,8 @@ if ( isset( $users ) ) {
 				</li>
 			</ul>
 		</div>
-
 <div id="erf" class="wpeo-grid grid-4" style="display:none;">
-
-		<h4 class="form-label">Ajouter un contact</h4>
+		<h4 class="form-label"><?php echo esc_html_e( 'Add New customer', 'Call-Manager' ); ?></h4>
 		<div class="form-element">
 			<label class="form-field-container">
 				<span class="form-field-icon-prev"><i class="fas fa-building"></i></span>
@@ -100,9 +96,9 @@ if ( isset( $users ) ) {
 </div>
 
 		<div class="form-element">
-<span class="form-label">Commentaire</span>
+<span class="form-label"><?php echo esc_html_e( 'Comment', 'Call-Manager' ); ?></span>
 <label class="form-field-container">
-	<textarea class="form-field" rows="5" cols="5" name="commentaire" placeholder="loremipsum...."></textarea>
+	<textarea class="form-field" rows="5" cols="5" name="commentaire" placeholder=<?php esc_html_e( 'read a Comment !', 'Call-Manager' ); ?>></textarea>
 </label>
 </div>
 	</form>
