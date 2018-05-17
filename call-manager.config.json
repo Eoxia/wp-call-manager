@@ -1,0 +1,10 @@
+{
+	"name": "Call_manager",
+	"slug": "call-manager",
+	"modules": [
+		"core/core.config.json",
+		"modules/handle-call/handle-call.config.json",
+		"modules/call-comment/call-comment.config.json"
+	],
+	"version": "0.1.0"
+}

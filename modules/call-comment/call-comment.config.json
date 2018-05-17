@@ -1,0 +1,11 @@
+{
+	"name": "call-comment",
+	"slug": "call-comment",
+	"version": "0.1.0",
+	"path": "modules/call-comment",
+	"dependencies": {
+		"model": {},
+		"class": {},
+		"action": {}
+	}
+}

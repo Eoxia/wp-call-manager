@@ -1,19 +1,24 @@
 <?php
-/**
- * Initialisation du plugin.
- *
- * @package WordPress.
- * @subpackage Call & Blame.
- */
-
 /*
- * Plugin Name: Call Manager
- * Description: Un plugin pour les devs d'Eoxia.
- * Version: 1.13.0.0.
- * Author: Diogo Monteiro.
+Plugin Name: Call mangerV2
+Plugin URI:
+Description:
+Version: 0.1.0
+Author:
+Text Domain: Call-Manager
+Author URI:
+License:
+License URI:
 */
 
-include( 'includes/admin/cm-class-ajax-admin.php' );
-include( 'includes/admin/cm-class-barmenu-admin.php' );
-include( 'includes/admin/cm-class-filter-admin.php' );
-include( 'includes/admin/cm-class-send-mail-admin.php' );
+namespace call_manager;
+
+DEFINE( 'PLUGIN_CALL_MANAGER_PATH', realpath( plugin_dir_path( __FILE__ ) ) . '/' );
+DEFINE( 'PLUGIN_CALL_MANAGER_URL', plugins_url( basename( __DIR__ ) ) . '/' );
+DEFINE( 'PLUGIN_CALL_MANAGER_DIR', basename( __DIR__ ) );
+
+// Include EO_Framework.
+require_once 'core/external/eo-framework/eo-framework.php';
+
+// Boot your plugin.
+\eoxia\Init_Util::g()->exec( PLUGIN_CALL_MANAGER_PATH, basename( __FILE__, '.php' ) );
