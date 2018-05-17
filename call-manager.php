@@ -1,11 +1,11 @@
 <?php
 /*
-Plugin Name: Call mangerV2
+Plugin Name: Call manger
 Plugin URI:
 Description:
-Version: 0.1.0
+Version: 2.0.0
 Author:
-Text Domain: Call-Manager
+Text Domain: call-manager
 Author URI:
 License:
 License URI:

@@ -2,10 +2,10 @@
 /**
  * Form view of "Call Manager" module.
  *
- * @author You <you@mail>
+ * @author You <you@mail> => @author Eoxia <dev@eoxia.com>
  * @since 2.0.0
  * @version 2.0.0
- * @copyright 2018+
+ * @copyright 2018
  * @package call_manager
  */
 
@@ -16,7 +16,7 @@ if ( ! defined( 'ABSPATH' ) ) {
 } ?>
 <div class="wpeo">
 	<form  class="wpeo-form">
-<h3 class="form-label"><strong><?php echo esc_html_e( 'Administrator', 'Call-Manager' ); ?></strong></h3>
+<h3 class="form-label"><strong><?php echo esc_html_e( 'Administrator', 'call-manager' ); ?></strong></h3>
 <?php
 wp_nonce_field( 'send_form' );
 if ( isset( $users ) ) {
@@ -26,10 +26,10 @@ if ( isset( $users ) ) {
 }
 ?>
 <input id='id_cust' type='hidden' name="id_cust" value="">
-<input id="yup" type="hidden" class="#" name="id_admin" value="" >
+<input id="hook_jquery1" type="hidden" class="#" name="id_admin" value="" >
 </br>
 <div class="wpeo-grid">
-<h3 class="form-label"><strong><?php echo esc_html_e( 'Call Status', 'Call-Manager' ); ?></strong></h3>
+<h3 class="form-label"><strong><?php echo esc_html_e( 'Call Status', 'call-manager' ); ?></strong></h3>
 <hr>
 <?php
 if ( isset( $users ) ) {
@@ -42,7 +42,7 @@ if ( isset( $users ) ) {
 }
 ?>
 		<div class="wpeo-autocomplete" data-action="search_admins">
-			<h3 class="form-label"><strong><?php echo esc_html_e( 'customers', 'Call-Manager' ); ?></strong></h3>
+			<h3 class="form-label"><strong><?php echo esc_html_e( 'customers', 'call-manager' ); ?></strong></h3>
 			<label class="autocomplete-label" for="autocomplete-search-admins">
 				<i class="autocomplete-icon-before far fa-search"></i>
 				<input id="mon-autocomplete" placeholder="Recherche..." class="autocomplete-search-input" type="text" />
@@ -60,7 +60,7 @@ if ( isset( $users ) ) {
 			</ul>
 		</div>
 <div id="erf" class="wpeo-grid grid-4" style="display:none;">
-		<h4 class="form-label"><?php echo esc_html_e( 'Add New customer', 'Call-Manager' ); ?></h4>
+		<h4 class="form-label"><?php echo esc_html_e( 'Add New customer', 'call-manager' ); ?></h4>
 		<div class="form-element">
 			<label class="form-field-container">
 				<span class="form-field-icon-prev"><i class="fas fa-building"></i></span>
@@ -96,9 +96,9 @@ if ( isset( $users ) ) {
 </div>
 
 		<div class="form-element">
-<span class="form-label"><?php echo esc_html_e( 'Comment', 'Call-Manager' ); ?></span>
+<span class="form-label"><?php echo esc_html_e( 'Comment', 'call-manager' ); ?></span>
 <label class="form-field-container">
-	<textarea class="form-field" rows="5" cols="5" name="commentaire" placeholder=<?php esc_html_e( 'read a Comment !', 'Call-Manager' ); ?>></textarea>
+	<textarea class="form-field" rows="5" cols="5" name="commentaire" placeholder=<?php esc_html_e( 'read a Comment !', 'call-manager' ); ?>></textarea>
 </label>
 </div>
 	</form>
