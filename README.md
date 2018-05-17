@@ -1,6 +1,6 @@
-# Call Manager
+# Call Manager ![Eoxia Logo](https://avatars0.githubusercontent.com/u/3227847?s=200&amp;v=4)
 ### version 2.0.0
-###### Call Manager est un plugin WordPress qui nesseciste les plugins [WP_shop](https://github.com/Eoxia/wpshop) pour fonctionner correctement.
+###### Call Manager est un plugin WordPress qui nesseciste le plugins [WP_shop](https://github.com/Eoxia/wpshop) de [Eoxia](https://github.com/eoxia) pour fonctionner correctement.
 
 ## Fonctionnality
 
