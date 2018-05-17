@@ -2,7 +2,7 @@
 /**
  * Form view of "Call Manager" module.
  *
- * @author You <you@mail> => @author Eoxia <dev@eoxia.com>
+ * @author Eoxia <dev@eoxia.com>
  * @since 2.0.0
  * @version 2.0.0
  * @copyright 2018
@@ -16,9 +16,9 @@ if ( ! defined( 'ABSPATH' ) ) {
 } ?>
 <div class="wpeo">
 	<form  class="wpeo-form">
-<h3 class="form-label"><strong><?php echo esc_html_e( 'Administrator', 'call-manager' ); ?></strong></h3>
+		<h3 class="form-label"><strong><?php echo esc_html_e( 'Administrator', 'call-manager' ); ?></strong></h3>
 <?php
-wp_nonce_field( 'send_form' );
+	wp_nonce_field( 'send_form' );
 if ( isset( $users ) ) {
 	foreach ( $users as $user ) :
 		echo "<span class='wpeo-button button-main yop active' data-id='" . esc_html( $user->data['id'] ) . "'>" . esc_html( $user->data['displayname'] ) . '   </span>';
@@ -28,19 +28,22 @@ if ( isset( $users ) ) {
 <input id='id_cust' type='hidden' name="id_cust" value="">
 <input id="hook_jquery1" type="hidden" class="#" name="id_admin" value="" >
 </br>
-<div class="wpeo-grid">
+<div class="wpeo">
+<div class="form-element form-align-horizontal">
 <h3 class="form-label"><strong><?php echo esc_html_e( 'Call Status', 'call-manager' ); ?></strong></h3>
-<hr>
+<label class="form-field-container">
 <?php
 if ( isset( $users ) ) {
 	foreach ( $four_categorys as $keys => $four_category ) :
-		echo '<div class="form-field">';
+		echo '<div class="form-field-inline">';
 		echo '<input type="radio" class="form-field" name="le_status" value=' . esc_attr( $keys ) . '>';
-		echo "<label for='radio1'>" . $four_category . '</label></div>';
+		echo "<label for='radio1'>  " . $four_category . '</div>';
 		//faire la traduction de $four_category. +XSS
 	endforeach;
 }
 ?>
+</label>
+</div>
 		<div class="wpeo-autocomplete" data-action="search_admins">
 			<h3 class="form-label"><strong><?php echo esc_html_e( 'customers', 'call-manager' ); ?></strong></h3>
 			<label class="autocomplete-label" for="autocomplete-search-admins">
@@ -74,7 +77,6 @@ if ( isset( $users ) ) {
 			<input type="text" class="form-field"
 			name="username" placeholder="username" value="">
 			<input type="hidden" id="samplepermalinknonce" name="samplepermalinknonce" value="411fb0931e">
-
 		</label>
 
 			<label class="form-field-container">

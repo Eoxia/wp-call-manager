@@ -2,7 +2,7 @@
 /**
  * Handle call-comment Class.
  *
- * @author You <you@mail> => @author Eoxia <dev@eoxia.com>
+ * @author Eoxia <dev@eoxia.com>
  * @since 2.0.0
  * @version 2.0.0
  * @copyright 2018
