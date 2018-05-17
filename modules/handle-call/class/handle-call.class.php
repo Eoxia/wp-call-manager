@@ -2,11 +2,11 @@
 /**
  * Class of handle_call.
  *
- * @author You <you@mail>
+ * @author You <you@mail> => @author Eoxia <dev@eoxia.com>
  * @since 2.0.0
  * @version 2.0.0
- * @copyright 2018+
- * @package call_manger
+ * @copyright 2018
+ * @package call_manager
  */
 
 namespace call_manager;
@@ -54,6 +54,7 @@ class Handle_Call_Class extends \eoxia\Singleton_Util {
 	protected $version = '0.1';
 	/**
 	 * Construct .
+	 * void.
 	 */
 	protected function construct() {
 	}
@@ -72,6 +73,9 @@ class Handle_Call_Class extends \eoxia\Singleton_Util {
 	}
 	/**
 	 * Fonction pour appeler la function d insert new costumer [pour le moment c est pas ca !] .
+	 *
+	 * @since 2.0.0
+	 * @version 2.0.0
 	 */
 	public function create_customer( $username, $lastname, $societe, $tel ) {
 		global $wpdb;
@@ -94,7 +98,8 @@ class Handle_Call_Class extends \eoxia\Singleton_Util {
 				) );
 			} else {
 				$user_id      = $cree_user;
-				$user_id_post = $wpdb->get_var( "SELECT ID FROM wp_posts WHERE post_type = 'wpshop_customers' AND post_author = " . $user_id . " ORDER BY ID DESC LIMIT 1 " );
+				//avoir avec jimmy l histoire du prepare
+				$user_id_post = $wpdb->query( $wpdb->prepare( "SELECT ID FROM wp_posts WHERE post_type = 'wpshop_customers' AND post_author = " . $user_id . ' ORDER BY ID DESC LIMIT 1 ' ) );
 				update_user_meta( $user_id, 'first_name', $username );
 				update_user_meta( $user_id, 'last_name', $username );
 				update_user_meta( $user_id, 'wps_phone', $tel );

@@ -2,9 +2,10 @@
 /*
 Plugin Name: Call manger
 Plugin URI:
-Description:
+Description: plugin pour traîté les appels entrant
+ce plugin fonctionne avec WP_shop et Task_manger.
 Version: 2.0.0
-Author:
+Author: You <you@mail> => @author Eoxia <dev@eoxia.com>
 Text Domain: call-manager
 Author URI:
 License:

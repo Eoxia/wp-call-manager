@@ -26,21 +26,20 @@ class Handle_Call_Action {
 	 */
 	public function __construct() {
 		add_action( 'wp_ajax_cree_cust', array( $this, 'insert_comment' ) );
-		add_action( 'wp_ajax_search_admins', array( $this, 'ajax_search_admis' ) );
+		add_action( 'wp_ajax_search_admins', array( $this, 'ajax_search_cust' ) );
 		add_action( 'admin_bar_menu', array( $this, 'button_toolbar' ) );
 		add_action( 'wp_ajax_affich_users', array( $this, 'select_users' ) );
-			add_action( 'wp_ajax_ajax_hook2', array( $this, 'cree_posts' ) );
-			add_action( 'wp_ajax_ajax_launch', array( $this, 'ajax_load' ) );
-			add_action( 'wp_ajax_ajax_launch2', array( $this, 'vu_list' ) );
+		add_action( 'wp_ajax_ajax_launch', array( $this, 'ajax_load' ) );
+		add_action( 'wp_ajax_ajax_launch2', array( $this, 'list_view' ) );
 	}
 	/**
 	 * Fonction qui ajoute un boutton dans la toolbar de wp !
 	 *
 	 * @method button_toolbar   .
 	 *
-	 * @param string $wp_admin_bar ].
+	 * @param string $wp_admin_bar .
 	 *
-	 * @return void                       [description].
+	 * @return void.
 	 */
 	public function button_toolbar( $wp_admin_bar ) {
 		ob_start();
@@ -67,28 +66,12 @@ class Handle_Call_Action {
 			) );
 	}
 	/**
-	 * Add function qui cree 4 Posts et les lie au category.
-	 *
-	 * @since 2.0.0
-	 * @version 2.0.0
-	 */
-	public function cree_posts() {
-		$cats = My_Category_Class::g()->get();
-		foreach ( $cats as $cat ) {
-			$args = array( 'title' => $cat->data['name'] );
-			$post = Post_Model_Class::g()->create( $args );
-			$post->data['taxonomy'][ My_Category_Class::g()->get_type() ][] = $cat->data['id'];
-			Post_Model_Class::g()->update( $post->data );
-		}
-				wp_send_json_success();
-	}
-	/**
 	 * Add function qui charge les vues de la modal List .
 	 *
 	 * @since 2.0.0
 	 * @version 2.0.0
 	 */
-	public function vu_list() {
+	public function list_view() {
 		$users          = \eoxia\User_Class::g()->get( array(
 			'role' => 'administrator',
 		) );
@@ -114,7 +97,7 @@ class Handle_Call_Action {
 	 * Add function qui charge les vues du formulaire .
 	 * Si l'arret est vide je recup tous .
 	 *
-	 * @since 2.0.0
+	 * @since 1.0.0
 	 * @version 2.0.0
 	 */
 	public function ajax_load() {
@@ -140,10 +123,10 @@ class Handle_Call_Action {
 	}
 	/**
 	 * Fonction insert commentaire.
+	 * elle permet d'envoyer les données saisie et selectioner dans la modal .
 	 */
 	public function insert_comment() {
 		check_ajax_referer( 'send_form' );
-
 		$id_cust      = (int) $_POST['id_cust'];
 		$id_admi      = (int) $_POST['id_admin'];
 		$post_status  = (string) $_POST['le_status'];
@@ -152,7 +135,6 @@ class Handle_Call_Action {
 		$lastname     = sanitize_text_field( $_POST['lastname'] );
 		$societe      = sanitize_text_field( $_POST['societe'] );
 		$tel          = sanitize_text_field( $_POST['phone'] );
-
 		if ( empty( $id_admi ) ) {
 			wp_send_json_error();
 		}
@@ -173,19 +155,17 @@ class Handle_Call_Action {
 	/**
 	 * Fonction auto complete de la barre de recherche rapide.
 	 */
-	public function ajax_search_admis() {
+	public function ajax_search_cust() {
 		$ss = sanitize_text_field( $_POST['s'] );
 		$s  = ! empty( $ss ) ? $ss : '';
 		if ( empty( $s ) ) {
 			wp_send_json_error();
 		}
-
 		$call_consumer = new \wps_customer_mdl();
 		$u             = $call_consumer->get_customer_list( 10, 0, array(
 			's' => $s,
 		) );
 		$users         = $u->posts;
-
 		ob_start();
 		foreach ( $users as $user ) :
 			?>

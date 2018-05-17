@@ -1,12 +1,12 @@
 <?php
 /**
- * Handle call-comment
+ * Handle call-comment Class.
  *
- * @author You <you@mail>
- * @since 0.1.0
- * @version 0.1.0
- * @copyright 2017+
- * @package starter
+ * @author You <you@mail> => @author Eoxia <dev@eoxia.com>
+ * @since 2.0.0
+ * @version 2.0.0
+ * @copyright 2018
+ * @package call_manager
  */
 
 namespace call_manager;
