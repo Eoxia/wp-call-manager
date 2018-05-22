@@ -98,8 +98,7 @@ class Handle_Call_Class extends \eoxia\Singleton_Util {
 				) );
 			} else {
 				$user_id      = $cree_user;
-				//avoir avec jimmy l histoire du prepare
-				$user_id_post = $wpdb->query( $wpdb->prepare( 'SELECT ID FROM wp_posts WHERE post_type = %s AND post_author = %d ORDER BY ID DESC LIMIT 1 ', 'wpshop_customers', $user_id ) );
+				$user_id_post = $wpdb->query( $wpdb->prepare( "SELECT ID FROM {$wpdb->posts} WHERE post_type = %s AND post_author = %d ORDER BY ID DESC LIMIT 1 ", 'wpshop_customers', $user_id ) );
 				update_user_meta( $user_id, 'first_name', $username );
 				update_user_meta( $user_id, 'last_name', $username );
 				update_user_meta( $user_id, 'wps_phone', $tel );
@@ -108,7 +107,5 @@ class Handle_Call_Class extends \eoxia\Singleton_Util {
 		}
 		return $user_id_post;
 	}
-
 }
-
 Handle_Call_Class::g();
