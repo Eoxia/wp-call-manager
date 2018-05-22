@@ -25,18 +25,26 @@ window.eoxiaJS.callManager.handleCall = {};
  * @return {void}
  */
 window.eoxiaJS.callManager.handleCall.init = function() {
-	jQuery( document ).on( 'click', '.yop form a', window.eoxiaJS.callManager.handleCall.selectUser );
+	jQuery( document ).on( 'click', '.id_administrator', window.eoxiaJS.callManager.handleCall.selectUser );
+	jQuery( document ).on( 'click', '#btn-status', window.eoxiaJS.callManager.handleCall.selectStatus );
 	jQuery( document ).on( 'click', 'li.autocomplete-result', window.eoxiaJS.callManager.handleCall.selectCustomers );
 	jQuery( document ).on( 'click', 'span.ajou_client', window.eoxiaJS.callManager.handleCall.newCustomers );
 };
 
 window.eoxiaJS.callManager.handleCall.selectUser = function() {
 	var dataId = jQuery( this ).attr( 'data-id' );
-	jQuery( 'a.active' ).removeClass( 'active' );
-	jQuery( this ).addClass( 'active' );
-	jQuery( '#yup' ).attr( 'value', dataId );
+	jQuery( 'li.active' ).removeClass( 'active button-main' );
+	jQuery( this ).addClass( 'active button-main' );
+	jQuery( '#hook_jquery1' ).attr( 'value', dataId );
 };
 
+window.eoxiaJS.callManager.handleCall.selectStatus = function() {
+	var status = jQuery( this ).attr( 'value' );
+	jQuery( '#btn-status.button-main' ).toggleClass( 'button-main button-secondary' );
+	jQuery( this ).addClass( 'button-main' );
+	jQuery( this ).removeClass( 'button-secondary' );
+	jQuery( '#hook_jquery2' ).attr( 'value', status );
+}
 window.eoxiaJS.callManager.handleCall.selectCustomers = function() {
 	var custumName = jQuery( this ).attr( 'data-result' );
 	var dataId = jQuery( this ).attr( 'data-id' );
@@ -46,6 +54,6 @@ window.eoxiaJS.callManager.handleCall.selectCustomers = function() {
 };
 
 window.eoxiaJS.callManager.handleCall.newCustomers = function() {
-var focus = jQuery( '#erf' ).css("display", "none");
+var focus = jQuery( '#erf' ).css("display", "block");
 console.log( focus );
 };
