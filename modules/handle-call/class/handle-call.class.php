@@ -64,10 +64,10 @@ class Handle_Call_Class extends \eoxia\Singleton_Util {
 	public function get() {
 		// Définition du Tableau.
 		$four_categorys = array(
-			'slug1' => __( 'traité', 'call_manger' ),
-			'slug2' => __( 'rappelera' ),
-			'slug3' => __( 'a-rappeler' ),
-			'slug4' => __( 'transferer' ),
+			'traite'     => __( 'Treaty', 'call_manager' ),
+			'rappelera'  => __( 'Call back' ),
+			'arappeler'  => __( 'to Remind' ),
+			'transferer' => __( 'To transfer' ),
 		);
 		return $four_categorys;
 	}
