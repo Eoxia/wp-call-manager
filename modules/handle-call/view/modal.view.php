@@ -85,30 +85,30 @@ if ( ! defined( 'ABSPATH' ) ) {
 				<label class="form-field-container">
 					<span class="form-field-icon-prev"><i class="fas fa-building"></i></span>
 						<input type="text"
-							name="societe" class="form-field" placeholder="société" />
+							name="societe" class="form-field" placeholder="<?php echo esc_html_e( 'Society', 'call-manager' ); ?>" />
 				</label>
 			</div>
 		<div class="form-element">
 			<label class="form-field-container">
 				<span class="form-field-icon-prev"><i class="fas fa-user"></i></span>
 				<input type="text" class="form-field"
-				name="username" placeholder="username" value="">
+				name="username" placeholder="<?php echo esc_html_e( 'First Name', 'call-manager' ); ?>" value="">
 				<input type="hidden" id="samplepermalinknonce" name="samplepermalinknonce" value="411fb0931e">
 			</label>
 			<label class="form-field-container">
 				<span class="form-field-icon-prev"><i class="fas fa-user"></i></span>
 					<input
-					name="lastname" type="text" class="form-field" placeholder="lastname" />
+					name="lastname" type="text" class="form-field" placeholder="<?php echo esc_html_e( 'Last Name', 'call-manager' ); ?>" />
 			</label>
 			<label class="form-field-container">
 				<span class="form-field-icon-prev"><i class="fas fa-envelope"></i></span>
 					<input
-					name="email" type="email" class="form-field" placeholder="email" />
+					name="email" type="email" class="form-field" placeholder="<?php echo esc_html_e( 'email', 'call-manager' ); ?>" />
 			</label>
 			<label class="form-field-container">
 				<span class="form-field-icon-prev"><i class="fas fa-phone"></i></span>
 					<input
-					name="phone" type="tel" class="form-field" placeholder="tel" />
+					name="phone" type="tel" class="form-field" placeholder="<?php echo esc_html_e( 'Phone', 'call-manager' ); ?>" />
 			</label>
 		</div>
 	</div>

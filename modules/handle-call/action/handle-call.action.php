@@ -31,6 +31,14 @@ class Handle_Call_Action {
 		add_action( 'wp_ajax_affich_users', array( $this, 'select_users' ) );
 		add_action( 'wp_ajax_ajax_launch', array( $this, 'ajax_load' ) );
 		add_action( 'wp_ajax_ajax_launch2', array( $this, 'list_view' ) );
+		add_action( 'init', array( $this, 'load_traduc' ) );
+	}
+	/**
+	 * Load plugin textdomain.
+	 * Fonction pour charger la traduction fr.
+	 */
+	public function load_traduc() {
+		load_plugin_textdomain( 'call-manager', false, PLUGIN_CALL_MANAGER_DIR . '/core/asset/languages/' );
 	}
 	/**
 	 * Fonction qui ajoute un boutton dans la toolbar de wp !
