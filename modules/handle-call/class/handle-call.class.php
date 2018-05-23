@@ -1,6 +1,6 @@
 <?php
 /**
- * Class of handle_call.
+ * Class  handle_call
  *
  * @author Eoxia <dev@eoxia.com>
  * @since 2.0.0
@@ -15,7 +15,7 @@ if ( ! defined( 'ABSPATH' ) ) {
 	exit;
 }
 /**
- * Class of my_product controlleur.
+ * Class Handle-Call
  */
 class Handle_Call_Class extends \eoxia\Singleton_Util {
 	/**
@@ -64,10 +64,10 @@ class Handle_Call_Class extends \eoxia\Singleton_Util {
 	public function get() {
 		// Définition du Tableau.
 		$four_categorys = array(
-			'traite'     => __( 'Treaty', 'call_manager' ),
-			'rappelera'  => __( 'Call back' ),
-			'arappeler'  => __( 'to Remind' ),
-			'transferer' => __( 'To transfer' ),
+			'traite'     => __( 'Treaty', 'call-manager' ),
+			'rappelera'  => __( 'Call back', 'call-manager' ),
+			'arappeler'  => __( 'to Remind', 'call-manager' ),
+			'transferer' => __( 'To transfer', 'call-manager' ),
 		);
 		return $four_categorys;
 	}
@@ -76,14 +76,16 @@ class Handle_Call_Class extends \eoxia\Singleton_Util {
 	 *
 	 * @since 2.0.0
 	 * @version 2.0.0
+	 * @param string $username _.
+	 * @param string $lastname _.
+	 * @param string $societe  _.
+	 * @param string $tel      _.
 	 */
 	public function create_customer( $username, $lastname, $societe, $tel ) {
 		global $wpdb;
 		$random_password = wp_generate_password();
 		if ( ! empty( $username ) ) {
-
 			$cree_user = wp_create_user( $username, $random_password, $lastname );
-
 			if ( is_wp_error( $cree_user ) ) {
 				ob_start();
 				$ar = $cree_user->get_error_message();

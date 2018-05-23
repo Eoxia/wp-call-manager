@@ -14,7 +14,7 @@ namespace handle_call;
 if ( ! defined( 'ABSPATH' ) ) {
 	exit;
 } ?>
-	<body>
+<body>
 		<form class="wpcm-add-call wpeo-form wpeo-wrap">
 			<div class="wpcm-section-user">
 				<h2><i class="fas fa-user-secret fa-fw"></i><?php echo esc_html_e( 'User concerned', 'call-manager' ); ?></h2>
@@ -27,42 +27,38 @@ if ( ! defined( 'ABSPATH' ) ) {
 						endforeach;
 					}
 					?>
-					<input id="hook_jquery1" type="hidden" name="id_admin" value="" >
-
-			</ul>
+					<input id="hook_jquery1" type="hidden" name="id_admin" value="">
+				</ul>
 			</div><!-- .wpcm-section-user -->
-
-
-	<div class="wpcm-section-call wpeo-grid grid-2">
-		<div class="wpcm-section-statut">
-			<h2><i class="fas fa-phone fa-fw"></i><?php echo esc_html_e( 'Call Status', 'call-manager' ); ?></h2>
-
-			<ul class="wpcm-list-statut wpeo-grid grid-2">
-			<?php
-			if ( isset( $users ) ) {
-				foreach ( $four_categorys as $keys => $four_category ) :
-					?>
-					<li class="wpcm-statut">
-					<div id ="btn-status" class="wpeo-button button-secondary" value ='<?php echo esc_attr( $keys ); ?>' >
-					<span class="wpcm-icon"><i class="fas fa-check"></i></span>
-					<span class ="wpcm-label"><?php echo esc_html( $four_category ); ?></span></div></li>
-					<?php
-				endforeach;
-			}
-			?>
-				<input id="hook_jquery2" type = "hidden" name = "le_status" value = "">
-			</ul>
+			<div class="wpcm-section-call wpeo-grid grid-2">
+				<div class="wpcm-section-statut">
+					<h2><i class="fas fa-phone fa-fw"></i><?php echo esc_html_e( 'Call Status', 'call-manager' ); ?></h2>
+					<ul class="wpcm-list-statut wpeo-grid grid-2">
+						<?php
+						if ( isset( $users ) ) {
+							foreach ( $four_categorys as $keys => $four_category ) :
+								?>
+								<li class="wpcm-statut">
+									<div id ="btn-status" class="wpeo-button button-secondary" value ='<?php echo esc_attr( $keys ); ?>' >
+										<span class="wpcm-icon"><i class="fas fa-check"></i></span>
+										<span class ="wpcm-label"><?php echo esc_html( $four_category ); ?></span></div></li>
+										<?php
+							endforeach;
+						}
+						?>
+						<input id="hook_jquery2" type = "hidden" name = "le_status" value = "">
+					</ul>
 				</div><!-- .wpcm-section-call -->
 			<!-- l'auto complete clients -->
-			<div class="wpcm-section-search">
-			<h2><i class="fas fa-user fa-fw"></i><?php echo esc_html_e( 'customers', 'call-manager' ); ?></h2>
-			<div class="wpeo-autocomplete"  data-action="search_admins">
-				<input id='id_cust' type='hidden' name="id_cust" value="">
-				<label class="autocomplete-label" for="mon-autocomplete">
-					<i class="autocomplete-icon-before far fa-search"></i>
-					<input id="mon-autocomplete" placeholder="Recherche..." class="autocomplete-search-input" type="text">
-					<span class="autocomplete-icon-after"><i class="far fa-times"></i></span>
-				</label>
+				<div class="wpcm-section-search">
+					<h2><i class="fas fa-user fa-fw"></i><?php echo esc_html_e( 'customers', 'call-manager' ); ?></h2>
+					<div class="wpeo-autocomplete"  data-action="search_admins">
+						<input id='id_cust' type='hidden' name="id_cust" value="">
+						<label class="autocomplete-label" for="mon-autocomplete">
+							<i class="autocomplete-icon-before far fa-search"></i>
+							<input id="mon-autocomplete" placeholder="Recherche..." class="autocomplete-search-input" type="text">
+							<span class="autocomplete-icon-after"><i class="far fa-times"></i></span>
+						</label>
 				<ul class="autocomplete-search-list">
 					<li class="autocomplete-result">
 						<img class="autocomplete-result-image" src="https://pbs.twimg.com/profile_images/378800000483044729/a9887ba5faac56724e7988ce95c5bab0_normal.png">
@@ -73,11 +69,9 @@ if ( ! defined( 'ABSPATH' ) ) {
 						</div>
 					</li>
 				</ul>
-			</div><!-- .wpeo-autocomplete -->
-		</div>
-
-</div>
-
+					</div><!-- .wpeo-autocomplete -->
+				</div>
+			</div>
 <!-- formulaire nouveau client -->
 	<div id="erf" class="wpeo-grid grid-4" style="display:none;">
 		<h4 class="form-label"><?php echo esc_html_e( 'Add New customer', 'call-manager' ); ?></h4>
@@ -112,14 +106,13 @@ if ( ! defined( 'ABSPATH' ) ) {
 			</label>
 		</div>
 	</div>
-
 <!-- contact fin -->
 <!-- comment start -->
 		<div class="form-element">
 			<span class="form-label"><?php echo esc_html_e( 'Comment', 'call-manager' ); ?></span>
 				<label class="form-field-container">
-				<textarea class="form-field" rows="5" cols="5" name="commentaire" placeholder=<?php esc_html_e( 'read a Comment !', 'call-manager' ); ?>></textarea>
+				<textarea class="form-field" rows="5" cols="5" name="commentaire" placeholder="<?php esc_html_e( 'Write a Comment !', 'call-manager' ); ?>"></textarea>
 				</label>
 		</div>
-</form><!-- .wpcm-add-call -->
+	</form>
 </body>

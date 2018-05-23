@@ -44,7 +44,8 @@ window.eoxiaJS.callManager.handleCall.selectStatus = function() {
 	jQuery( this ).addClass( 'button-main' );
 	jQuery( this ).removeClass( 'button-secondary' );
 	jQuery( '#hook_jquery2' ).attr( 'value', status );
-}
+};
+
 window.eoxiaJS.callManager.handleCall.selectCustomers = function() {
 	var custumName = jQuery( this ).attr( 'data-result' );
 	var dataId = jQuery( this ).attr( 'data-id' );
@@ -54,6 +55,5 @@ window.eoxiaJS.callManager.handleCall.selectCustomers = function() {
 };
 
 window.eoxiaJS.callManager.handleCall.newCustomers = function() {
-var focus = jQuery( '#erf' ).css("display", "block");
-console.log( focus );
+	jQuery( '#erf' ).css( 'display', 'block' );
 };

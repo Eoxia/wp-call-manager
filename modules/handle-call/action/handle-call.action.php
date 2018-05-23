@@ -15,33 +15,30 @@ if ( ! defined( 'ABSPATH' ) ) {
 	exit;
 }
 /**
- * Action of "Handle_call" module.
+ * Class Handle Call Action
  */
 class Handle_Call_Action {
 	/**
-	 * Constructor
+	 * Constructeur
 	 *
 	 * @since 2.0.0
 	 * @version 0.0.0
 	 */
 	public function __construct() {
-		add_action( 'wp_ajax_cree_cust', array( $this, 'insert_comment' ) );
-		add_action( 'wp_ajax_search_admins', array( $this, 'ajax_search_cust' ) );
 		add_action( 'admin_bar_menu', array( $this, 'button_toolbar' ) );
-		add_action( 'wp_ajax_affich_users', array( $this, 'select_users' ) );
-		add_action( 'wp_ajax_ajax_launch', array( $this, 'ajax_load' ) );
-		add_action( 'wp_ajax_ajax_launch2', array( $this, 'list_view' ) );
 		add_action( 'init', array( $this, 'load_traduc' ) );
+		add_action( 'wp_ajax_ajax_launch', array( $this, 'ajax_load' ) );
+		add_action( 'wp_ajax_search_admins', array( $this, 'ajax_search_cust' ) );
+		add_action( 'wp_ajax_cree_cust', array( $this, 'insert_comment' ) );
 	}
 	/**
-	 * Load plugin textdomain.
 	 * Fonction pour charger la traduction fr.
 	 */
 	public function load_traduc() {
 		load_plugin_textdomain( 'call-manager', false, PLUGIN_CALL_MANAGER_DIR . '/core/asset/languages/' );
 	}
 	/**
-	 * Fonction qui ajoute un boutton dans la toolbar de wp !
+	 * Fonction qui ajoute un boutton dans la toolbar de WordPress !
 	 *
 	 * @method button_toolbar   .
 	 *
@@ -52,58 +49,14 @@ class Handle_Call_Action {
 	public function button_toolbar( $wp_admin_bar ) {
 		ob_start();
 		\eoxia\View_Util::exec( 'call-manager', 'handle-call', 'button' );
-		\eoxia\View_Util::exec( 'call-manager', 'handle-call', 'buttonlist' );
 		$args = array(
 			'id'    => 'wpbeginner',
 			'title' => ob_get_clean(),
 		);
 		$wp_admin_bar->add_node( $args );
 	}
-		/**
-		 * Add function envoyer view users.
-		 *
-		 * @since 2.0.0
-		 * @version 2.0.0
-		 */
-	public function select_users() {
-			ob_start();
-			\eoxia\View_Util::exec( 'call-manager', 'handle-call', 'modal-users' );
-			$modal_view = ob_get_clean();
-			wp_send_json_success( array(
-				'view' => $modal_view,
-			) );
-	}
 	/**
-	 * Add function qui charge les vues de la modal List .
-	 *
-	 * @since 2.0.0
-	 * @version 2.0.0
-	 */
-	public function list_view() {
-		$users          = \eoxia\User_Class::g()->get( array(
-			'role' => 'administrator',
-		) );
-		$four_categorys = Handle_Call_Class::g()->get();
-		$info_comm      = Call_Comment_Class::g()->get();
-		ob_start();
-		\eoxia\View_Util::exec( 'call-manager', 'handle-call', 'modal-list', array(
-			'users'          => $users,
-			'four_categorys' => $four_categorys,
-			'info_comm'      => $info_comm,
-		) );
-		$modal_view = ob_get_clean();
-		ob_start();
-		\eoxia\View_Util::exec( 'call-manager', 'handle-call', 'modal-button' );
-		$modal_button_view = ob_get_clean();
-
-		wp_send_json_success( array(
-			'view'         => $modal_view,
-			'buttons_view' => $modal_button_view,
-		) );
-	}
-	/**
-	 * Add function qui charge les vues du formulaire .
-	 * Si l'arret est vide je recup tous .
+	 * Fonction qui charge les vues du formulaire  .
 	 *
 	 * @since 1.0.0
 	 * @version 2.0.0

@@ -1,6 +1,6 @@
 <?php
 /**
- * Handle call-comment Class.
+ * Class call-comment
  *
  * @author Eoxia <dev@eoxia.com>
  * @since 2.0.0
@@ -16,19 +16,19 @@ if ( ! defined( 'ABSPATH' ) ) {
 }
 
 /**
- * Handle call-comment
+ * Class call-comment
  */
 class Call_Comment_Class extends \eoxia\Comment_Class {
 
 	/**
-	 * Model name @see ../model/*.model.php.
+	 * Nom du model
 	 *
 	 * @var string
 	 */
 	protected $model_name = '\call_manager\Call_Comment_Model';
 
 	/**
-	 * Post type
+	 * Le type du post ou du commentaire ou du term.
 	 *
 	 * @var string
 	 */

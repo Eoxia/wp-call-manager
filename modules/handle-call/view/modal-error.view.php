@@ -1,6 +1,6 @@
 <?php
 /**
- * Form view of "Call Manager" module.
+ * Vue qui sert à afficher les erreurs du formulaire
  *
  * @author Eoxia <dev@eoxia.com>
  * @since 2.0.0

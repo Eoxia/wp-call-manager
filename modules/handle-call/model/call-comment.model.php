@@ -1,6 +1,6 @@
 <?php
 /**
- * Define schema of call-comment
+ * Definition du schema de call-comment .
  *
  * @author Eoxia <dev@eoxia.com>
  * @since 2.0.0
@@ -32,5 +32,4 @@ class Call_Comment_Model extends \eoxia\Comment_Model {
 		);
 		parent::__construct( $data, $req_method );
 	}
-
 }
