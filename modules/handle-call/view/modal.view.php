@@ -14,8 +14,7 @@ namespace handle_call;
 if ( ! defined( 'ABSPATH' ) ) {
 	exit;
 } ?>
-<body>
-		<form class="wpcm-add-call wpeo-form wpeo-wrap">
+		<form id="body_modal" class="wpcm-add-call wpeo-form wpeo-wrap">
 			<div class="wpcm-section-user">
 				<h2><i class="fas fa-user-secret fa-fw"></i><?php echo esc_html_e( 'User concerned', 'call-manager' ); ?></h2>
 				<ul class="wpcm-list-user">
@@ -46,7 +45,7 @@ if ( ! defined( 'ABSPATH' ) ) {
 							endforeach;
 						}
 						?>
-						<input id="hook_jquery2" type = "hidden" name = "le_status" value = "">
+						<input id="hook_jquery2" type = "hidden" name = "modal_status" value = "">
 					</ul>
 				</div><!-- .wpcm-section-call -->
 			<!-- l'auto complete clients -->
@@ -79,7 +78,7 @@ if ( ! defined( 'ABSPATH' ) ) {
 				<label class="form-field-container">
 					<span class="form-field-icon-prev"><i class="fas fa-building"></i></span>
 						<input type="text"
-							name="societe" class="form-field" placeholder="<?php echo esc_html_e( 'Society', 'call-manager' ); ?>" />
+							name="society" class="form-field" placeholder="<?php echo esc_html_e( 'Society', 'call-manager' ); ?>" />
 				</label>
 			</div>
 		<div class="form-element">
@@ -87,7 +86,6 @@ if ( ! defined( 'ABSPATH' ) ) {
 				<span class="form-field-icon-prev"><i class="fas fa-user"></i></span>
 				<input type="text" class="form-field"
 				name="username" placeholder="<?php echo esc_html_e( 'First Name', 'call-manager' ); ?>" value="">
-				<input type="hidden" id="samplepermalinknonce" name="samplepermalinknonce" value="411fb0931e">
 			</label>
 			<label class="form-field-container">
 				<span class="form-field-icon-prev"><i class="fas fa-user"></i></span>
@@ -111,8 +109,7 @@ if ( ! defined( 'ABSPATH' ) ) {
 		<div class="form-element">
 			<span class="form-label"><?php echo esc_html_e( 'Comment', 'call-manager' ); ?></span>
 				<label class="form-field-container">
-				<textarea class="form-field" rows="5" cols="5" name="commentaire" placeholder="<?php esc_html_e( 'Write a Comment !', 'call-manager' ); ?>"></textarea>
+				<textarea class="form-field" rows="2" cols="2" name="modal_comment" placeholder="<?php esc_html_e( 'Write a Comment !', 'call-manager' ); ?>"></textarea>
 				</label>
 		</div>
 	</form>
-</body>

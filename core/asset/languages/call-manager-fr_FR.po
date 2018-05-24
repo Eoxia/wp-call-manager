@@ -1,8 +1,8 @@
 msgid ""
 msgstr ""
 "Project-Id-Version: Call Manager\n"
-"POT-Creation-Date: 2018-05-23 14:24+0200\n"
-"PO-Revision-Date: 2018-05-23 14:24+0200\n"
+"POT-Creation-Date: 2018-05-24 10:23+0200\n"
+"PO-Revision-Date: 2018-05-24 10:23+0200\n"
 "Last-Translator: \n"
 "Language-Team: eoxia\n"
 "Language: fr\n"
@@ -34,62 +34,70 @@ msgstr "a rappeler"
 msgid "To transfer"
 msgstr "A Transferer"
 
+#: modules/handle-call/view/modal-button-success.view.php:18
+msgid "Insert has been success Close modal"
+msgstr "l'insertion a été un succès fermer le modal"
+
 #: modules/handle-call/view/modal-button.view.php:18
 msgid "Valid"
 msgstr "Validé"
+
+#: modules/handle-call/view/modal-success.view.php:18
+msgid "Comment insert is Success"
+msgstr "l'insertion de commentaire est Succès"
 
 #: modules/handle-call/view/modal.view.php:20
 msgid "User concerned"
 msgstr "Utilisateur concerné"
 
-#: modules/handle-call/view/modal.view.php:38
+#: modules/handle-call/view/modal.view.php:35
 msgid "Call Status"
 msgstr "Statut de l'appel"
 
-#: modules/handle-call/view/modal.view.php:58
+#: modules/handle-call/view/modal.view.php:54
 msgid "customers"
 msgstr "clients"
 
-#: modules/handle-call/view/modal.view.php:70
+#: modules/handle-call/view/modal.view.php:66
 msgid "Display Name"
 msgstr "Nom d affichage"
 
-#: modules/handle-call/view/modal.view.php:71
+#: modules/handle-call/view/modal.view.php:67
 msgid "Adress Mail"
 msgstr "Mail Adress"
 
-#: modules/handle-call/view/modal.view.php:72
+#: modules/handle-call/view/modal.view.php:68
 msgid "New customer"
 msgstr "Nouveau Client"
 
-#: modules/handle-call/view/modal.view.php:83
+#: modules/handle-call/view/modal.view.php:77
 msgid "Add New customer"
 msgstr "Ajouté un  Nouveau Client"
 
-#: modules/handle-call/view/modal.view.php:88
+#: modules/handle-call/view/modal.view.php:82
 msgid "Society"
 msgstr "Entreprise"
 
-#: modules/handle-call/view/modal.view.php:95
+#: modules/handle-call/view/modal.view.php:89
 msgid "First Name"
 msgstr "Prénom"
 
-#: modules/handle-call/view/modal.view.php:101
+#: modules/handle-call/view/modal.view.php:94
 msgid "Last Name"
 msgstr "Nom"
 
-#: modules/handle-call/view/modal.view.php:106
+#: modules/handle-call/view/modal.view.php:99
 msgid "email"
 msgstr "email"
 
-#: modules/handle-call/view/modal.view.php:111
+#: modules/handle-call/view/modal.view.php:104
 msgid "Phone"
 msgstr "Téléphone"
 
-#: modules/handle-call/view/modal.view.php:119
+#: modules/handle-call/view/modal.view.php:111
 msgid "Comment"
 msgstr "Commentaire"
 
-#: modules/handle-call/view/modal.view.php:121
+#: modules/handle-call/view/modal.view.php:113
 msgid "Write a Comment !"
 msgstr "écrie un Commentaire ! "

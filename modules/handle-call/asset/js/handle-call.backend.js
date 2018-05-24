@@ -30,7 +30,15 @@ window.eoxiaJS.callManager.handleCall.init = function() {
 	jQuery( document ).on( 'click', 'li.autocomplete-result', window.eoxiaJS.callManager.handleCall.selectCustomers );
 	jQuery( document ).on( 'click', 'span.ajou_client', window.eoxiaJS.callManager.handleCall.newCustomers );
 };
+window.eoxiaJS.callManager.handleCall.backModal = function( triggeredElement, response ) {
+	jQuery( '.modal-content' ).html( response.data.view );
+	jQuery( '.modal-footer' ).html( response.data.buttons_view );
+};
 
+window.eoxiaJS.callManager.handleCall.displaySucessMess = function( triggeredElement, response ) {
+		jQuery( '.modal-content' ).html( response.data.view_s );
+		jQuery( '.modal-footer' ).html( response.data.button_view_s );
+};
 window.eoxiaJS.callManager.handleCall.selectUser = function() {
 	var dataId = jQuery( this ).attr( 'data-id' );
 	jQuery( 'li.active' ).removeClass( 'active button-main' );
@@ -56,4 +64,8 @@ window.eoxiaJS.callManager.handleCall.selectCustomers = function() {
 
 window.eoxiaJS.callManager.handleCall.newCustomers = function() {
 	jQuery( '#erf' ).css( 'display', 'block' );
+};
+
+window.eoxiaJS.callManager.handleCall.displayErrorCreateCustomer = function( triggeredElement, response ) {
+	jQuery( '#displayerror' ).html( response.data.view );
 };
