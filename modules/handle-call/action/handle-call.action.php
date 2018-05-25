@@ -39,12 +39,42 @@ class Handle_Call_Action {
 		add_menu_page( __( 'Call List', 'call-manager' ), 'Call_List', 'manage_options', 'call-manager', array( $this, 'send_list_view' ) );
 	}
 	/**
+	 * Fonction pour filter Date .
+	 */
+	public function date_filter() {
+		if ( isset( $_GET['date_start'] ) && isset( $_GET['date_end'] )  ) {
+			$date = $_GET['date'];
+		} else {
+			$date = date( 'd/m/Y' );
+}
+	}
+	/**
 	 * Fonction pour charger la vu de list menu.
 	 */
 	public function send_list_view() {
+		$users_admin    = \eoxia\User_Class::g()->get( array(
+			'role' => 'administrator',
+		) );
+		$four_categorys = Handle_Call_Class::g()->get();
+
+		if ( isset( $_POST['status'] ) ) { // WPCS: CSRF ok.
+			$ps     = $_POST['status'];
+			$status = $ps;
+		} else {
+			$status = 'traite';
+		}
+
+		$comments = Call_Comment_Class::g()->get(array(
+			'order'      => 'DESC',
+			'meta_key'   => 'call_status',
+			'meta_value' => $status,
+		));
 		ob_start();
-		\eoxia\View_Util::exec( 'call-manager', 'handle-call', 'menu-list',array(
+		\eoxia\View_Util::exec( 'call-manager', 'handle-call', 'menu-list', array(
 			'list_view_success' => ob_get_clean(),
+			'users'             => $users_admin,
+			'four_categorys'    => $four_categorys,
+			'comments'          => $comments,
 		) );
 	}
 	/**
@@ -98,7 +128,7 @@ class Handle_Call_Action {
 			'view'         => $clean_modal,
 			'buttons_view' => $clean_modal_btn,
 		);
-		if ( isset($_POST['reload'] ) && $_POST['reload'] === 'ok') {
+		if ( isset( $_POST['reload'] ) && $_POST['reload'] === 'ok' ) {
 			$response = array(
 				'namespace'        => 'callManager',
 				'module'           => 'handleCall',
@@ -130,18 +160,16 @@ class Handle_Call_Action {
 			$arg     = Handle_Call_Class::g()->create_customer( $username, $lastname, $society, $tel );
 			$id_cust = (int) $arg;
 		}
-
 		ob_start();
 		\eoxia\View_Util::exec( 'call-manager', 'handle-call', 'modal-success' );
 		$clean_modal_success = ob_get_clean();
 		ob_start();
 		\eoxia\View_Util::exec( 'call-manager', 'handle-call', 'modal-button-success' );
 		$clean_modal_btn_success = ob_get_clean();
-
-				$args_success = array(
+				$args_success        = array(
 					'post_id'          => $id_cust,
 					'author_id'        => $id_admi,
-					'status'           => $modal_status,
+					'call_status'      => $modal_status,
 					'content'          => $modal_comment,
 					'namespace'        => 'callManager',
 					'module'           => 'handleCall',

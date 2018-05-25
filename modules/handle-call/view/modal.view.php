@@ -55,7 +55,7 @@ if ( ! defined( 'ABSPATH' ) ) {
 						<input id='id_cust' type='hidden' name="id_cust" value="">
 						<label class="autocomplete-label" for="mon-autocomplete">
 							<i class="autocomplete-icon-before far fa-search"></i>
-							<input id="mon-autocomplete" placeholder="Recherche..." class="autocomplete-search-input" type="text">
+							<input autocomplete="off" id="mon-autocomplete" placeholder="Recherche..." class="autocomplete-search-input" type="text">
 							<span class="autocomplete-icon-after"><i class="far fa-times"></i></span>
 						</label>
 				<ul class="autocomplete-search-list">

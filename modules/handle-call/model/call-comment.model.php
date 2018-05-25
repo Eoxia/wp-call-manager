@@ -27,8 +27,10 @@ class Call_Comment_Model extends \eoxia\Comment_Model {
 	 */
 	public function __construct( $data = null, $req_method = null ) {
 		$this->schema['call_status'] = array(
-			'type'    => 'string',
-			'default' => 'treated',
+			'type'      => 'string',
+			'default'   => 'treated',
+			'meta_type' => 'single',
+			'field'     => 'call_status',
 		);
 		parent::__construct( $data, $req_method );
 	}
