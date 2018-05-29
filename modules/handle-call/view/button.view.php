@@ -18,5 +18,5 @@ if ( ! defined( 'ABSPATH' ) ) {
 	data-action="ajax_launch"
 	data-title="Call Manager"
 	>
-	<i class="#"></i> <span>Call Manager</span>
+	<i class="#"></i> <span><?php echo esc_html_e( 'Incomming Call', 'call-manager' ); ?></span>
 </div>

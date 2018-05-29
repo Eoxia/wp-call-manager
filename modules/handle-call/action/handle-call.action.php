@@ -31,22 +31,32 @@ class Handle_Call_Action {
 		add_action( 'wp_ajax_ajax_launch', array( $this, 'ajax_load' ) );
 		add_action( 'wp_ajax_search_admins', array( $this, 'ajax_search_cust' ) );
 		add_action( 'wp_ajax_cree_cust', array( $this, 'insert_comment' ) );
+		add_action( 'wp_ajax_update_status', array( $this, 'up_status' ) );
+	}
+	/**
+	 * Fonction update status
+	 */
+	public function up_status() {
+		// traitement status vers traite .
+		if ( isset( $_POST['id_call'] ) ) { // WPCS: CSRF ok.
+			$id_comment = $_POST['id_call']; // WPCS: CSRF ok.
+			update_comment_meta( $id_comment, 'call_status', 'traite' );
+		}
+		// traitement des status traite vers trash .
+		if ( isset( $_POST['id_trash'] ) ) {
+			$id_comment                  = $_POST['id_trash']; // WPCS: CSRF ok.
+			$comment                     = array();
+			$comment['comment_ID']       = $id_comment;
+			$comment['comment_approved'] = 0;
+			wp_update_comment( $comment );
+		}
+		wp_send_json_success();
 	}
 	/**
 	 * Fonction pour ajouter une page menu list.
 	 */
 	public function add_list_page() {
 		add_menu_page( __( 'Call List', 'call-manager' ), 'Call_List', 'manage_options', 'call-manager', array( $this, 'send_list_view' ) );
-	}
-	/**
-	 * Fonction pour filter Date .
-	 */
-	public function date_filter() {
-		if ( isset( $_GET['date_start'] ) && isset( $_GET['date_end'] )  ) {
-			$date = $_GET['date'];
-		} else {
-			$date = date( 'd/m/Y' );
-}
 	}
 	/**
 	 * Fonction pour charger la vu de list menu.
@@ -56,25 +66,60 @@ class Handle_Call_Action {
 			'role' => 'administrator',
 		) );
 		$four_categorys = Handle_Call_Class::g()->get();
-
+				// traitement pour les 4 status !
 		if ( isset( $_POST['status'] ) ) { // WPCS: CSRF ok.
-			$ps     = $_POST['status'];
+			$ps     = $_POST['status']; // WPCS: CSRF ok.
 			$status = $ps;
 		} else {
-			$status = 'traite';
+			$status = '';
 		}
-
-		$comments = Call_Comment_Class::g()->get(array(
-			'order'      => 'DESC',
-			'meta_key'   => 'call_status',
-			'meta_value' => $status,
-		));
+		// traitement date !
+		if ( isset( $_POST['date_start'] ) && isset( $_POST['date_end'] ) ) { // WPCS: CSRF ok.
+				$date_start = $_POST['date_start']; // WPCS: CSRF ok.
+				$date_end   = $_POST['date_end']; // WPCS: CSRF ok.
+		} else {
+				$date_start = '';
+				$date_end   = '';
+		}
+		$display_count = 9999999999999;
+		$paged         = ( get_query_var( 'paged' ) ) ? get_query_var( 'paged' ) : 1;
+		$offset        = ( $paged - 1 ) * $display_count;
+		if ( '' !== $date_start || '' !== $date_end ) {
+			echo '$date a une valeur !';
+			$comments = Call_Comment_Class::g()->get(array(
+				'order'      => 'DESC',
+				'meta_key'   => 'call_status',
+				'meta_value' => $status,
+				'number'     => $display_count,
+				'paged'      => $paged,
+				'offset'     => $offset,
+				'date_query' => array(
+					array(
+						'after'     => $date_start,
+						'before'    => $date_end,
+						'inclusive' => true,
+					),
+				),
+			));
+		} else {
+			$comments = Call_Comment_Class::g()->get(array(
+				'order'      => 'DESC',
+				'meta_key'   => 'call_status',
+				'meta_value' => $status,
+				'number'     => $display_count,
+				'paged'      => $paged,
+				'offset'     => $offset,
+			));
+		}
 		ob_start();
 		\eoxia\View_Util::exec( 'call-manager', 'handle-call', 'menu-list', array(
 			'list_view_success' => ob_get_clean(),
 			'users'             => $users_admin,
 			'four_categorys'    => $four_categorys,
 			'comments'          => $comments,
+			'number'            => $display_count,
+			'paged'             => $paged,
+			'offset'            => $offset,
 		) );
 	}
 	/**
@@ -108,7 +153,6 @@ class Handle_Call_Action {
 	 * @version 2.0.0
 	 */
 	public function ajax_load() {
-
 		$users          = \eoxia\User_Class::g()->get( array(
 			'role' => 'administrator',
 		) );
@@ -123,12 +167,11 @@ class Handle_Call_Action {
 		\eoxia\View_Util::exec( 'call-manager', 'handle-call', 'modal-button' );
 		\eoxia\View_Util::exec( 'call-manager', 'handle-call', 'modal-error' );
 		$clean_modal_btn = ob_get_clean();
-
-		$response = array(
+		$response        = array(
 			'view'         => $clean_modal,
 			'buttons_view' => $clean_modal_btn,
 		);
-		if ( isset( $_POST['reload'] ) && $_POST['reload'] === 'ok' ) {
+		if ( isset( $_POST['reload'] ) && 'ok' === $_POST['reload'] ) { // WPCS: CSRF ok.
 			$response = array(
 				'namespace'        => 'callManager',
 				'module'           => 'handleCall',
@@ -166,7 +209,7 @@ class Handle_Call_Action {
 		ob_start();
 		\eoxia\View_Util::exec( 'call-manager', 'handle-call', 'modal-button-success' );
 		$clean_modal_btn_success = ob_get_clean();
-				$args_success        = array(
+				$args_success    = array(
 					'post_id'          => $id_cust,
 					'author_id'        => $id_admi,
 					'call_status'      => $modal_status,
@@ -195,16 +238,30 @@ class Handle_Call_Action {
 		) );
 		$users         = $u->posts;
 		ob_start();
-		foreach ( $users as $user ) :
-			?>
+		if ( isset( $users ) ) {
+			foreach ( $users as $user ) :
+				?>
 			<li data-id="<?php echo esc_attr( $user->ID ); ?>" data-result="<?php echo esc_html( $user->post_title ); ?>" class="autocomplete-result">
 				<?php echo get_avatar( $user->ID, 32, '', '', array( 'class' => 'autocomplete-result-image autocomplete-image-rounded' ) ); ?>
 				<div class="autocomplete-result-container">
 					<span class="autocomplete-result-title"><?php echo esc_html( $user->post_title ); ?></span>
 				</div>
 			</li>
+				<?php
+			endforeach;
+		}
+		if ( empty( $users ) ) {
+			?>
+		<li class="autocomplete-result" style="z-index:999;">
+			<img class="autocomplete-result-image" src="https://pbs.twimg.com/profile_images/378800000483044729/a9887ba5faac56724e7988ce95c5bab0_normal.png">
+			<div class="autocomplete-result-container">
+				<span class="autocomplete-result-title"><?php echo esc_html_e( 'Display Name', 'call-manager' ); ?></span>
+				<span class="autocomplete-result-subtitle"><?php echo esc_html_e( 'Adress Mail', 'call-manager' ); ?></span>
+				<span class="wpeo-button button-main ajou_client"><?php echo esc_html_e( 'New customer', 'call-manager' ); ?></span>
+			</div>
+		</li>
 			<?php
-		endforeach;
+		}
 		wp_send_json_success( array(
 			'view' => ob_get_clean(),
 		) );

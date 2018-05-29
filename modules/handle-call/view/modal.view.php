@@ -59,14 +59,9 @@ if ( ! defined( 'ABSPATH' ) ) {
 							<span class="autocomplete-icon-after"><i class="far fa-times"></i></span>
 						</label>
 				<ul class="autocomplete-search-list">
-					<li class="autocomplete-result">
-						<img class="autocomplete-result-image" src="https://pbs.twimg.com/profile_images/378800000483044729/a9887ba5faac56724e7988ce95c5bab0_normal.png">
-						<div class="autocomplete-result-container">
-							<span class="autocomplete-result-title"><?php echo esc_html_e( 'Display Name', 'call-manager' ); ?></span>
-							<span class="autocomplete-result-subtitle"><?php echo esc_html_e( 'Adress Mail', 'call-manager' ); ?></span>
-							<span class="wpeo-button button-main ajou_client"><?php echo esc_html_e( 'New customer', 'call-manager' ); ?></span>
-						</div>
-					</li>
+
+
+
 				</ul>
 					</div><!-- .wpeo-autocomplete -->
 				</div>

@@ -29,7 +29,16 @@ window.eoxiaJS.callManager.handleCall.init = function() {
 	jQuery( document ).on( 'click', '#btn-status', window.eoxiaJS.callManager.handleCall.selectStatus );
 	jQuery( document ).on( 'click', 'li.autocomplete-result', window.eoxiaJS.callManager.handleCall.selectCustomers );
 	jQuery( document ).on( 'click', 'span.ajou_client', window.eoxiaJS.callManager.handleCall.newCustomers );
+	jQuery( document ).on( 'click', '#switch_btn', window.eoxiaJS.callManager.handleCall.switchStatus );
 };
+
+window.eoxiaJS.callManager.handleCall.switchStatus = function() {
+	jQuery( '#switch_btn' ).removeClass( 'button-yellow' );
+	jQuery( this ).addClass( 'button-red' );
+	jQuery( '#switch_btn_text' ).replaceWith( '<span id="switch_btn_text">Drop</span>' );
+	//jQuery( '#' ).replaceWith( '<span id="switch_btn_text">Drop</span>' );
+};
+
 window.eoxiaJS.callManager.handleCall.backModal = function( triggeredElement, response ) {
 	jQuery( '.modal-content' ).html( response.data.view );
 	jQuery( '.modal-footer' ).html( response.data.buttons_view );
