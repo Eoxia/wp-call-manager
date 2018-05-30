@@ -81,6 +81,7 @@ class Handle_Call_Action {
 				$date_start = '';
 				$date_end   = '';
 		}
+		// variable pour la pagination .
 		$display_count = 9999999999999;
 		$paged         = ( get_query_var( 'paged' ) ) ? get_query_var( 'paged' ) : 1;
 		$offset        = ( $paged - 1 ) * $display_count;
@@ -190,6 +191,7 @@ class Handle_Call_Action {
 		check_ajax_referer( 'send_form' );
 		$id_cust       = (int) $_POST['id_cust'];
 		$id_admi       = (int) $_POST['id_admin'];
+		$elapsed_time  = (int) $_POST['time_info_modal'];
 		$modal_status  = (string) $_POST['modal_status'];
 		$modal_comment = (string) $_POST['modal_comment'];
 		$username      = sanitize_text_field( $_POST['username'] );
@@ -205,11 +207,9 @@ class Handle_Call_Action {
 		}
 		ob_start();
 		\eoxia\View_Util::exec( 'call-manager', 'handle-call', 'modal-success' );
-		$clean_modal_success = ob_get_clean();
-		ob_start();
-		\eoxia\View_Util::exec( 'call-manager', 'handle-call', 'modal-button-success' );
-		$clean_modal_btn_success = ob_get_clean();
-				$args_success    = array(
+		$clean_modal_success  = ob_get_clean();
+				$args_success = array(
+					'view_s'           => $clean_modal_success,
 					'post_id'          => $id_cust,
 					'author_id'        => $id_admi,
 					'call_status'      => $modal_status,
@@ -217,11 +217,36 @@ class Handle_Call_Action {
 					'namespace'        => 'callManager',
 					'module'           => 'handleCall',
 					'callback_success' => 'displaySucessMess',
-					'view_s'           => $clean_modal_success,
-					'button_view_s'    => $clean_modal_btn_success,
 				);
-					Call_Comment_Class::g()->create( $args_success );
-					wp_send_json_success( $args_success );
+				Call_Comment_Class::g()->create( $args_success );
+					// Crée nouvelle tache START.
+				$call_term  = get_term_by( 'slug', 'call-manager', \task_manager\Tag_Class::g()->get_type() );
+
+				//ICI
+				global $wpdb;
+				$post_id = $wpdb->get_results("SELECT post_type
+				FROM {$wpdb->prefix}posts
+				INNER JOIN {$wpdb->term_relationships} ON ({$wpdb->posts}.ID = {$wpdb->term_relationships}.object_id)
+				WHERE {$wpdb->prefix}post_type = 'wpshop_customers'");
+				//query recup la tache qui correspond à l id cust et qui correspond à l id de la category
+				//et pour verif c est dans la table term_relationships
+				$verif_task = \task_manager\Task_Class::g()->get( array(
+					'post_id' => $id_cust,
+					'title'   => 'appel telephonique',
+
+				), true );
+				echo "<pre>"; print_r($verif_task); echo "</pre>";
+	if ( $verif_task !== null ) {
+							$modal_task = \task_manager\Task_Class::g()->create( array(
+								'post_id'    => $id_cust,
+								'post_title' => 'appel telephonique',
+								'category'   => 'call-manager',
+								'taxonomy'   => array(
+									\task_manager\Tag_Class::g()->get_type() => $call_term->term_id,
+								),
+							));
+				}
+				wp_send_json_success( $args_success );
 	}
 	/**
 	 * Fonction auto complete de la barre de recherche rapide.

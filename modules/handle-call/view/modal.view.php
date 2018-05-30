@@ -106,5 +106,7 @@ if ( ! defined( 'ABSPATH' ) ) {
 				<label class="form-field-container">
 				<textarea class="form-field" rows="2" cols="2" name="modal_comment" placeholder="<?php esc_html_e( 'Write a Comment !', 'call-manager' ); ?>"></textarea>
 				</label>
-		</div>
+
+				<i class="dashicons dashicons-clock"></i>
+				<input type="text" class="point-time" name="time_info_modal" value="15">
 	</form>

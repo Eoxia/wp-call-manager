@@ -16,3 +16,10 @@ if ( ! defined( 'ABSPATH' ) ) {
 } ?>
 
 	<h1 id="body_modal_success"><?php echo esc_html_e( 'Comment insert is Success', 'call-manager' ); ?></h1>
+	<div  class="wpeo-button button-red modal-close">
+		<span><?php echo esc_html_e( 'Close modal', 'Call-Manager' ); ?></span>
+	</div>
+
+	<div id="back_modal" class="wpeo-button button-green action-attribute" data-action="ajax_launch" data-reload ="ok">
+		<span><?php echo esc_html_e( 'Back to the Modal', 'Call-Manager' ); ?></span>
+	</div>
