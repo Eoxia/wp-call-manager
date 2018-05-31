@@ -15,8 +15,10 @@ if ( ! defined( 'ABSPATH' ) ) {
 	exit;
 } ?>
 		<form id="body_modal" class="wpcm-add-call wpeo-form wpeo-wrap">
+
 			<div class="wpcm-section-user">
 				<h2><i class="fas fa-user-secret fa-fw"></i><?php echo esc_html_e( 'User concerned', 'call-manager' ); ?></h2>
+
 				<ul class="wpcm-list-user">
 					<?php
 					wp_nonce_field( 'send_form' );
@@ -28,10 +30,12 @@ if ( ! defined( 'ABSPATH' ) ) {
 					?>
 					<input id="hook_jquery1" type="hidden" name="id_admin" value="">
 				</ul>
+
 			</div><!-- .wpcm-section-user -->
 			<div class="wpcm-section-call wpeo-grid grid-2">
 				<div class="wpcm-section-statut">
 					<h2><i class="fas fa-phone fa-fw"></i><?php echo esc_html_e( 'Call Status', 'call-manager' ); ?></h2>
+
 					<ul class="wpcm-list-statut wpeo-grid grid-2">
 						<?php
 						if ( isset( $users ) ) {
@@ -47,6 +51,7 @@ if ( ! defined( 'ABSPATH' ) ) {
 						?>
 						<input id="hook_jquery2" type = "hidden" name = "modal_status" value = "">
 					</ul>
+
 				</div><!-- .wpcm-section-call -->
 			<!-- l'auto complete clients -->
 				<div class="wpcm-section-search">
@@ -59,8 +64,6 @@ if ( ! defined( 'ABSPATH' ) ) {
 							<span class="autocomplete-icon-after"><i class="far fa-times"></i></span>
 						</label>
 				<ul class="autocomplete-search-list">
-
-
 
 				</ul>
 					</div><!-- .wpeo-autocomplete -->
@@ -106,7 +109,7 @@ if ( ! defined( 'ABSPATH' ) ) {
 				<label class="form-field-container">
 				<textarea class="form-field" rows="2" cols="2" name="modal_comment" placeholder="<?php esc_html_e( 'Write a Comment !', 'call-manager' ); ?>"></textarea>
 				</label>
-
 				<i class="dashicons dashicons-clock"></i>
-				<input type="text" class="point-time" name="time_info_modal" value="15">
+				<input type="text" class="point-time" name="time_info" value="15">
+				<input type="hidden" name="tm_point_is_quick_point" value="true">
 	</form>

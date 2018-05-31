@@ -82,6 +82,7 @@ class Handle_Call_Class extends \eoxia\Singleton_Util {
 	 * @param string $tel      _.
 	 */
 	public function create_customer( $username, $lastname, $societe, $tel ) {
+		$user_id_post = 0;
 		global $wpdb;
 		$random_password = wp_generate_password();
 		if ( ! empty( $username ) ) {

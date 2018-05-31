@@ -82,7 +82,7 @@ foreach ( $four_categorys as $four_category => $key ) :
 						if ( 'traite' === $comment->data['call_status'] ) {
 							?>
 						<div class="table-cell">
-							<div onclick="document.location.replace('admin.php?page=call-manager');" id="trash_btn" class="wpeo-button button-progress button-red action-attribute wpeo-animate animate-hover swing" data-action="update_status" data-id_trash="<?php echo esc_attr( $comment->data['id'] ); ?>">
+							<div onclick="document.location.replace('admin.php?page=call-manager&paged=1');" id="trash_btn" class="wpeo-button button-progress button-red action-attribute wpeo-animate animate-hover swing" data-action="update_status" data-id_trash="<?php echo esc_attr( $comment->data['id'] ); ?>">
 							<?php echo esc_html_e( 'Drop', 'call-manager' ); ?>
 							</div>
 						</div>
@@ -91,7 +91,7 @@ foreach ( $four_categorys as $four_category => $key ) :
 						if ( 'traite' !== $comment->data['call_status'] ) {
 							?>
 							<div class="table-cell">
-								<div onclick="document.location.replace('admin.php?page=call-manager');" id="switch_btn" class="wpeo-button button-progress button-yellow action-attribute wpeo-animate animate-hover swing" data-action="update_status" data-id_call="<?php echo esc_attr( $comment->data['id'] ); ?>">
+								<div onclick="document.location.replace('admin.php?page=call-manager&paged=1');" id="switch_btn" class="wpeo-button button-progress button-yellow action-attribute wpeo-animate animate-hover swing" data-action="update_status" data-id_call="<?php echo esc_attr( $comment->data['id'] ); ?>">
 							<?php echo esc_html_e( 'Switch to treaty', 'call-manager' ); ?>
 								</div>
 							</div>
@@ -112,14 +112,12 @@ foreach ( $four_categorys as $four_category => $key ) :
 <!-- Tableau End -->
 <div>
 	<?php
-	// $big = 999999999; // need an unlikely integer
-	//
-	// echo paginate_links( array(
-	// 	'base' => str_replace( $big, '%#%', esc_url( get_pagenum_link( $big ) ) ),
-	// 	'format' => '?paged=%#%',
-	// 	'current' => max( 1, get_query_var('paged') ),
-	// 	'total' => count( $comments ),
-	// ) );
-	//echo count( $comments );
+	$big = 999999999; // need an unlikely integer .
+	echo paginate_links( array(
+		'base'    => str_replace( $big, '%#%', esc_url( get_pagenum_link( $big ) ) ),
+		'format'  => '?paged=%#%',
+		'current' => max( 1, $paged ),
+		'total'   => $nb_page,
+	) );
 	?>
 </div>

@@ -19,4 +19,6 @@ DEFINE( 'PLUGIN_CALL_MANAGER_URL', plugins_url( basename( __DIR__ ) ) . '/' );
 DEFINE( 'PLUGIN_CALL_MANAGER_DIR', basename( __DIR__ ) );
 
 // Boot your plugin.
+require_once 'core/external/eo-framework/eo-framework.php';
+
 \eoxia\Init_Util::g()->exec( PLUGIN_CALL_MANAGER_PATH, basename( __FILE__, '.php' ) );

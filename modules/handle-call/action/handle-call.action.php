@@ -82,17 +82,20 @@ class Handle_Call_Action {
 				$date_end   = '';
 		}
 		// variable pour la pagination .
-		$display_count = 9999999999999;
-		$paged         = ( get_query_var( 'paged' ) ) ? get_query_var( 'paged' ) : 1;
-		$offset        = ( $paged - 1 ) * $display_count;
+		global $wpdb;
+		$number   = 10;
+		$paged    = isset( $_GET['paged'] ) ? $_GET['paged'] : 1; // WPCS: CSRF ok.
+		$offset   = ( $paged - 1 ) * $number;
+		$max_mess = $wpdb->get_var( 'SELECT COUNT(*) FROM wp_comments WHERE comment_type = "call-comment"' );
+		$nb_page  = ceil( $max_mess / $number );
+
 		if ( '' !== $date_start || '' !== $date_end ) {
 			echo '$date a une valeur !';
 			$comments = Call_Comment_Class::g()->get(array(
 				'order'      => 'DESC',
 				'meta_key'   => 'call_status',
 				'meta_value' => $status,
-				'number'     => $display_count,
-				'paged'      => $paged,
+				'number'     => $number,
 				'offset'     => $offset,
 				'date_query' => array(
 					array(
@@ -106,10 +109,9 @@ class Handle_Call_Action {
 			$comments = Call_Comment_Class::g()->get(array(
 				'order'      => 'DESC',
 				'meta_key'   => 'call_status',
-				'meta_value' => $status,
-				'number'     => $display_count,
-				'paged'      => $paged,
+				'number'     => $number,
 				'offset'     => $offset,
+				'meta_value' => $status,
 			));
 		}
 		ob_start();
@@ -118,9 +120,10 @@ class Handle_Call_Action {
 			'users'             => $users_admin,
 			'four_categorys'    => $four_categorys,
 			'comments'          => $comments,
-			'number'            => $display_count,
-			'paged'             => $paged,
+			'number'            => $number,
 			'offset'            => $offset,
+			'nb_page'           => $nb_page,
+			'paged'             => $paged,
 		) );
 	}
 	/**
@@ -191,7 +194,6 @@ class Handle_Call_Action {
 		check_ajax_referer( 'send_form' );
 		$id_cust       = (int) $_POST['id_cust'];
 		$id_admi       = (int) $_POST['id_admin'];
-		$elapsed_time  = (int) $_POST['time_info_modal'];
 		$modal_status  = (string) $_POST['modal_status'];
 		$modal_comment = (string) $_POST['modal_comment'];
 		$username      = sanitize_text_field( $_POST['username'] );
@@ -220,32 +222,37 @@ class Handle_Call_Action {
 				);
 				Call_Comment_Class::g()->create( $args_success );
 					// Crée nouvelle tache START.
-				$call_term  = get_term_by( 'slug', 'call-manager', \task_manager\Tag_Class::g()->get_type() );
+				$call_term = get_term_by( 'slug', 'call-manager', \task_manager\Tag_Class::g()->get_type() );
 
-				//ICI
 				global $wpdb;
-				$post_id = $wpdb->get_results("SELECT post_type
-				FROM {$wpdb->prefix}posts
-				INNER JOIN {$wpdb->term_relationships} ON ({$wpdb->posts}.ID = {$wpdb->term_relationships}.object_id)
-				WHERE {$wpdb->prefix}post_type = 'wpshop_customers'");
-				//query recup la tache qui correspond à l id cust et qui correspond à l id de la category
-				//et pour verif c est dans la table term_relationships
-				$verif_task = \task_manager\Task_Class::g()->get( array(
-					'post_id' => $id_cust,
-					'title'   => 'appel telephonique',
+				$post_id = $wpdb->get_var($wpdb->prepare('SELECT ID
+				FROM wp_posts AS T
+				INNER JOIN wp_term_relationships
+				AS TR
+				ON (T.ID = TR.object_id)
+				WHERE T.post_type = %s
+				AND T.post_parent = %d
+				AND TR.term_taxonomy_id = %d
+				LIMIT 1',
+				'wpeo-task', $id_cust, $call_term->term_taxonomy_id ) );
 
-				), true );
-				echo "<pre>"; print_r($verif_task); echo "</pre>";
-	if ( $verif_task !== null ) {
-							$modal_task = \task_manager\Task_Class::g()->create( array(
-								'post_id'    => $id_cust,
-								'post_title' => 'appel telephonique',
-								'category'   => 'call-manager',
-								'taxonomy'   => array(
-									\task_manager\Tag_Class::g()->get_type() => $call_term->term_id,
+		if ( empty( $post_id ) ) {
+						$modal_task = \task_manager\Task_Class::g()->create( array(
+							'parent_id' => $id_cust,
+							'title'     => 'appel telephonique',
+							'taxonomy'  => array(
+								\task_manager\Tag_Class::g()->get_type() => array(
+									$call_term->term_taxonomy_id,
 								),
-							));
-				}
+							),
+						));
+					$post_id        = $modal_task->data['id'];
+		}
+		$complete = false;
+		if ( 'traite' === $modal_status ) {
+			$complete = true;
+		}
+		$call_pts = \task_manager\Point_Class::g()->edit_point( 0, (int) $post_id, $modal_comment, $complete );
 				wp_send_json_success( $args_success );
 	}
 	/**
@@ -275,6 +282,7 @@ class Handle_Call_Action {
 				<?php
 			endforeach;
 		}
+		// Si aucun client n'est trouvé affichage du bouton qui permet d'afficher le formulaire .
 		if ( empty( $users ) ) {
 			?>
 		<li class="autocomplete-result" style="z-index:999;">
