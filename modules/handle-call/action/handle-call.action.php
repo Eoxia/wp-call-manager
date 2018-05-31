@@ -32,6 +32,18 @@ class Handle_Call_Action {
 		add_action( 'wp_ajax_search_admins', array( $this, 'ajax_search_cust' ) );
 		add_action( 'wp_ajax_cree_cust', array( $this, 'insert_comment' ) );
 		add_action( 'wp_ajax_update_status', array( $this, 'up_status' ) );
+		add_action( 'admin_init', array( $this, 'create_category' ) );
+	}
+	/**
+	 * Fonction cree la category call-manager si elle n'existe pas .
+	 */
+	public function create_category() {
+			$test_category = get_term_by( 'slug', 'call-manager', \task_manager\Tag_Class::g()->get() );
+		if ( empty( $test_category ) ) {
+			\task_manager\Tag_Class::g()->create(array(
+				'name' => 'call-manager',
+			) );
+		}
 	}
 	/**
 	 * Fonction update status
@@ -206,6 +218,7 @@ class Handle_Call_Action {
 		if ( empty( $id_cust ) ) {
 			$arg     = Handle_Call_Class::g()->create_customer( $username, $lastname, $society, $tel );
 			$id_cust = (int) $arg;
+			var_dump($arg);
 		}
 		ob_start();
 		\eoxia\View_Util::exec( 'call-manager', 'handle-call', 'modal-success' );
@@ -222,9 +235,17 @@ class Handle_Call_Action {
 				);
 				Call_Comment_Class::g()->create( $args_success );
 					// Crée nouvelle tache START.
+					// récup du tag .
 				$call_term = get_term_by( 'slug', 'call-manager', \task_manager\Tag_Class::g()->get_type() );
-
+				// Jointure de la table pour lier le commentaire à la tache par l id .
 				global $wpdb;
+				if ( empty( $id_cust ) ) {
+					$id_cust = ('SELECT ID
+						FROM wp_posts
+						WHERE post_type = wpshop_customers
+						LIMIT 1
+						');
+				}
 				$post_id = $wpdb->get_var($wpdb->prepare('SELECT ID
 				FROM wp_posts AS T
 				INNER JOIN wp_term_relationships
@@ -235,7 +256,7 @@ class Handle_Call_Action {
 				AND TR.term_taxonomy_id = %d
 				LIMIT 1',
 				'wpeo-task', $id_cust, $call_term->term_taxonomy_id ) );
-
+				// création de la tache .
 		if ( empty( $post_id ) ) {
 						$modal_task = \task_manager\Task_Class::g()->create( array(
 							'parent_id' => $id_cust,
@@ -248,6 +269,7 @@ class Handle_Call_Action {
 						));
 					$post_id        = $modal_task->data['id'];
 		}
+		// si le point est completer oui ou non .
 		$complete = false;
 		if ( 'traite' === $modal_status ) {
 			$complete = true;
