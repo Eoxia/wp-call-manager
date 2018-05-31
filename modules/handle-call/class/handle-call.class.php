@@ -81,12 +81,12 @@ class Handle_Call_Class extends \eoxia\Singleton_Util {
 	 * @param string $societe  _.
 	 * @param string $tel      _.
 	 */
-	public function create_customer( $username, $lastname, $societe, $tel ) {
+	public function create_customer( $username, $lastname, $societe, $tel, $email ) {
 		$user_id_post = 0;
 		global $wpdb;
 		$random_password = wp_generate_password();
 		if ( ! empty( $username ) ) {
-			$cree_user = wp_create_user( $username, $random_password, $lastname );
+			$cree_user = wp_create_user( $username, $random_password, $email );
 			if ( is_wp_error( $cree_user ) ) {
 				ob_start();
 				$ar = $cree_user->get_error_message();
@@ -103,7 +103,7 @@ class Handle_Call_Class extends \eoxia\Singleton_Util {
 				$user_id      = $cree_user;
 				$user_id_post = $wpdb->get_var( $wpdb->prepare( "SELECT ID FROM {$wpdb->posts} WHERE post_type = %s AND post_author = %d ORDER BY ID DESC LIMIT 1 ", 'wpshop_customers', $user_id ) );
 				update_user_meta( $user_id, 'first_name', $username );
-				update_user_meta( $user_id, 'last_name', $username );
+				update_user_meta( $user_id, 'last_name', $lastname );
 				update_user_meta( $user_id, 'wps_phone', $tel );
 				$wpdb->update( 'wp_posts', array( 'post_title' => $societe ), array( 'ID' => $user_id_post ) );
 			}

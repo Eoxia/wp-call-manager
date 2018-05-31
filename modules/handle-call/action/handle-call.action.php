@@ -38,7 +38,7 @@ class Handle_Call_Action {
 	 * Fonction cree la category call-manager si elle n'existe pas .
 	 */
 	public function create_category() {
-			$test_category = get_term_by( 'slug', 'call-manager', \task_manager\Tag_Class::g()->get() );
+			$test_category = get_term_by( 'slug', 'call-manager', \task_manager\Tag_Class::g()->get_type() );
 		if ( empty( $test_category ) ) {
 			\task_manager\Tag_Class::g()->create(array(
 				'name' => 'call-manager',
@@ -212,13 +212,13 @@ class Handle_Call_Action {
 		$lastname      = sanitize_text_field( $_POST['lastname'] );
 		$society       = sanitize_text_field( $_POST['society'] );
 		$tel           = sanitize_text_field( $_POST['phone'] );
+		$mail          = sanitize_text_field( $_POST['email'] );
 		if ( empty( $id_admi ) ) {
 			wp_send_json_error();
 		}
 		if ( empty( $id_cust ) ) {
-			$arg     = Handle_Call_Class::g()->create_customer( $username, $lastname, $society, $tel );
+			$arg     = Handle_Call_Class::g()->create_customer( $username, $lastname, $society, $tel, $mail );
 			$id_cust = (int) $arg;
-			var_dump($arg);
 		}
 		ob_start();
 		\eoxia\View_Util::exec( 'call-manager', 'handle-call', 'modal-success' );
