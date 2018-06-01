@@ -1,7 +1,7 @@
 # Call Manager ![Eoxia Logo](https://avatars0.githubusercontent.com/u/3227847?s=200&amp;v=4)
 ### version 2.0.0
 
-###### Call Manager a etais construit avec [eo-framework](https://github.com/Eoxia/eo-framework) il nécessite donc NodeJs ainsi que Gulp .
+###### Call Manager a étais construit avec [eo-framework](https://github.com/Eoxia/eo-framework) il nécessite donc NodeJs ainsi que Gulp .
 ###### Call Manager est un plugin WordPress qui nécessite les plugins suivant pour fonctionner correctement :
 
 * [WP_shop](https://github.com/Eoxia/wpshop).
@@ -14,7 +14,7 @@
 
 * au clique sur ce bouton une modal s'ouvre.
 
-* dans cette modal il vous sera demander de sélectionner l'administrateur concerner, le status de l'appel, le client Wp_shop (ou creation du client) et le temps de la tache (pour task-manager) .
+* dans cette modal il vous sera demander de sélectionner l'administrateur concerner, le status de l'appel, le client Wp_shop (ou création du client) et le temps de la tache (pour task-manager) .
 
 * si le client Wp_shop est introuvable il vous sera demander de cliquer sur un bouton "ajouter nouveau client", après un formulaire supplémentaire va apparaître pour vous permettre de crée un nouveau clients WP_shop .
 
