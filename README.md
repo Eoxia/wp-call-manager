@@ -20,7 +20,7 @@
 
 * Après il vous reste juste à taper un commentaire concernant l'appel reçu et cliquer sur validé . le commentaire sera liée au clients et à l'administrateur concerné .
 
-* de plus le commentaire corespondra à une une nouvelle tache dans le plugin task-manager avec la category "appel téléphonique".
+* de plus le commentaire correspondra à une une nouvelle tache dans le plugin task-manager avec la category "appel téléphonique".
 
 
 ## Table
