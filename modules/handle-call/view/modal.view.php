@@ -1,6 +1,7 @@
 <?php
 /**
  * Form view of "Call Manager" module.
+ * vue principale qui affiche le formulaire .
  *
  * @author Eoxia <dev@eoxia.com>
  * @since 2.0.0

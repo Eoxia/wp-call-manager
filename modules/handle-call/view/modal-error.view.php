@@ -1,6 +1,6 @@
 <?php
 /**
- * Vue qui sert à afficher les erreurs du formulaire
+ * Vue qui sert à afficher les erreurs du formulaire en bas de la modal .
  *
  * @author Eoxia <dev@eoxia.com>
  * @since 2.0.0

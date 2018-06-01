@@ -28,7 +28,7 @@ class Handle_Call_Action {
 		add_action( 'admin_bar_menu', array( $this, 'button_toolbar' ) );
 		add_action( 'admin_menu', array( $this, 'add_list_page' ), 20 );
 		add_action( 'init', array( $this, 'load_traduc' ) );
-		add_action( 'wp_ajax_ajax_launch', array( $this, 'ajax_load' ) );
+		add_action( 'wp_ajax_ajax_launch', array( $this, 'main_modal_view' ) );
 		add_action( 'wp_ajax_search_admins', array( $this, 'ajax_search_cust' ) );
 		add_action( 'wp_ajax_cree_cust', array( $this, 'insert_comment' ) );
 		add_action( 'wp_ajax_update_status', array( $this, 'up_status' ) );
@@ -100,7 +100,7 @@ class Handle_Call_Action {
 		$offset   = ( $paged - 1 ) * $number;
 		$max_mess = $wpdb->get_var( 'SELECT COUNT(*) FROM wp_comments WHERE comment_type = "call-comment"' );
 		$nb_page  = ceil( $max_mess / $number );
-
+		// filtre par tranche de date .
 		if ( '' !== $date_start || '' !== $date_end ) {
 			echo '$date a une valeur !';
 			$comments = Call_Comment_Class::g()->get(array(
@@ -163,15 +163,17 @@ class Handle_Call_Action {
 		$wp_admin_bar->add_node( $args );
 	}
 	/**
-	 * Fonction qui charge les vues du formulaire  .
+	 * Fonction qui charge les vues du formulaire : Principale & bouton & erreur .
 	 *
 	 * @since 1.0.0
 	 * @version 2.0.0
 	 */
-	public function ajax_load() {
-		$users          = \eoxia\User_Class::g()->get( array(
+	public function main_modal_view() {
+		// envoyer la liste des administrateurs .
+		$users = \eoxia\User_Class::g()->get( array(
 			'role' => 'administrator',
 		) );
+		// envoyer les 4 types d'appels .
 		$four_categorys = Handle_Call_Class::g()->get();
 		ob_start();
 		\eoxia\View_Util::exec( 'call-manager', 'handle-call', 'modal', array(
@@ -179,6 +181,7 @@ class Handle_Call_Action {
 			'four_categorys' => $four_categorys,
 		) );
 		$clean_modal = ob_get_clean();
+		// envoyer le bouton validé ainsi que la vu des erreurs .
 		ob_start();
 		\eoxia\View_Util::exec( 'call-manager', 'handle-call', 'modal-button' );
 		\eoxia\View_Util::exec( 'call-manager', 'handle-call', 'modal-error' );
@@ -213,13 +216,16 @@ class Handle_Call_Action {
 		$society       = sanitize_text_field( $_POST['society'] );
 		$tel           = sanitize_text_field( $_POST['phone'] );
 		$mail          = sanitize_text_field( $_POST['email'] );
+		// si l'id admin est vide il retourne une erreur .
 		if ( empty( $id_admi ) ) {
 			wp_send_json_error();
 		}
+		// si l'id client est vide alors il faut le crée .
 		if ( empty( $id_cust ) ) {
 			$arg     = Handle_Call_Class::g()->create_customer( $username, $lastname, $society, $tel, $mail );
 			$id_cust = (int) $arg;
 		}
+		// envoyer la vue success en cas de creation du nouveau clients .
 		ob_start();
 		\eoxia\View_Util::exec( 'call-manager', 'handle-call', 'modal-success' );
 		$clean_modal_success  = ob_get_clean();
@@ -234,18 +240,18 @@ class Handle_Call_Action {
 					'callback_success' => 'displaySucessMess',
 				);
 				Call_Comment_Class::g()->create( $args_success );
-					// Crée nouvelle tache START.
+					// Crée nouvelle tache Associer pour le plugin task-manager.
 					// récup du tag .
 				$call_term = get_term_by( 'slug', 'call-manager', \task_manager\Tag_Class::g()->get_type() );
 				// Jointure de la table pour lier le commentaire à la tache par l id .
 				global $wpdb;
-				if ( empty( $id_cust ) ) {
-					$id_cust = ('SELECT ID
+		if ( empty( $id_cust ) ) {
+					$id_cust = ( ' SELECT ID
 						FROM wp_posts
 						WHERE post_type = wpshop_customers
 						LIMIT 1
-						');
-				}
+						' );
+		}
 				$post_id = $wpdb->get_var($wpdb->prepare('SELECT ID
 				FROM wp_posts AS T
 				INNER JOIN wp_term_relationships
@@ -274,6 +280,7 @@ class Handle_Call_Action {
 		if ( 'traite' === $modal_status ) {
 			$complete = true;
 		}
+		// editer le status du points pour task-manager.
 		$call_pts = \task_manager\Point_Class::g()->edit_point( 0, (int) $post_id, $modal_comment, $complete );
 				wp_send_json_success( $args_success );
 	}

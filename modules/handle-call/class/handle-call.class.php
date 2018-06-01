@@ -62,7 +62,7 @@ class Handle_Call_Class extends \eoxia\Singleton_Util {
 	 * Get .
 	 */
 	public function get() {
-		// Définition du Tableau.
+		// Définition du Tableau des 4 types d'appels.
 		$four_categorys = array(
 			'traite'     => __( 'Treaty', 'call-manager' ),
 			'rappelera'  => __( 'Call back', 'call-manager' ),
@@ -72,7 +72,8 @@ class Handle_Call_Class extends \eoxia\Singleton_Util {
 		return $four_categorys;
 	}
 	/**
-	 * Fonction pour appeler la function d insert new costumer [pour le moment c est pas ca !] .
+	 * Fonction pour crée un nouveau client .
+	 * avec la gestion d'erreur.
 	 *
 	 * @since 2.0.0
 	 * @version 2.0.0
@@ -80,6 +81,7 @@ class Handle_Call_Class extends \eoxia\Singleton_Util {
 	 * @param string $lastname _.
 	 * @param string $societe  _.
 	 * @param string $tel      _.
+	 * @param string $email    _.
 	 */
 	public function create_customer( $username, $lastname, $societe, $tel, $email ) {
 		$user_id_post = 0;

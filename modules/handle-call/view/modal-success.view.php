@@ -1,6 +1,7 @@
 <?php
 /**
  * Form view of "Call Manager" module.
+ * une vue modal qui est retourné à l'utilisateur en cas de success avec deux bouton :retour au formulaire & fermer la modal.
  *
  * @author Eoxia <dev@eoxia.com>
  * @since 2.0.0

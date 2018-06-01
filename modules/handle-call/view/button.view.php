@@ -1,6 +1,7 @@
 <?php
 /**
- * Button view of "Call Manager" module.
+ * Button view of "Call Manager"
+ * module bouton qui sert à ouvrir la modal dans la barre d'administration.
  *
  * @author Eoxia <dev@eoxia.com>
  * @since 2.0.0

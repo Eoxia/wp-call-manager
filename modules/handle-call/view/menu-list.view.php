@@ -1,6 +1,7 @@
 <?php
 /**
  * Form view of "Call Manager" module.
+ * vue pour la page Call_List dans le menu lateral.
  *
  * @author Eoxia <dev@eoxia.com>
  * @since 2.0.0
@@ -113,11 +114,13 @@ foreach ( $four_categorys as $four_category => $key ) :
 <div>
 	<?php
 	$big = 999999999; // need an unlikely integer .
-	echo paginate_links( array(
+	echo wp_kses( paginate_links( array(
 		'base'    => str_replace( $big, '%#%', esc_url( get_pagenum_link( $big ) ) ),
 		'format'  => '?paged=%#%',
 		'current' => max( 1, $paged ),
 		'total'   => $nb_page,
-	) );
+		) ),
+		'a'
+	);
 	?>
 </div>

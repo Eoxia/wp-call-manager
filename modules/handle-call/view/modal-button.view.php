@@ -1,6 +1,7 @@
 <?php
 /**
  * Form view of "Call Manager" module.
+ * bouton validé pour envoyer le formulaire de la vue modal .
  *
  * @author Eoxia <dev@eoxia.com>
  * @since 2.0.0
