@@ -1,0 +1,10 @@
+{
+	"name": "Core",
+	"slug": "core",
+	"version": "2.0.0",
+	"description": "Main files of call_manager",
+	"path": "core/",
+	"dependencies": {
+		"action": {}
+	}
+}
