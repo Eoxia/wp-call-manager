@@ -1,28 +1,31 @@
 # Call Manager ![Eoxia Logo](https://avatars0.githubusercontent.com/u/3227847?s=200&amp;v=4)
 ### version 2.0.0
 
-###### Call Manager a étais construit avec [eo-framework](https://github.com/Eoxia/eo-framework) il nécessite donc NodeJs ainsi que Gulp .
+###### Call Manager a été construit avec [eo-framework](https://github.com/Eoxia/eo-framework) il nécessite donc NodeJs ainsi que Gulp (pour les développeurs).
 ###### Call Manager est un plugin WordPress qui nécessite les plugins suivant pour fonctionner correctement :
 
-* [WP_shop](https://github.com/Eoxia/wpshop).
+* [WPshop](https://github.com/Eoxia/wpshop).
 * [task-manager](https://github.com/Eoxia/task-manager).
 * [task-manager-wpshop](https://github.com/Eoxia/task-manager-wpshop).
 
-## Fonctionnalitées
+## Fonctionnalités
 
-* Le plugin ajoute 1 bouton supplémentaire dans l'admin bar de WordPress .
+* Gérer les appels entrants des clients WPshop
 
-* au clique sur ce bouton une modal s'ouvre.
+## Documentation d'utilisation
 
-* dans cette modal il vous sera demander de sélectionner l'administrateur concerner, le status de l'appel, le client Wp_shop (ou création du client) et le temps de la tache (pour task-manager) .
+* Le plugin ajoute un bouton supplémentaire dans la barre d'outils de WordPress.
 
-* si le client Wp_shop est introuvable il vous sera demander de cliquer sur un bouton "ajouter nouveau client", après un formulaire supplémentaire va apparaître pour vous permettre de crée un nouveau clients WP_shop .
+* Lors du clique sur ce bouton, une fenêtre s'ouvre.
 
-* Après il vous reste juste à taper un commentaire concernant l'appel reçu et cliquer sur validé . le commentaire sera liée au clients et à l'administrateur concerné .
+* Dans cette fenêtre, il vous sera demandé de sélectionner : l'administrateur concerné, le status de l'appel, le client WPshop (ou création du client) et le temps de la tâche (pour Task Manager) .
 
-* de plus le commentaire correspondra à une une nouvelle tache dans le plugin task-manager avec la category "appel téléphonique".
+* Si le client WPshop est introuvable, il vous sera demandé de cliquer sur un bouton "ajouter nouveau client". Un formulaire supplémentaire va ensuite apparaître pour vous permettre de créer un nouveau client WPshop.
+
+* Finalement, entrez un commentaire concernant l'appel reçu et cliquez sur "valider".
+Le commentaire sera lié au client de WPshop et à l'administrateur concerné. Il sera également associé à une nouvelle tâche avec la catégorie "appel téléphonique".
 
 
 ## Table
 
-###### Après son activation le plugin ne rajoute pas de table supplémentaire les seuls tables utilisées sont celle de WordPress 'comments','commentmeta','postmeta','posts','users','usermeta'.
+###### Après son activation le plugin ne rajoute pas de table supplémentaire. Les seules tables utilisées sont celles de WordPress 'comments','commentmeta','postmeta','posts','users','usermeta'.
